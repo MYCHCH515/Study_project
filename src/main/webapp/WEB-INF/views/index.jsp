@@ -18,6 +18,10 @@
     	font-family: 'Noto Sans KR','Roboto', sans-serif;
 	  }
 	  
+	 body {
+ 	 	padding-top: 80px;
+	}
+	  
 	ol, ul {
     	list-style: none;
 	}
@@ -26,10 +30,11 @@
    		text-decoration: none;
     	cursor: pointer;
 	}
-	
+
 	.nav>li>a {
    		 padding: 0 20px;
    		 font-size: 17px;
+   		 color: #9d9d9d;
 	}
 	
 	.nav{
@@ -37,7 +42,6 @@
 	}
 	
 	#logo{
-	    
 		float: left;
 		width: 100px;
 		height: 60px;
@@ -48,21 +52,18 @@
 		height: 80px;
 	}
 
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
     	background-color:white;
         height:80px;
         margin-bottom: 0;
         border-radius: 0;
         border: none;
+        position: fixed; 
+		top: 0; 
+		width: 100%;
+		z-index: 9999; 
     }
-     
-    .affix {
-	    top: 0;
-	    width: 100%;
-	    z-index: 9999 !important;
- 	}  
- 	
+  
  	.con1{
  		margin-top: 60px;
  	}
@@ -103,6 +104,36 @@
         padding: 25px;
     }
     
+    .ft_txt1{
+    	font-size: 20px;
+    }
+    
+    .ft_txt2{
+    	padding-top: 2px;
+    	padding-left:20px;
+    	float: right;
+    }
+    
+    .top_area{
+    	padding: 20px 0;
+    	border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sns_list ul li{
+    	float: right;
+    	padding-top: 20px;
+    	padding-left: 10px;
+    }
+    
+    .copy_area {
+    	padding-top: 30px;
+    }
+    
+    .copy_txt{
+    	color: #949494;
+    	padding-top: 40px;
+    }
+    
     .carousel-inner img {
         width: 100%; /* Set width to 100% */
         margin: auto;
@@ -120,7 +151,7 @@
 
 <body>
 
-	<header class="navbar navbar-inverse" data-spy="affix" data-offset-top="0">
+	<header class="navbar navbar-inverse lnb" >
 	   <div class="container" id="myNavbar">
 	      <a href="${pageContext.request.contextPath}"><img alt="" src="./images/logo.png" id="logo"></a>
 	      
@@ -130,10 +161,9 @@
 	        <li><a href="#">사물함</a></li>
 	        <li><a href="#">이용가이드</a></li>
 	        <li><a href="#">공지사항</a></li>
-	        <li class="Login_link"><a href="#" style="color:#00a5bd;">로그인</a></li>
+	        <li class="Login_link"><a href="#" style="color:#00a5bd; font-weight: bold;">로그인</a></li>
 	      </ul>
 	    </div>
-	   
 	</header>
 	
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -214,64 +244,50 @@
 	
 
 	<footer class="container-fluid">
-	  <div class="container inner_width">
+	  <div class="container">
 	  	<div class="top_area">
-	  		<a href="#" class="footer_logo">
-	  			<span class="sp_icon logo_footer">거북이의 기적</span>
-	  		</a> 
-	  		<ul class="bar_list link_info">
-	  			<li><a href="https://blog.naver.com/spacecloud" title="새창열림" target="_blank">블로그</a></li> 
-	  			<li><a href="/agreement" class="">이용약관</a></li> 
-	  			<li><a href="/policyPerson" class="">개인정보처리방침</a></li> 
-	  			<li><a href="/policyOperate" class="">운영정책</a></li> 
-	  			<li><a href="javascript:;" title="새창열림">고객 문의</a></li>
-	  		</ul> 
-	  		
-	  		<a class="btn_toggle">
-	  			<span class="btn_inner">(주)NSPACE 사업자정보 및 통신판매업자 신원정보</span></a>
-	  	</div> 
-	  	
-	  	<div class="bottom_area">
-	  		<ul class="bar_list company_info">
-	  			<li class="first">상호명: 주식회사 앤스페이스</li> 
-	  			<li>대표: 정수현</li> <li>사업자등록번호: 230-81-03117</li> 
-	  			<li>통신판매업신고번호: 2018-서울강남-04590</li> 
-	  			<li class="business_info"><a href="http://www.ftc.go.kr/www/bizCommView.do?key=232&amp;apv_perm_no=2018301013030200778&amp;pageUnit=10&amp;searchCnd=wrkr_no&amp;searchKrwd=2308103117&amp;pageIndex=1" target="_blank" title="새창열림">사업자등록정보</a></li> 
-	  			<li>영업소재지: 서울특별시 강남구 삼성로 414</li> <li>
-         		이메일:<a href="mailto:office@spacecloud.kr">office@spacecloud.kr</a></li> 
-         		<li>대표전화: 1599-4312(평일 오후 2시 ~ 오후 6시)</li> 
-         		<li><a href="javascript:;" title="새창열림" class="link">온라인 1:1 문의 바로가기</a>(평일 오전 10시 ~ 오후 6시) </li> 
-       			<li class="first">* 공간에 대한 문의사항은 해당 공간 호스트에게 직접 문의해주세요.</li>
-       		</ul> 
-       		
-       		<p class="p_caution">스페이스클라우드는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 스페이스클라우드는 공간 거래정보 및 거래에 대해 책임지지 않습니다.</p>
-       	 </div> 
+			<span class="ft ft_txt1">(주)거북이의 기적</span>
+			
+	      	<a href="#"><span class="ft ft_txt2">고객문의</span></a>
+	       	<a href="#"><span class="ft ft_txt2">이용약관</span></a>
+	        <a href="#"><span class="ft ft_txt2">개인정보처리방침</span></a>
+	       	<a href="https://blog.naver.com/turtlesmiracle"><span class="ft ft_txt2">블로그</span></a>
+       	</div>
+       	
+	    <div class="policy_area">
+     		<div class="sns_list">
+     	 		<ul>
+     	 			<li><a href="https://www.instagram.com/turtles_miracle/" target="_blank" ><img alt="" src="./images/insta.png"></a></li>
+		      		<li><a href="https://www.facebook.com/turtlesmiracle1/" target="_blank" ><img alt="" src="./images/facebook.png"></a></li>
+		       		<li><a href="https://blog.naver.com/turtlesmiracle" target="_blank" ><img alt="" src="./images/blog.png"></a></li>
+	      		</ul>
+      	    </div> 	
+	    </div> 
        	 
-       	 <div class="policy_area">
-       	 	<div class="sns_list">
-       	 		<a href="http://blog.naver.com/spacecloud" title="새창열림" target="_blank" class="sp_icon ico_blog">블로그</a> 
-       	 		<a href="http://post.naver.com/spacecloud" title="새창열림" target="_blank" class="sp_icon ico_post">포스트</a> 
-       	 		<a href="https://www.facebook.com/spaceclouding" title="새창열림" target="_blank" class="sp_icon ico_facebook">페이스북</a> 
-       	 		<a href="https://twitter.com/spacecloud_kr" title="새창열림" target="_blank" class="sp_icon ico_tweeter">트위터</a> 
-       	 		<a href="https://www.instagram.com/spacecloud.kr" title="새창열림" target="_blank" class="sp_icon ico_instagram">인스타그램</a>
-       	 	</div> 
-       	 	
-       	 	<ul class="bar_list">
-       	 	    <li><a href="/agreement" class="">이용약관</a></li> 
-       	 	    <li><a href="/policyPerson" class="">개인정보처리방침</a></li> 
-       	 	    <li><a href="/policyOperate" class="">운영정책</a></li>
-       	 	</ul>
-       	 </div> 
-       	 
-       	 <p class="copyright">
-       	 	<a href="http://www.nspace.co/" target="_blank" title="새창열림" class="copy_mobile">ⓒNSPACE Corp.</a> 
-       	 	<span class="copy_pc">
-       			Copyright
-            <a href="http://www.nspace.co/" target="_blank" title="새창열림">NSPACE Corp.</a> All Rights Reserved.
-           </span>
-         </p>
-         
-       </div>
+    	
+    	<div class="copy_area">
+	      	<p>
+	      		<span>상호명: (주)거북이의 기적</span> 
+	      		<span>|</span>
+	      		<span>대표: 박병진 양형석</span>  
+	      		<span>|</span>
+	      		<span>사업자등록번호: 219-88-00897</span>
+	      	</p>
+	       
+	        <p>
+		        <span>영업소재지: 서울시 서대문구 명물길 21,3층</span> 
+		        <span>|</span>
+		        <span>이메일: sweetjinnycho@gmail.com</span> 
+		        <span>|</span>
+		        <span>가맹문의 : 1670 - 7929 </span>
+	        </p>
+	        
+	        <p class="copy_txt">
+	       		<span>Copyright © 2019 (주)거북이의기적. All rights reserved.</span>
+	        </p>
+       	</div>
+      </div>
 	</footer>
 </body>
+
 </html>
