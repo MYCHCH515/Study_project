@@ -1,0 +1,99 @@
+@charset "UTF-8";
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap');  
+	
+	* {		
+  		margin: 0px;
+		padding: 0px;
+    	box-sizing: border-box;
+    	font-family: 'Noto Sans KR','Roboto', sans-serif;
+	 }
+	  
+	body {
+ 	 	padding-top: 80px;
+	 }
+	  
+	ol, ul {
+    	list-style: none;
+	}
+		
+	a:-webkit-any-link {
+   		text-decoration: none;
+    	cursor: pointer;
+	}
+
+	.nav>li>a {
+   		 padding: 0 20px;
+   		 font-size: 17px;
+   		 color: #9d9d9d;
+	}
+	
+	.nav{
+		 padding: 30px 0;
+	}
+	
+	#logo{
+		float: left;
+		width: 100px;
+		height: 60px;
+		margin: 10px 0;
+	}
+
+	#myNavbar{
+		height: 80px;
+	}
+
+    .navbar {
+    	background-color:white;
+        height:80px;
+        margin-bottom: 0;
+        border-radius: 0;
+        border: none;
+        position: fixed; 
+		top: 0; 
+		width: 100%;
+		z-index: 9999; 
+    }
+    
+        /* Add a gray background color and some padding to the footer */
+    footer {
+        height: 300px;
+        background-color: #ebebeb;
+        padding: 25px;
+    }
+    
+    .ft_txt1{
+    	font-size: 20px;
+    }
+    
+    .ft_txt2{
+    	padding-top: 2px;
+    	padding-left:20px;
+    	float: right;
+    }
+    
+    .top_area{
+    	padding: 20px 0;
+    	border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sns_list ul li{
+    	float: right;
+    	padding-top: 20px;
+    	padding-left: 10px;
+    }
+    
+    .copy_area {
+    	padding-top: 30px;
+    }
+    
+    .copy_txt{
+    	color: #949494;
+    	padding-top: 40px;
+    }
+    
+    /* Hide the carousel text when the screen is less than 600 pixels wide */
+    @media (max-width: 800px) {
+	    .lnb {
+	        display: none; 
+	    }
+   	}

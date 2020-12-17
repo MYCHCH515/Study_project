@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+ 	.con1{
+ 		margin-top: 60px;
+ 	}
+ 	
+ 	.con1_1{
+ 		font-size: 30px;
+ 		font-weight: bold;
+ 		padding-right: 10px;
+ 	
+ 	}
+
+ 	.con1_2{
+ 		margin-top: 30px;
+ 	}
+
+	.con2{
+		margin-top: 30px;
+		overflow: hidden;	
+	} 	
+ 	.con2 img{
+ 	    width: 100%;
+ 		height: 320px;
+ 		object-fit: cover;  
+ 		/* 마우스가 이미지를 벗어 났을 때도 자연스럽게 크기가 줄어들기 위함 */   
+	    transform: scale(1.0);        
+        transition: transform .5s; 
+ 	}
+ 	
+ 	.con2 img:hover{
+ 	    transform: scale(1.03);       /* 이미지 확대 */
+        transition: transform .5s; 	/* 시간 설정  */
+ 	}
+ 	 
+    .carousel-inner img {
+        width: 100%; /* Set width to 100% */
+        margin: auto;
+        min-height:200px;
+    }
