@@ -15,4 +15,11 @@ public class MemberController {
 		mv.setViewName("member/memberLogin");
 		return mv;
 	}
+	
+	@GetMapping("memberJoin")
+	public ModelAndView getMemberJoin() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberJoin");
+		return mv;
+	}
 }
