@@ -30,6 +30,10 @@
   		padding: 10px 85px;
   	}
   	
+  	.agree span{
+  		cursor: default;
+  	}
+  	
   	.agree a{
   		text-decoration: underline;
   	}
@@ -46,7 +50,7 @@
   	}
   	
   	.login_btn:hover{
-  		opacity: 80%;
+  		opacity: 0.8;
   	}
   	
   	.info_find{
