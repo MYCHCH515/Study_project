@@ -2,3 +2,12 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <configuration>
+  	<typeAliases>
+  		<typeAlias type="java.lang.Long" alias="Long"/>
+		<typeAlias type="java.util.List" alias="List"/> 
+		<typeAlias type="com.ch.s1.member.MemberVO" alias="MemberVO"/>
+  	
+  	</typeAliases>
+  </configuration>

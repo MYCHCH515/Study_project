@@ -12,52 +12,6 @@
   <link href="../css/index.css" rel="stylesheet">
   <link href="../css/member.css" rel="stylesheet">
 
-  <style type="text/css">
-  	.modal-dialog{
-  		width: 500px;
-  	}
-  	.modal-content{
-  		height: 1000px;
-  		overflow-y: scroll;
-  	}
-  	.modal-body h4{
-  		color: #00a5bd;
-  		font-weight: bold;
-  		margin: 10px 0;
-  	}
-  	.modal-body p{
-		margin: 0;
-  	}
-  	
-  	.modal-body blockquote{
-  		border: none;
-  		font-size: 14px;
-  		margin-bottom: 0;
-  	}
-  	
-  	
-  	.modal-footer{
-  		text-align: center;
-  	}
-  	
-  	.modal-footer button{
-  		width:400px;
-  		height: 50px;
-  		background-color: #00a5bd;
-  		color: white;
-  		font-size: 17px;
-  		opacity: 0.8;
-  	}
-  	
-  	.modal-footer button:hover{
-  		background-color: #00a5bd;
-  		opacity: 1;
-  		color: white;
-  	}
-  	
-  	
-  	
-  </style>
 <body>
   <c:import url="../template/header.jsp"></c:import>
 	
@@ -69,27 +23,30 @@
   		<div class="join_box">
   			<form action="./memberJoin" method="post" id="frm">
 				  <div class="form-group">
-				    <input type="text" class="form-control" id="id" name="id" placeholder="아이디">
+				  		<input type="text" class="form-control" id="id" name="mem_id" placeholder="아이디">
+						<input type="button" class="repeat_chk" value="중복확인">
 				  </div>
 				  
 				  <div class="form-group">
-				    <input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호">
+				    <input type="password" class="form-control join_indent" id="pw" name="mem_pw" placeholder="비밀번호">
 				  </div>
 				  
 				  <div class="form-group">
-				    <input type="password" class="form-control" id="pw2" name="pw2" placeholder="비밀번호확인">
+				    <input type="password" class="form-control join_indent" id="pw2" name="pw2" placeholder="비밀번호확인">
 				  </div>
 				  
 				  <div class="form-group">
-				    <input type="text" class="form-control" id="name" name="name" placeholder="이름">
+				    <input type="text" class="form-control join_indent" id="name" name="mem_name" placeholder="이름">
 				  </div>
 				  
 				  <div class="form-group">
-				    <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호">
+				    <input type="text" class="form-control" id="phone" name="mem_phone" placeholder="전화번호">
+				  	<input type="button" class="repeat_chk" value="인증">	
 				  </div>
 				  
 				  <div class="form-group">
-				    <input type="email" class="form-control" id="email" name="email" placeholder="이메일">
+				    <input type="email" class="form-control" id="email" name="mem_email" placeholder="이메일">
+				  	<input type="button" class="repeat_chk" value="인증">	
 				  </div>
 				  
 				  <div class="agree">
@@ -119,7 +76,7 @@
 				      <div class="modal-content">
 				        <div class="modal-header">
 				          <button type="button" class="close" data-dismiss="modal">&times;</button>
-				          <h4 class="modal-title"> <strong>서비스 이용약관</strong></h4>
+				          <h4 class="modal-title"><strong>서비스 이용약관</strong></h4>
 				        </div>
 				        <div class="modal-body">
 							<h4>제 1 조 (목적)</h4>
@@ -203,12 +160,14 @@
 							</blockquote>
 							<p>④ 서비스 이용자ID 및 비밀번호의 관리책임은 이용자에게 있습니다. 이를 소홀히 관리하여 발생하는 서비스 이용 상의 손해 또는 
 								제3자에 의한 부정이용 등에 대한 책임은 이용자에게 있으며 회사는 그에 대한 책임을 일절 지지 않습니다.</p>
-							
-							
+								
 							<h4>제 10 조 (이용자정보의 변경)</h4>
 							<p>
 								회원은 이용신청 시 기재한 이용자정보가 변경되었을 경우에는, 온라인으로 수정을 하여야 하며 미 변경으로 발생한 문제의 책임은 이용자에게 있습니다.
 							</p>
+							
+							<br>	
+							<p>[부칙] (시행일) 본 약관은 2018년 7월 1일부터 시행 합니다.</p>
 				        </div>
 				        <div class="modal-footer">
 				          <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
@@ -226,7 +185,7 @@
 				      <div class="modal-content">
 				        <div class="modal-header">
 				          <button type="button" class="close" data-dismiss="modal">&times;</button>
-				          <h4 class="modal-title">개인정보 처리방침</h4>
+				          <h4 class="modal-title"><strong>개인정보 처리방침</strong></h4>
 				        </div>
 				        <div class="modal-body">
 				         	<h4>1. 개인정보의 수집항목 및 이용 목적</h4>

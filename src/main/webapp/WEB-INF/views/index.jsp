@@ -14,22 +14,37 @@
 
 <body>
 	<c:import url="./template/header.jsp"></c:import>
-	
+	<div class="index_txt_wrap">
+		<div class="container index_txt">    
+			<h1>사람과 사람이 소통하는 카페</h1>
+			<h1>거북이의 기적</h1>
+		</div>
+	</div>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 	    <!-- Indicators -->
 	    <ol class="carousel-indicators">
 	      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 	      <li data-target="#myCarousel" data-slide-to="1"></li>
+	      <li data-target="#myCarousel" data-slide-to="2"></li>
+	      <li data-target="#myCarousel" data-slide-to="3"></li>
 	    </ol>
 	
 	    <!-- Wrapper for slides -->
 	    <div class="carousel-inner" role="listbox">
 	      <div class="item active">
-	        <img src="https://placehold.it/1200x400?text=IMAGE" alt="Image">      
+	        <img src="./images/main1_1.jpg" alt="Image" class="img_filter">      
 	      </div>
 	
 	      <div class="item">
-	        <img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image">      
+	        <img src="./images/main2_1.jpg" alt="Image" class="img_filter">      
+	      </div>
+	      
+	       <div class="item">
+	        <img src="./images/main3_1.jpg" alt="Image" class="img_filter">      
+	      </div>
+	      
+	       <div class="item">
+	        <img src="./images/main4_1.jpg" alt="Image" class="img_filter">      
 	      </div>
 	    </div>
 	

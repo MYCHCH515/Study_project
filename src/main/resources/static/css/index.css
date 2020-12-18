@@ -38,3 +38,20 @@
         margin: auto;
         min-height:200px;
     }
+    
+    .index_txt{
+		position: absolute;
+		z-index: 1;
+	 	top: 43%;
+        left: 50%;
+        transform: translate(-50%, -43%);
+		text-align: center;
+	}
+
+	.index_txt h1{
+		color: white;
+	}
+	
+	.img_filter{
+		filter: brightness(0.9);
+	}

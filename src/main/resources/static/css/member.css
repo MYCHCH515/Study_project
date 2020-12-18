@@ -18,16 +18,17 @@
   	}
   	
   	.login_auto{
+  		height: 40px;
   		padding: 0 85px;
   	}
   	
   	.login_btn_wrap,.join_link{
   		text-align: center;
-  		margin: 20px 0;
+  		margin-bottom: 20px;
   	}
   	
   	.agree {
-  		padding: 10px 85px;
+  		padding: 10px 50px;
   	}
   	
   	.agree span{
@@ -63,10 +64,17 @@
   	}
   	
   	#frm{
-  		padding: 50px 0;
+  		padding: 40px 0;
   	}
+  	.form-group{
+  		display: inline-block;
+  		width: 100%;
+  		text-align: center;
+  		margin-bottom: 25px;
+  	}
+  	
   	.form-control{
-  		margin: 0 auto;
+  		display: inline-block;
   		width: 400px;
   		height: 50px;
   		border-radius: 0;
@@ -84,5 +92,62 @@
   		width: 50%;
   		height: 800px;
   		background-color: white;	
+  	}
+  	
+  	/* memberJoin */
+  	.repeat_chk{
+  		width: 70px;
+  		height: 50px;
+  		border-radius: 0;
+  		border: none;
+  		background-color: #00a5bd;
+  		opacity: 60%;
+  		text-align: center;
+  		color: white;
+  	}
+  	
+  	.join_indent{
+  		margin-right: 70px;
+  	}
+  
+  	.modal-dialog{
+  		width: 500px;
+  	}
+  	.modal-content{
+  		height: 1000px;
+  		overflow-y: scroll;
+  	}
+  	.modal-body h4{
+  		color: #00a5bd;
+  		font-weight: bold;
+  		margin: 10px 0;
+  	}
+  	.modal-body p{
+		margin: 0;
+  	}
+  	
+  	.modal-body blockquote{
+  		border: none;
+  		font-size: 14px;
+  		margin-bottom: 0;
+  	}
+
+  	.modal-footer{
+  		text-align: center;
+  	}
+  	
+  	.modal-footer button{
+  		width:400px;
+  		height: 50px;
+  		background-color: #00a5bd;
+  		color: white;
+  		font-size: 17px;
+  		opacity: 0.8;
+  	}
+  	
+  	.modal-footer button:hover{
+  		background-color: #00a5bd;
+  		opacity: 1;
+  		color: white;
   	}
   	
