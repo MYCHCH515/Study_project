@@ -24,7 +24,6 @@
 	
 	.emptyResult{
 		text-align: left;
-		
 	}
   	
   	
@@ -46,11 +45,12 @@
 				  
 				  <div class="form-group">
 				    <input type="password" class="form-control empty" id="pw" name="mem_pw" placeholder="비밀번호">
+				    <div class="emptyResult pwResult1"></div>
 				  </div>
 				  
 				  <div class="form-group">
 				    <input type="password" class="form-control empty" id="pw2" name="pw2" placeholder="비밀번호확인">
-				 	<div class="emptyResult pwResult"></div>
+				 	<div class="emptyResult pwResult2"></div>
 				  </div>
 				  
 				  <div class="form-group">
@@ -65,7 +65,7 @@
 				  
 				  <div class="form-group">
 				    <input type="email" class="form-control empty email_form1" id="email" name="mem_email" placeholder="이메일">
-				  	<input type="button" class="repeat_chk" value="인증">	
+				  	<input type="button" class="repeat_chk" value="인증번호받기">	
 				  	 <input type="email" class="form-control empty email_form2" placeholder="인증번호를 입력하세요">
 				 	<div class="emptyResult emailResult"></div>
 				  </div>
@@ -290,7 +290,7 @@
 
 <script type="text/javascript">
 
-	<!-- 약관 동의 -->
+	<!-- 약관 전체 동의 -->
 	$("#checkAll").click(function(){
 		if($("#checkAll").is(":checked")){
 				$(".agreeChk").prop("checked",true);
@@ -319,8 +319,8 @@
 	$(".join_btn").click(function(){
 			emptyCheck();
 			agreeCheck();
-		
-			if(idCheck && pwCheck && phoneCheck && emailCheck && emptyCheckResult && agreeCheckResult)
+			
+			if(idCheck && pwCheck && pwExpCheck && phoneCheck && emailCheck &&emptyCheckResult && agreeCheckResult)
 			{
 				$("#frm").submit();
 			}
@@ -338,16 +338,22 @@
 				emptyCheckResult=false;
 				$(this).next().html("필수 정보입니다.")
 				$(".emptyResult").addClass("chkNotice1");
-			}	
-			
+			}
+
 		});
 	}
 
+	<!-- 중복검사, 유효성 검사 -->
 	var idCheck=false;
 	var pwCheck=false;
+	var pwExpCheck=false;
 	var phoneCheck=false;
 	var emailCheck=false;
-	var regExp = /^[A-Za-z0-9]{6,12}$/;
+	var regExpId = /^[A-Za-z0-9]{5,20}$/;
+	var regExpPw = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+	var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	var regExpPhone = /^\d{3}-\d{3,4}-\d{4}$/;
+
 	
 	$("#id").blur(function () {
 		idCheck=false;
@@ -358,23 +364,48 @@
 				var str = "이미 사용중인 ID입니다."
 				$(".idResult").removeClass("chkNotice2").addClass("chkNotice1");
 				if(data==0){
-					if(!regExp.test($("input[id='id']").val())) {
+					if(!regExpId.test($("input[id='id']").val())) {
 						idCheck=false;
-						str="형식에 맞지않은 ID입니다.";
+						str="5~20자의 영 대 소문자, 숫자만 사용 가능합니다."				
 						$(".idResult").removeClass("chkNotice2").addClass("chkNotice1");
 					}else{
 						idCheck=true;
 						str="사용가능한 ID입니다.";
 						$(".idResult").removeClass("chkNotice1").addClass("chkNotice2");
 					}	
-
-					//str="사용가능한 ID입니다.";
-					//$(".idResult").removeClass("chkNotice1").addClass("chkNotice2");
-					//idCheck=true;
 				}
 				$(".idResult").html(str);
 			});
 		}
+
+		else{
+			$(".idResult").html("필수 항목입니다.")
+			$(".idResult").removeClass("chkNotice2").addClass("chkNotice1");
+		}
+	});
+
+	$("#pw").blur(function(){
+		pwCheck=false;
+		pwExpCheck=true;
+		var pw = $("#pw").val();
+
+		if(pw !=''){
+			if(!regExpPw.test($("input[id='pw']").val())) {
+				pwExpCheck=false;
+				str="8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."	
+				$(".pwResult1").removeClass("chkNotice2").addClass("chkNotice1");
+			}else{
+				str=""
+			}
+			
+			$(".pwResult1").html(str);
+		}
+
+		else{
+			$(".pwResult1").html("필수 항목입니다.")
+			$(".pwResult1").removeClass("chkNotice2").addClass("chkNotice1");
+		}
+
 	});
 
 	$("#pw2").blur(function(){
@@ -382,14 +413,24 @@
 		var pw = $("#pw").val();
 		var pw2 = $("#pw2").val();
 
-		if(pw == pw2){
-			$(".pwResult").html("비밀번호가 일치합니다.");
-			$(".pwResult").removeClass("chkNotice1").addClass("chkNotice2");
-			pwCheck=true;
-		}else{
-			$(".pwResult").html("비밀번호가 일치하지 않습니다.");
-			$(".pwResult").removeClass("chkNotice2").addClass("chkNotice1");
+		if(pw2 !=''){
+			if(pw == pw2){
+				str = "비밀번호가 일치합니다.";
+				$(".pwResult2").removeClass("chkNotice1").addClass("chkNotice2");
+				pwCheck=true;
+			}else{
+				str= "비밀번호가 일치하지 않습니다.";
+				$(".pwResult2").removeClass("chkNotice2").addClass("chkNotice1");
+			}
+			$(".pwResult2").html(str);
+			
 		}
+
+		else{
+			$(".pwResult2").html("필수 항목입니다.")
+			$(".pwResult2").removeClass("chkNotice2").addClass("chkNotice1");
+		}
+		
 	});
 
 	$("#phone").blur(function () {
@@ -401,12 +442,24 @@
 				var str = "이미 사용중인 전화번호 입니다."
 				$(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
 				if(data==0){
-					str="사용가능한 전화번호 입니다.";
-					$(".phoneResult").removeClass("chkNotice1").addClass("chkNotice2");
-					phoneCheck=true;
+					if(!regExpPhone.test($("input[id='phone']").val())) {
+						str="형식에 맞지않는 전화번호 입니다.";
+						$(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
+						phoneCheck=false;
+					}
+					else{
+						phoneCheck=true;
+						str="사용가능한 전화번호입니다.";
+						$(".phoneResult").removeClass("chkNotice1").addClass("chkNotice2");
+					}	
 				}
 				$(".phoneResult").html(str);
 			});
+		}
+
+		else{
+			$(".phoneResult").html("필수 항목입니다.")
+			$(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
 		}
 	});
 
@@ -419,15 +472,28 @@
 				var str = "이미 사용중인 이메일 입니다."
 				$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
 				if(data==0){
-					str="사용가능한 이메일 입니다.";
-					$(".emailResult").removeClass("chkNotice1").addClass("chkNotice2");
-					emailCheck=true;
+					if(!regExpEmail.test($("input[id='email']").val())) {
+						str="형식에 맞지않는 이메일 입니다.";
+						$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
+						emailCheck=false;
+					}
+					else{
+						emailCheck=true;
+						str="사용가능한 이메일입니다.";
+						$(".emailResult").removeClass("chkNotice1").addClass("chkNotice2");
+					}
 				}
 				$(".emailResult").html(str);
 			});
 		}
+
+		else{
+			$(".emailResult").html("필수 항목입니다.")
+			$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
+		}
 	});
-	   
+
+	<!-- 약관동의 -->
 	var agreeCheckResult = false;
 	function agreeCheck() {
 		var check1 = $("#check1").prop("checked");

@@ -26,13 +26,11 @@
 
 	.nav>li>a {
    		 padding: 0 20px;
-   		 font-size: 17px;
-   		 color: #9d9d9d;
-   		 
+   		 font-size: 17px; 		 
 	}
 	
-	.lnb_li:hover{
-		
+	.nav>li>a :hover{
+		color: black;
 	}
 	
 	.nav{

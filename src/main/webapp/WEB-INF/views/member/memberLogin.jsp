@@ -23,15 +23,15 @@
   		<div class="login_box">
   			<form action="./memberLogin" method="post" id="frm">
 				  <div class="form-group">
-				    <input type="text" class="form-control" id="id" name="id" placeholder="아이디">
+				    <input type="text" class="form-control" id="id" name="mem_id" value="${cookie.remember.value}" placeholder="아이디">
 				  </div>
 				  
 				  <div class="form-group">
-				    <input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호">
+				    <input type="password" class="form-control" id="pw" name="mem_pw" placeholder="비밀번호">
 				  </div>
 				  
 				  <div class="checkbox login_auto">
-				    <label><input type="checkbox">로그인 기억하기</label>
+				    <label><input type="checkbox" name="remember">아이디 기억하기</label>
 				    
 				    <label class="info_find">
 					   <a href="#">아이디 찾기</a>
