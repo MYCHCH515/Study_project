@@ -28,7 +28,7 @@
   	}
   	
   	.agree {
-  		padding: 10px 50px;
+  		padding: 10px 85px;
   	}
   	
   	.agree span{
@@ -39,7 +39,7 @@
   		text-decoration: underline;
   	}
   	
-  	.login_btn{
+  	.login_btn, .join_btn{
   		width: 400px;
   		height: 50px;
   		border-radius: 0;
@@ -50,7 +50,7 @@
   		color: white;
   	}
   	
-  	.login_btn:hover{
+  	.login_btn:hover .join_btn:hover{
   		opacity: 0.8;
   	}
   	
@@ -70,7 +70,7 @@
   		display: inline-block;
   		width: 100%;
   		text-align: center;
-  		margin-bottom: 25px;
+  		padding: 0 85px;
   	}
   	
   	.form-control{
@@ -81,16 +81,24 @@
   		bottom: 1px solid #e0e0e0;
   	}
   	
+  	.email_form1 {
+  		width: 325px;
+  	}
+  	
+  	.email_form2 {
+  		margin-top: 5px;
+  	}
+  	
   	.join_wrap{
   		width: 100%;
-  		height: 1000px;
+  		height: 1100px;
   		background-color: #f6f6f6;
   	}
   	
   	.join_box{
   		margin: 0 auto;
   		width: 50%;
-  		height: 800px;
+  		height: 900px;
   		background-color: white;	
   	}
   	
@@ -104,10 +112,6 @@
   		opacity: 60%;
   		text-align: center;
   		color: white;
-  	}
-  	
-  	.join_indent{
-  		margin-right: 70px;
   	}
   
   	.modal-dialog{

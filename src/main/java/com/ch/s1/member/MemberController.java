@@ -36,4 +36,58 @@ public class MemberController {
 		mv.setViewName("redirect:../");
 		return mv;
 	}
+	
+	@GetMapping("memberIdCheck")
+	public ModelAndView getMemberId(MemberVO memberVO) throws Exception{
+		
+		memberVO = memberService.getMemberId(memberVO);
+		ModelAndView mv = new ModelAndView();
+		
+		int result=1;
+		if(memberVO == null) {
+			result=0;
+		}
+		
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;	
+	}
+	
+	@GetMapping("memberPhoneCheck")
+	public ModelAndView getMemberPhone(MemberVO memberVO) throws Exception{
+		
+		memberVO = memberService.getMemberPhone(memberVO);
+		ModelAndView mv = new ModelAndView();
+		
+		int result=1;
+		if(memberVO == null) {
+			result=0;
+		}
+		
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;	
+	}
+
+	
+	@GetMapping("memberEmailCheck")
+	public ModelAndView getMemberEmail(MemberVO memberVO) throws Exception{
+		
+		memberVO = memberService.getMemberEmail(memberVO);
+		ModelAndView mv = new ModelAndView();
+		
+		int result=1;
+		if(memberVO == null) {
+			result=0;
+		}
+		
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+	
+		return mv;	
+	}
+
+
 }

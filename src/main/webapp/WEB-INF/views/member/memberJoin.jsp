@@ -12,6 +12,23 @@
   <link href="../css/index.css" rel="stylesheet">
   <link href="../css/member.css" rel="stylesheet">
 
+  <style type="text/css">
+  	
+  	.chkNotice1{
+		color: red;
+	}
+	
+	.chkNotice2{
+		color: blue;
+	}
+	
+	.emptyResult{
+		text-align: left;
+		
+	}
+  	
+  	
+  </style>
 <body>
   <c:import url="../template/header.jsp"></c:import>
 	
@@ -23,52 +40,56 @@
   		<div class="join_box">
   			<form action="./memberJoin" method="post" id="frm">
 				  <div class="form-group">
-				  		<input type="text" class="form-control" id="id" name="mem_id" placeholder="아이디">
-						<input type="button" class="repeat_chk" value="중복확인">
+				  		<input type="text" class="form-control empty" id="id" name="mem_id" placeholder="아이디">
+						<div class="emptyResult idResult"></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <input type="password" class="form-control join_indent" id="pw" name="mem_pw" placeholder="비밀번호">
+				    <input type="password" class="form-control empty" id="pw" name="mem_pw" placeholder="비밀번호">
 				  </div>
 				  
 				  <div class="form-group">
-				    <input type="password" class="form-control join_indent" id="pw2" name="pw2" placeholder="비밀번호확인">
+				    <input type="password" class="form-control empty" id="pw2" name="pw2" placeholder="비밀번호확인">
+				 	<div class="emptyResult pwResult"></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <input type="text" class="form-control join_indent" id="name" name="mem_name" placeholder="이름">
+				    <input type="text" class="form-control empty" id="name" name="mem_name" placeholder="이름">
+				  	<div class="emptyResult nameResult"></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <input type="text" class="form-control" id="phone" name="mem_phone" placeholder="전화번호">
+				    <input type="text" class="form-control empty" id="phone" name="mem_phone" placeholder="전화번호">
+				  	<div class="emptyResult phoneResult"></div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <input type="email" class="form-control empty email_form1" id="email" name="mem_email" placeholder="이메일">
 				  	<input type="button" class="repeat_chk" value="인증">	
-				  </div>
-				  
-				  <div class="form-group">
-				    <input type="email" class="form-control" id="email" name="mem_email" placeholder="이메일">
-				  	<input type="button" class="repeat_chk" value="인증">	
+				  	 <input type="email" class="form-control empty email_form2" placeholder="인증번호를 입력하세요">
+				 	<div class="emptyResult emailResult"></div>
 				  </div>
 				  
 				  <div class="agree">
 					   <div class="checkbox">
-					    <label><input type="checkbox">아래 약관에 모두 동의합니다.</label>
+					    <label><input type="checkbox" id="checkAll">아래 약관에 모두 동의합니다.</label>
 					   </div>
 					   <hr>
 					   <div class="checkbox">
-					    <label><input type="checkbox"><a href="#" data-toggle="modal" data-target="#myModal1">서비스 이용약관(필수)</a></label>
+					    <label><input type="checkbox" id="check1" class="agreeChk"><a href="#" data-toggle="modal" data-target="#myModal1">서비스 이용약관(필수)</a></label>
 					   </div>
 					   <div class="checkbox">
-					    <label><input type="checkbox"><a href="#" data-toggle="modal" data-target="#myModal2">개인정보 처리방침(필수)</a></label>
+					    <label><input type="checkbox" id="check2" class="agreeChk"><a href="#" data-toggle="modal" data-target="#myModal2">개인정보 처리방침(필수)</a></label>
 					   </div>
 					   <div class="checkbox">
-					    <label><input type="checkbox"><span>이벤트등 프로모션 알림 SMS 수신 (선택)</span></label>
+					    <label><input type="checkbox" id="check3" class="agreeChk"><span>이벤트등 프로모션 알림 SMS 수신 (선택)</span></label>
 					   </div>
 					    <div class="checkbox">
-					    <label><input type="checkbox"><span>이벤트등 프로모션 알림 메일 수신 (선택)</span></label>
+					    <label><input type="checkbox" id="check4" class="agreeChk"><span>이벤트등 프로모션 알림 메일 수신 (선택)</span></label>
 					   </div>
 				   </div>
 				   
-				    <!-- Modal1 -->
+				  <!-- Modal1 -->
 				  <div class="modal" id="myModal1" role="dialog">
 				    <div class="modal-dialog" >
 				    
@@ -257,7 +278,7 @@
 				  </div>
    
 				  <div class="login_btn_wrap">
-				 	<button type="submit" class="login_btn">회원가입</button>
+				 	<button type="button" class="join_btn">회원가입</button>
 				  </div>
 			</form>
 		</div>
@@ -266,4 +287,162 @@
   
   <c:import url="../template/footer.jsp"></c:import>
 </body>
+
+<script type="text/javascript">
+
+	<!-- 약관 동의 -->
+	$("#checkAll").click(function(){
+		if($("#checkAll").is(":checked")){
+				$(".agreeChk").prop("checked",true);
+			}else{
+				$(".agreeChk").prop("checked",false);
+			}
+		});
+
+	var checkAll = document.getElementById("checkAll");
+	var agreeChk = document.getElementsByClassName("agreeChk");
+
+	for (var i=0;i<agreeChk.length;i++){
+		agreeChk[i].addEventListener('click',function(){
+
+			var result = true;
+			for(var j=0;j<agreeChk.length;j++){
+				if(!agreeChk[j].checked){
+					result = false;
+					}
+				}
+				$("#checkAll").prop("checked",result);
+			});
+		}
+	
+	<!-- join버튼 누를 시 -->
+	$(".join_btn").click(function(){
+			emptyCheck();
+			agreeCheck();
+		
+			if(idCheck && pwCheck && phoneCheck && emailCheck && emptyCheckResult && agreeCheckResult)
+			{
+				$("#frm").submit();
+			}
+		});
+
+	<!-- 공백검사 -->
+	var emptyCheckResult = true;
+	function emptyCheck() {
+		emptyCheckResult = true;
+		$(".emptyResult").removeClass("chkNotice1");
+		$(".emptyResult").html('');
+		$(".empty").each(function(){
+			var data = $(this).val();
+			if(data==''){
+				emptyCheckResult=false;
+				$(this).next().html("필수 정보입니다.")
+				$(".emptyResult").addClass("chkNotice1");
+			}	
+			
+		});
+	}
+
+	var idCheck=false;
+	var pwCheck=false;
+	var phoneCheck=false;
+	var emailCheck=false;
+	var regExp = /^[A-Za-z0-9]{6,12}$/;
+	
+	$("#id").blur(function () {
+		idCheck=false;
+		var id = $(this).val();
+		if(id !=''){
+			$.get("./memberIdCheck?mem_id="+id,function(data){
+				data=data.trim();
+				var str = "이미 사용중인 ID입니다."
+				$(".idResult").removeClass("chkNotice2").addClass("chkNotice1");
+				if(data==0){
+					if(!regExp.test($("input[id='id']").val())) {
+						idCheck=false;
+						str="형식에 맞지않은 ID입니다.";
+						$(".idResult").removeClass("chkNotice2").addClass("chkNotice1");
+					}else{
+						idCheck=true;
+						str="사용가능한 ID입니다.";
+						$(".idResult").removeClass("chkNotice1").addClass("chkNotice2");
+					}	
+
+					//str="사용가능한 ID입니다.";
+					//$(".idResult").removeClass("chkNotice1").addClass("chkNotice2");
+					//idCheck=true;
+				}
+				$(".idResult").html(str);
+			});
+		}
+	});
+
+	$("#pw2").blur(function(){
+		pwCheck=false;
+		var pw = $("#pw").val();
+		var pw2 = $("#pw2").val();
+
+		if(pw == pw2){
+			$(".pwResult").html("비밀번호가 일치합니다.");
+			$(".pwResult").removeClass("chkNotice1").addClass("chkNotice2");
+			pwCheck=true;
+		}else{
+			$(".pwResult").html("비밀번호가 일치하지 않습니다.");
+			$(".pwResult").removeClass("chkNotice2").addClass("chkNotice1");
+		}
+	});
+
+	$("#phone").blur(function () {
+		phoneCheck=false;
+		var phone = $(this).val();
+		if(phone !=''){
+			$.get("./memberPhoneCheck?mem_phone="+phone,function(data){
+				data=data.trim();
+				var str = "이미 사용중인 전화번호 입니다."
+				$(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
+				if(data==0){
+					str="사용가능한 전화번호 입니다.";
+					$(".phoneResult").removeClass("chkNotice1").addClass("chkNotice2");
+					phoneCheck=true;
+				}
+				$(".phoneResult").html(str);
+			});
+		}
+	});
+
+	$("#email").blur(function () {
+		emailCheck=false;
+		var email = $(this).val();
+		if(email !=''){
+			$.get("./memberEmailCheck?mem_email="+email,function(data){
+				data=data.trim();
+				var str = "이미 사용중인 이메일 입니다."
+				$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
+				if(data==0){
+					str="사용가능한 이메일 입니다.";
+					$(".emailResult").removeClass("chkNotice1").addClass("chkNotice2");
+					emailCheck=true;
+				}
+				$(".emailResult").html(str);
+			});
+		}
+	});
+	   
+	var agreeCheckResult = false;
+	function agreeCheck() {
+		var check1 = $("#check1").prop("checked");
+		var check2 = $("#check2").prop("checked");
+
+		agreeCheckResult = false;
+		if(check1 && check2){
+			agreeCheckResult=true;
+		}
+		else{
+			agreeCheckResult=false;
+			alert("필수동의항목에 체크해주세요");
+		}
+	}
+</script>
+
+
 </html>
