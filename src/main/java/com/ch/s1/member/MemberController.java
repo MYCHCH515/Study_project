@@ -3,10 +3,11 @@ package com.ch.s1.member;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,17 +58,22 @@ public class MemberController {
 	}
 	
 	@GetMapping("memberJoin")
-	public ModelAndView setMemberJoin() throws Exception{
+	public ModelAndView setMemberJoin(MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/memberJoin");
 		return mv;
 	}
 	
 	@PostMapping("memberJoin")
-	public ModelAndView setMemberJoin(MemberVO memberVO) throws Exception{
+	public ModelAndView setMemberJoin(@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		if(memberService.getMemberError(memberVO, bindingResult)) {
+			mv.setViewName("member/memberJoin");
+			return mv;
+		}
+		
 		int result = memberService.setMemberJoin(memberVO);
-
 		mv.setViewName("redirect:../");
 		return mv;
 	}
