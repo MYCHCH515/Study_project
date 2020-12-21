@@ -72,7 +72,7 @@ public class MemberController {
 			mv.setViewName("member/memberJoin");
 			return mv;
 		}
-		
+	
 		int result = memberService.setMemberJoin(memberVO);
 		mv.setViewName("redirect:../");
 		return mv;

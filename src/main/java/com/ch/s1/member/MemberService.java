@@ -39,25 +39,25 @@ public class MemberService {
 		}
 		
 		if(!memberVO.getMem_pw().equals(memberVO.getMem_pw2())) {
-			bindingResult.rejectValue("mem_pw2", "memberVO.mem_pw.notEqual");
+			bindingResult.rejectValue("mem_pw2", "memberVO.pw.notEqual");
 			result = true;
 		}
 		
-		memberVO = memberMapper.getMemberId(memberVO);
-		if(memberVO!=null) {
-			bindingResult.rejectValue("mem_id", "memberVO.mem_id.isExist");
+		MemberVO memberVO1 = memberMapper.getMemberId(memberVO);
+		if(memberVO1!=null) {
+			bindingResult.rejectValue("mem_id", "memberVO.id.isExist");
 			result = true;
 		}
 		
-		memberVO = memberMapper.getMemberPhone(memberVO);
-		if(memberVO!=null) {
-			bindingResult.rejectValue("mem_phone", "memberVO.mem_phone.isExist");
+		MemberVO memberVO2 = memberMapper.getMemberPhone(memberVO);
+		if(memberVO2!=null) {
+			bindingResult.rejectValue("mem_phone", "memberVO.phone.isExist");
 			result = true;
 		}
 		
-		memberVO = memberMapper.getMemberEmail(memberVO);
-		if(memberVO!=null) {
-			bindingResult.rejectValue("mem_email", "memberVO.mem_email.isExist");
+		MemberVO memberVO3 = memberMapper.getMemberEmail(memberVO);
+		if(memberVO3!=null) {
+			bindingResult.rejectValue("mem_email", "memberVO.email.isExist");
 			result = true;
 		}
 		return result;

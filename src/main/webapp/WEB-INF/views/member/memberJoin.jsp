@@ -40,31 +40,31 @@
   		<div class="join_box">
   			<form:form modelAttribute="memberVO" id="frm">
 				  <div class="form-group">
-				  		<form:input path="mem_id" class="form-control empty" id="id" name="mem_id" placeholder="아이디"/>
+				  		<form:input path="mem_id" class="form-control empty" id="id" placeholder="아이디"/>
 						<form:errors path="mem_id" cssClass="error"></form:errors>
-						
+						<div class="emptyResult idResult"></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <form:input path="mem_pw" class="form-control empty" id="pw" name="mem_pw" placeholder="비밀번호"/>
+				    <form:password path="mem_pw" class="form-control empty" id="pw" placeholder="비밀번호"/>
 				    <form:errors path="mem_pw" cssClass="error"></form:errors>
 				    <div class="emptyResult pwResult1"></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <form:input path="mem_pw2" class="form-control empty" id="pw2" name="mem_pw2" placeholder="비밀번호확인"/>
+				    <form:input path="mem_pw2" class="form-control empty" id="pw2" placeholder="비밀번호확인"/>
 				 	<form:errors path="mem_pw2" cssClass="error"></form:errors>
 				 	<div class="emptyResult pwResult2"></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <form:input path="mem_name" class="form-control empty" id="name" name="mem_name" placeholder="이름"/>
-				  	<form:errors path="mem_pw2" cssClass="error"></form:errors>
+				    <form:input path="mem_name" class="form-control empty" id="name" placeholder="이름"/>
+				  	<form:errors path="mem_name" cssClass="error"></form:errors>
 				  	<div class="emptyResult nameResult"></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <form:input path="mem_phone" class="form-control empty phone_form1" id="phone" name="mem_phone" placeholder="전화번호"/>
+				    <form:input path="mem_phone" class="form-control empty phone_form1" id="phone" placeholder="전화번호"/>
 				  	<input type="button" class="repeat_chk" value="인증번호받기">	
 				  	<input type="email" class="form-control empty phone_form2" placeholder="인증번호를 입력하세요">
 				  	<form:errors path="mem_phone" cssClass="error"></form:errors>
@@ -72,7 +72,7 @@
 				  </div>
 				  
 				  <div class="form-group">
-				    <form:input path="mem_email" class="form-control empty" id="email" name="mem_email" placeholder="이메일"/>
+				    <form:input path="mem_email" class="form-control empty" id="email" placeholder="이메일"/>
 				 	<form:errors path="mem_email" cssClass="error"></form:errors>
 				 	<div class="emptyResult emailResult"></div>
 				  </div>
@@ -285,7 +285,7 @@
 				  </div>
    
 				  <div class="login_btn_wrap">
-				 	<button type="button" class="join_btn">회원가입</button>
+				 	<button class="join_btn">회원가입</button>
 				  </div>
 			</form:form>
 		</div>
@@ -322,7 +322,7 @@
 			});
 		}
 	
-	<!-- join버튼 누를 시 -->
+	<!--join버튼 누를 시-->
 	$(".join_btn").click(function(){
 			//emptyCheck();
 			agreeCheck();
