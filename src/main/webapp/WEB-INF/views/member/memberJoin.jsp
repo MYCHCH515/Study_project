@@ -23,10 +23,9 @@
 		color: blue;
 	}
 	
-	.emptyResult{
+	.emptyResult, .errors{
 		text-align: left;
 	}
-  	
   	
   </style>
 <body>
@@ -38,42 +37,42 @@
   	</div>
   	<div class="container">
   		<div class="join_box">
-  			<form:form modelAttribute="memberVO" id="frm">
+  			<form:form modelAttribute="memberVO" id="frm" method="post">
 				  <div class="form-group">
 				  		<form:input path="mem_id" class="form-control empty" id="id" placeholder="아이디"/>
-						<form:errors path="mem_id" cssClass="error"></form:errors>
+						<div class="errors"><form:errors path="mem_id" cssClass="error" ></form:errors></div>
 						<div class="emptyResult idResult"></div>
 				  </div>
 				  
 				  <div class="form-group">
 				    <form:password path="mem_pw" class="form-control empty" id="pw" placeholder="비밀번호"/>
-				    <form:errors path="mem_pw" cssClass="error"></form:errors>
+				    <div class="errors"><form:errors path="mem_pw" cssClass="error"></form:errors></div>
 				    <div class="emptyResult pwResult1"></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <form:input path="mem_pw2" class="form-control empty" id="pw2" placeholder="비밀번호확인"/>
-				 	<form:errors path="mem_pw2" cssClass="error"></form:errors>
+				    <form:password path="mem_pw2" class="form-control empty" id="pw2" placeholder="비밀번호확인"/>
+				 	<div class="errors"><form:errors path="mem_pw2" cssClass="error"></form:errors></div>
 				 	<div class="emptyResult pwResult2"></div>
 				  </div>
 				  
 				  <div class="form-group">
 				    <form:input path="mem_name" class="form-control empty" id="name" placeholder="이름"/>
-				  	<form:errors path="mem_name" cssClass="error"></form:errors>
+				  	<div class="errors"><form:errors path="mem_name" cssClass="error"></form:errors></div>
 				  	<div class="emptyResult nameResult"></div>
 				  </div>
 				  
 				  <div class="form-group">
 				    <form:input path="mem_phone" class="form-control empty phone_form1" id="phone" placeholder="전화번호"/>
 				  	<input type="button" class="repeat_chk" value="인증번호받기">	
-				  	<input type="email" class="form-control empty phone_form2" placeholder="인증번호를 입력하세요">
-				  	<form:errors path="mem_phone" cssClass="error"></form:errors>
+				  	<input type="text" class="form-control empty phone_form2" placeholder="인증번호를 입력하세요">
+				  	<div class="errors"><form:errors path="mem_phone" cssClass="error"></form:errors></div>
 				  	<div class="emptyResult phoneResult"></div>
 				  </div>
 				  
 				  <div class="form-group">
 				    <form:input path="mem_email" class="form-control empty" id="email" placeholder="이메일"/>
-				 	<form:errors path="mem_email" cssClass="error"></form:errors>
+				 	<div class="errors"><form:errors path="mem_email" cssClass="error"></form:errors></div>
 				 	<div class="emptyResult emailResult"></div>
 				  </div>
 				  
