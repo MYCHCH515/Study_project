@@ -323,10 +323,10 @@
 	
 	<!--join버튼 누를 시-->
 	$(".join_btn").click(function(){
-			//emptyCheck();
+			emptyCheck();
 			agreeCheck();
-			if(idCheck && pwCheck && pwExpCheck && phoneCheck && emailCheck &&emptyCheckResult && agreeCheckResult)
-			//if(idCheck && pwCheck && pwExpCheck && phoneCheck  &&emptyCheckResult && agreeCheckResult)
+			//if(idCheck && pwCheck && pwExpCheck && phoneCheck && emailCheck &&emptyCheckResult && agreeCheckResult)
+			if(idCheck && pwCheck && pwExpCheck && phoneCheck  && emailCheck &&emptyCheckResult && agreeCheckResult)
 			{
 				$("#frm").submit();
 			}
@@ -342,7 +342,7 @@
 			var data = $(this).val();
 			if(data==''){
 				emptyCheckResult=false;
-				$(this).next().html("필수 항목입니다.")
+				$(this).next().html("필수입력")
 				$(".emptyResult").addClass("chkNotice1");
 			}
 
@@ -357,7 +357,7 @@
 	var emailCheck=false;
 	var regExpId = /^[A-Za-z0-9]{5,20}$/;
 	var regExpPw = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-	var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	var regExpEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
 	var regExpPhone = /^\d{3}-\d{3,4}-\d{4}$/;
 
 	
@@ -383,7 +383,6 @@
 				$(".idResult").html(str);
 			});
 		}
-
 		else{
 			$(".idResult").html("필수 항목입니다.")
 			$(".idResult").removeClass("chkNotice2").addClass("chkNotice1");
@@ -437,6 +436,14 @@
 			$(".pwResult2").removeClass("chkNotice2").addClass("chkNotice1");
 		}
 		
+	});
+
+	$("#name").blur(function () {
+		var name = $(this).val();
+		if(name=''){
+			$(".nameResult").html("필수 항목입니다.")
+			$(".nameResult").removeClass("chkNotice2").addClass("chkNotice1");
+		}
 	});
 
 	$("#phone").blur(function () {
@@ -498,6 +505,8 @@
 			$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
 		}
 	});
+
+	
 
 	<!-- 약관동의 -->
 	var agreeCheckResult = false;

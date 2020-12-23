@@ -18,6 +18,7 @@ public class MemberVO {
 	@Pattern(regexp = "^.*(?=^.{8,16}$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$")
 	private String mem_pw;
 	
+	@NotEmpty
 	private String mem_pw2;
 	
 	@NotEmpty
@@ -28,6 +29,6 @@ public class MemberVO {
 	private String mem_phone;
 	
 	@NotEmpty
-	@Pattern(regexp = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i")
+	@Pattern(regexp = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$")
 	private String mem_email;
 }
