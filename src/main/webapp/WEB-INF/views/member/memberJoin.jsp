@@ -23,7 +23,7 @@
 		color: blue;
 	}
 	
-	.emptyResult, .errors{
+	.errors{
 		text-align: left;
 	}
   	
@@ -39,41 +39,35 @@
   		<div class="join_box">
   			<form:form modelAttribute="memberVO" id="frm" method="post">
 				  <div class="form-group">
-				  		<form:input path="mem_id" class="form-control empty" id="id" placeholder="아이디"/>
-						<div class="errors"><form:errors path="mem_id" cssClass="error" ></form:errors></div>
-						<div class="emptyResult idResult"></div>
+				  		<form:input path="mem_id" class="form-control" id="id" placeholder="아이디"/>
+						<div class="errors idResult"><form:errors path="mem_id" cssClass="error" ></form:errors></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <form:password path="mem_pw" class="form-control empty" id="pw" placeholder="비밀번호"/>
-				    <div class="errors"><form:errors path="mem_pw" cssClass="error"></form:errors></div>
-				    <div class="emptyResult pwResult1"></div>
+					    <form:password path="mem_pw" class="form-control" id="pw" placeholder="비밀번호"/>
+					    <div class="errors pwResult1"><form:errors path="mem_pw" cssClass="error"></form:errors></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <form:password path="mem_pw2" class="form-control empty" id="pw2" placeholder="비밀번호확인"/>
-				 	<div class="errors"><form:errors path="mem_pw2" cssClass="error"></form:errors></div>
-				 	<div class="emptyResult pwResult2"></div>
+					    <form:password path="mem_pw2" class="form-control" id="pw2" placeholder="비밀번호확인"/>
+					 	<div class="errors pwResult2"><form:errors path="mem_pw2" cssClass="error"></form:errors></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <form:input path="mem_name" class="form-control empty" id="name" placeholder="이름"/>
-				  	<div class="errors"><form:errors path="mem_name" cssClass="error"></form:errors></div>
-				  	<div class="emptyResult nameResult"></div>
+					    <form:input path="mem_name" class="form-control" id="name" placeholder="이름"/>
+					  	<div class="errors nameResult"><form:errors path="mem_name" cssClass="error"></form:errors></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <form:input path="mem_phone" class="form-control empty phone_form1" id="phone" placeholder="전화번호"/>
-				  	<input type="button" class="repeat_chk" value="인증번호받기">	
-				  	<input type="text" class="form-control empty phone_form2" placeholder="인증번호를 입력하세요">
-				  	<div class="errors"><form:errors path="mem_phone" cssClass="error"></form:errors></div>
-				  	<div class="emptyResult phoneResult"></div>
+					    <form:input path="mem_phone" class="form-control phone_form1" id="phone" placeholder="전화번호"/>
+					  	<input type="button" class="repeat_chk" value="인증번호받기">	
+					  	<input type="text" class="form-control empty phone_form2" placeholder="인증번호를 입력하세요">
+					  	<div class="errors phoneResult"><form:errors path="mem_phone" cssClass="error"></form:errors></div>
 				  </div>
 				  
 				  <div class="form-group">
-				    <form:input path="mem_email" class="form-control empty" id="email" placeholder="이메일"/>
-				 	<div class="errors"><form:errors path="mem_email" cssClass="error"></form:errors></div>
-				 	<div class="emptyResult emailResult"></div>
+					    <form:input path="mem_email" class="form-control" id="email" placeholder="이메일"/>
+					 	<div class="errors emailResult"><form:errors path="mem_email" cssClass="error"></form:errors></div>
 				  </div>
 				  
 				  <div class="agree">
@@ -323,35 +317,35 @@
 	
 	<!--join버튼 누를 시-->
 	$(".join_btn").click(function(){
-			emptyCheck();
 			agreeCheck();
-			//if(idCheck && pwCheck && pwExpCheck && phoneCheck && emailCheck &&emptyCheckResult && agreeCheckResult)
-			if(idCheck && pwCheck && pwExpCheck && phoneCheck  && emailCheck &&emptyCheckResult && agreeCheckResult)
-			{
-				$("#frm").submit();
+			if(agreeCheckResult){
+				if(idCheck && pwCheck && nameCheck && pwExpCheck && phoneCheck && emailCheck)
+				{
+					$("#frm").submit();
+				}
 			}
 		});
 
-	<!-- 공백검사 -->
-	var emptyCheckResult = true;
-	function emptyCheck() {
-		emptyCheckResult = true;
-		$(".emptyResult").removeClass("chkNotice1");
-		$(".emptyResult").html('');
-		$(".empty").each(function(){
-			var data = $(this).val();
-			if(data==''){
-				emptyCheckResult=false;
-				$(this).next().html("필수입력")
-				$(".emptyResult").addClass("chkNotice1");
-			}
+	<!-- 약관동의 -->
+	var agreeCheckResult = false;
+	function agreeCheck() {
+		var check1 = $("#check1").prop("checked");
+		var check2 = $("#check2").prop("checked");
 
-		});
+		agreeCheckResult = false;
+		if(check1 && check2){
+			agreeCheckResult=true;
+		}
+		else{
+			agreeCheckResult=false;
+			alert("필수동의항목에 체크해주세요");
+		}
 	}
 
 	<!-- 중복검사, 유효성 검사 -->
 	var idCheck=false;
 	var pwCheck=false;
+	var nameCheck = true;
 	var pwExpCheck=false;
 	var phoneCheck=false;
 	var emailCheck=false;
@@ -402,7 +396,6 @@
 			}else{
 				str=""
 			}
-			
 			$(".pwResult1").html(str);
 		}
 
@@ -435,15 +428,19 @@
 			$(".pwResult2").html("필수 항목입니다.")
 			$(".pwResult2").removeClass("chkNotice2").addClass("chkNotice1");
 		}
-		
 	});
 
 	$("#name").blur(function () {
+		nameCheck=true;
 		var name = $(this).val();
 		if(name=''){
-			$(".nameResult").html("필수 항목입니다.")
+			nameCheck=false;
+			str = "필수 항목입니다.";
 			$(".nameResult").removeClass("chkNotice2").addClass("chkNotice1");
+		}else{
+			str = "";
 		}
+		$(".nameResult").html(str);
 	});
 
 	$("#phone").blur(function () {
@@ -505,24 +502,6 @@
 			$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
 		}
 	});
-
-	
-
-	<!-- 약관동의 -->
-	var agreeCheckResult = false;
-	function agreeCheck() {
-		var check1 = $("#check1").prop("checked");
-		var check2 = $("#check2").prop("checked");
-
-		agreeCheckResult = false;
-		if(check1 && check2){
-			agreeCheckResult=true;
-		}
-		else{
-			agreeCheckResult=false;
-			alert("필수동의항목에 체크해주세요");
-		}
-	}
 </script>
 
 

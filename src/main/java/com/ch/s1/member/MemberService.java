@@ -39,7 +39,7 @@ public class MemberService {
 		} 
 		
 		if(!memberVO.getMem_pw().equals(memberVO.getMem_pw2())) {
-			bindingResult.rejectValue("mem_pw2", "memberVO.mem_pw2.notEqual");
+			bindingResult.rejectValue("mem_pw2", "memberVO.mem_pw2.notEqual" );
 			result = true;
 		}
 		
