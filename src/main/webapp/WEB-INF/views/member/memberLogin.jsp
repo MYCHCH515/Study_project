@@ -34,8 +34,8 @@
 				    <label><input type="checkbox" name="remember">아이디 기억하기</label>
 				    
 				    <label class="info_find">
-					   <a href="#">아이디 찾기</a>
-					   <a href="#">비밀번호 찾기</a>
+					   <a href="./memberSearchId">아이디 찾기</a>
+					   <a href="./memberSearchPw">비밀번호 찾기</a>
 				    </label> 
 				  </div>
 				 
@@ -45,7 +45,7 @@
 				  
 				  <div class="join_link">
 				   	<span>아직 거북이의기적 회원이 아니신가요?</span>
-				    <a href="./memberJoin">회원가입</a>
+				    <a href="./memberAgree">회원가입</a>
 				  </div>
 				  <hr>
 			</form>

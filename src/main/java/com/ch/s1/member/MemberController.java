@@ -57,8 +57,31 @@ public class MemberController {
 		return mv;	
 	}
 	
+	@GetMapping("memberSearchId")
+	public ModelAndView getMemberSearchId() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberSearchId");
+		return mv;
+	}
+	
+	@GetMapping("memberSearchPw")
+	public ModelAndView getMemberSearchPw() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberSearchPw");
+		return mv;
+	}
+	
+	@GetMapping("memberAgree")
+	public ModelAndView setMemberAgree() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberAgree");
+		return mv;
+	}
+	
 	@GetMapping("memberJoin")
 	public ModelAndView setMemberJoin(MemberVO memberVO) throws Exception{
+		
+		System.out.println("memberJoin진입");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/memberJoin");
 		return mv;
