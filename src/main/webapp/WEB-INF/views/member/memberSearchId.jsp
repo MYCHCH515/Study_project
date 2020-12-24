@@ -28,12 +28,11 @@
 				  </div>
 				  
 				  <div class="form-group">
-				  	<input type="email" class="form-control empty confirm_form1" id="email" name="mem_email" placeholder="이메일">
-				  	<input type="button" class="repeat_chk" value="인증번호받기">	
-				  	<input type="email" class="form-control empty confirm_form2" placeholder="인증번호를 입력하세요">
-				  	<div class="emptyResult emailResult"></div>
-				  </div>
-				  
+					  	<input type="text" class="form-control empty confirm_form1" id="phone" name="mem_phone" placeholder="전화번호">
+					  	<input type="button" class="repeat_chk" value="인증번호받기">	
+					  	<input type="text" class="form-control empty confirm_form2" placeholder="인증번호를 입력하세요">
+					  	<div class="emptyResult phoneResult"></div>
+			      </div>
 			  </form>
 		
 		     <div class="login_btn_wrap">
