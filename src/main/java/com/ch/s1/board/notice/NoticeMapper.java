@@ -1,5 +1,10 @@
 package com.ch.s1.board.notice;
 
-public interface NoticeMapper {
+import org.apache.ibatis.annotations.Mapper;
+
+import com.ch.s1.board.BoardMapper;
+
+@Mapper
+public interface NoticeMapper extends BoardMapper{
 
 }

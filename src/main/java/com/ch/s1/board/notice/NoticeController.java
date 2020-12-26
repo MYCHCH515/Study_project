@@ -25,4 +25,11 @@ public class NoticeController {
 		mv.setViewName("board/boardList");
 		return mv;	
 	}
+	
+	@GetMapping("noticeWrite")
+	public ModelAndView setInsert() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/boardWrite");
+		return mv;
+	}
 }

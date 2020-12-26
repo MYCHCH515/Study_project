@@ -10,7 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <c:import url="../template/bootStrap.jsp"></c:import>
   <link href="../css/common.css" rel="stylesheet">
-  <link href="../css/index.css" rel="stylesheet">
   <link href="../css/member.css" rel="stylesheet">
 
   <style type="text/css">
