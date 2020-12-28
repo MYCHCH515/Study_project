@@ -25,23 +25,30 @@
   		width: 90%;
   	}
   	
-  	.write_control_wrap{
-  		width: 300px;
-  		height: 50px;
-  		margin: 20px 0;
+  	#files{
+		margin-top: 5px;
+	}
+	
+	.files{
+		padding: 10px 0;
+	}
   	
-  	}
-  	
-  	.write_control input {
+  	.write_control {
+  		margin-top: 10px;
   		border: none;
  		width: 90px;
  		height: 40px;
   		float: right;
   		background-color: #00a5bd;
+  		text-align: center;
+  	}
+  	
+  	.write_control a{
+  		line-height: 40px;
   		color: white;
   	}
   	
-  	.go_list input{
+  	.go_list{
   		background-color: gray;
   		margin-right: 10px;
   	}
@@ -84,13 +91,13 @@
 				</div>  
 	  		</form>
 	  		
-	  		<div class="write_control_wrap">
+	  		<div>
 				<div id="board_submit_btn" class="write_control">
-				 	 <input type="button" value="글작성">
+					 <a href="#">글작성</a>
 				</div>
 				
 				<div  class="write_control go_list">
-					 <input type="button" value="목록">
+					 <a href="#">목록</a>
 				</div>
 			</div>
 		</div>
@@ -145,6 +152,11 @@
 		 }
 		
 	 });
+
+	 $("#board_submit_btn").click(function(){
+			$("#write_frm").submit();
+		 })
+	 
 	 
 </script>
 </html>

@@ -12,13 +12,13 @@
   
   <style type="text/css">
   	.table_list_title{
-  		padding-top: 50px;
+  		padding: 50px 0 30px 0;
   		text-align: center;
   	}
   	
   	.list_form, .write_form{
   		margin: 0 auto;
-  		padding: 20px 0;
+  		height: 1000px;
   		width: 90%;
   	}
   	

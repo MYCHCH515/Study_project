@@ -7,7 +7,7 @@
 	      <a href="${pageContext.request.contextPath}/"><img alt="" src="${pageContext.request.contextPath}/images/logo.png" id="logo"></a>
 	      
 	      <ul class="nav navbar-nav navbar-right">
-	        <li class="lnb_li"><a href="${pageContext.request.contextPath}"><span>개인석</span></a></li>
+	        <li class="lnb_li"><a href="${pageContext.request.contextPath}/seat/seatList"><span>개인석</span></a></li>
 	        <li class="lnb_li"><a href="${pageContext.request.contextPath}"><span>스터디룸</span></a></li>
 	        <li class="lnb_li"><a href="${pageContext.request.contextPath}"><span>사물함</span></a></li>
 	        <li class="lnb_li"><a href="${pageContext.request.contextPath}"><span>이용가이드</span></a></li>
