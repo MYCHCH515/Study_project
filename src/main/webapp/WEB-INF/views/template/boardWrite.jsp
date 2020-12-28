@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,14 +56,6 @@
   	.write_form #title, .write_form #writer{
   		height: 40px;
   	}
-  	
-   .error{
-		color: red;
-	}
-	
-	.errors{
-		text-align: left;
-	}
   </style>
 
 
@@ -76,12 +67,11 @@
 		
 		<!-- Write Form -->
 		<div class="write_form">
-	  		<form:form modelAttribute="boardVO" id="write_frm" enctype="multipart/form-data" >
+	  		<form id="write_frm" action="./${board}Write" method="post" enctype="multipart/form-data" >
 	  
 			    <div class="form-group">
 			      <label for="title">글 제목</label>
-			      <form:input path="board_title" class="form-control empty" id="title" title="제목"/>
-			      <div class="errors"><form:errors path="board_title" cssClass="error" ></form:errors></div>
+			      <input type="text" class="form-control empty" id="title" name="board_title" title="제목">
 			    </div>
 		    
 			    <div class="form-group">
@@ -91,8 +81,7 @@
 
 			     <div class="form-group">
 			      <label for="contents">내용</label>
-			      <form:textarea  path="board_contents" class="form-control empty" id="contents" rows="20" cols="30" title="내용"/>
-			      <div class="errors"><form:errors path="board_contents" cssClass="error" ></form:errors></div>
+			      <textarea class="form-control empty" rows="20" cols="30" id="contents" name="board_contents" title="내용"></textarea>
 			    </div>
 			   
 				<div id="files" class="col-sm-12" style="border: 1px solid #ddd">
@@ -100,7 +89,7 @@
 				  <input class="files" type="file" class="form-control" name="files">
 				  <input class="files" type="file" class="form-control" name="files">
 				</div>  
-	  		</form:form>
+	  		</form>
 	  		
 	  		<div>
 				<div id="board_submit_btn" class="write_control">

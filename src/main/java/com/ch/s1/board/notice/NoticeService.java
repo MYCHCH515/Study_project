@@ -34,6 +34,25 @@ public class NoticeService implements BoardService{
 	@Value("${board.notice.filePath}")
 	private String filePath;
 	
+	public String summernote(MultipartFile file, HttpSession session)throws Exception{
+		
+		String path = session.getServletContext().getRealPath("/upload/notice");
+		System.out.println(path);
+		File dest = new File(path);
+		String fileName = fileManager.saveFileCopy(file, dest);
+		return fileName;
+	}
+	
+	public boolean summernoteDelete(String file, HttpSession session)throws Exception{
+		String path = session.getServletContext().getRealPath("/resources/upload/dominoNews");
+		File file2 = new File(path, file);
+		boolean result = false;
+		if(file2.exists()) {
+			result=file2.delete();
+		}
+		return result;
+	}
+		
 	@Override
 	public int setInsert(BoardVO boardVO, MultipartFile [] files) throws Exception {
 		
