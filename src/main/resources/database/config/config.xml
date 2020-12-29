@@ -7,8 +7,10 @@
   	<typeAliases>
   		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="java.util.List" alias="List"/> 
+		<typeAlias type="com.ch.s1.util.Pager" alias="Pager"/>
 		<typeAlias type="com.ch.s1.member.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.ch.s1.board.BoardVO" alias="BoardVO"/>
   		<typeAlias type="com.ch.s1.board.notice.NoticeVO" alias="NoticeVO"/>
+  		<typeAlias type="com.ch.s1.board.file.FileVO" alias="FileVO"/>
   	</typeAliases>
   </configuration>

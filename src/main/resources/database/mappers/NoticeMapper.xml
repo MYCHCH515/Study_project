@@ -8,12 +8,71 @@
 		insert into notice (board_num, board_title, board_writer, board_contents, regDate, hit)
 		values(#{board_num},#{board_title},#{board_writer},#{board_contents},sysdate(),0)
 	</insert>
-
-
-
-
-
-
+	
+	<insert id="setInsertFile" parameterType="FileVO">
+		insert into noticeFiles(fileNum,fileName,oriName) values (#{fileNum}, #{fileName}, #{oriName})
+	</insert>
+	
+	<sql id="getSearch">
+		<choose>
+			<when test="kind=='title'">
+				board_title
+			</when>
+			<when test="kind='writer'">
+				board_writer
+			</when>
+			<otherwise>
+				board_contents
+			</otherwise>
+		</choose> 
+		like concat('%', #{search},'%') and board_num >0
+	</sql>
+	
+	<select id="getCount" resultType="Long" parameterType="Pager">
+		select count(board_num) from notice where
+		<include refid="getSearch"></include>
+	</select>
+	
+	<select id="getList" resultType="NoticeVO" parameterType="Pager">
+		select * from notice where
+		<include refid="getSearch"></include>
+		order by board_num desc 
+		limit #{startRow}, #{perPage}	
+	</select>
+	
+	<update id="setUpdate" parameterType="NoticeVO">
+		update notice set board_title='#{board_title}', board_contents='#{board_contents}' where board_num=#{board_num}
+	</update>
+	
+	<delete id="setDelete" parameterType="NoticeVO">
+		delete from notice where board_num=#{board_num}
+	</delete>
+	
+	<select id="getOne" parameterType="NoticeVO" resultMap="getOneResult">
+		select N.*, NF.*
+		from notice N left join noticeFiles NF
+		on N.board_num = NF.board_num 
+		where N.board_num=#{board_num}
+	</select>
+	
+	<resultMap type="NoticeVO" id="getOneResult">
+		<id column="board_num" property="board_num"></id>
+		<result column="board_title" property="board_title"></result>
+		<result column="board_writer" property="board_writer"></result>
+		<result column="board_contents" property="board_contents"></result>
+		<result column="regDate" property="regDate"></result>
+		<result column="hit" property="hit"></result>
+		<collection property="files" javaType="List" ofType="FileVO">
+			<id column="fileNum" property="fileNum"></id>
+			<!-- num은 위에 썼으므로 안써도됨 -->
+			<result column="fileName" property="fileName"></result>
+			<result column="oriName" property="oriName"></result>	
+		</collection>
+	</resultMap>
+	
+	<select id="getFile" parameterType="FileVO" resultType="FileVO">
+		select * from noticeFiles where fileNum=#{fileNum}
+	</select>
 
 </mapper>   
     

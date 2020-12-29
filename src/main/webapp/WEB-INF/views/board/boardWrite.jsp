@@ -166,7 +166,7 @@
 
 	 $("#board_submit_btn").click(function(){
 			$("#write_frm").submit();
-		 })
+	 });
 	 
 	 
 </script>
