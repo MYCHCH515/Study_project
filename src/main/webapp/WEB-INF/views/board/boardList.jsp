@@ -16,12 +16,26 @@
   		text-align: center;
   	}
   	
-  	.list_form, .write_form{
+  	.write_form{
   		margin: 0 auto;
   		height: 1000px;
   		width: 90%;
   	}
   	
+  	.list_form{
+  		margin: 0 auto;
+  		height: 700px;
+  		width: 90%;
+  		padding: 50px 0;
+  		text-align: center;
+  	}
+  	
+  	.list_form .table td{
+  		height: 60px;
+  		vertical-align: middle;
+  	}
+  	
+
   	.write_control input {
   		border: none;
  		width: 90px;
@@ -51,6 +65,25 @@
   		border: 1px solid #ddd;
   	}
   </style>
+  
+  
+ <!-- <script type="text/javascript">
+  $(document).ready(function(){
+	  	$("#search").val('${param.search}');
+	
+		var kind = '$(param.kind)'; 
+
+		if(kind == '' || 'title'){
+			$("#k_title").attr("selected","selected")
+		} 
+		else if(kind == 'writer'){
+			$("#k_writer").attr("selected","selected")
+		}
+		else if(kind == 'contents'){
+			$("#k_contents").attr("selected","selected")
+		}
+  </script>  -->
+  
 </head>
 
 <body>
@@ -60,10 +93,13 @@
 	<h3 class="table_list_title">뉴스&이벤트</h3>
 
 	
+
+
+	
 	<!-- list -->
 	<div class="list_form">
 		<table class="table">
-				<tr>
+				<tr class="list_tr">
 					<td class="col-sm-1">번호</td>
 					<td class="col-sm-7">제목</td>
 					<td class="col-sm-1">작성</td>
@@ -72,7 +108,7 @@
 				</tr>
 				
 				 <c:forEach items="${list}" var="vo">
-				      <tr>
+				      <tr class="list_tr">
 				        <td>${vo.board_num}</td>
 				        <td><a href="${board}Select?num=${vo.board_num}">${vo.board_title}</a></td>
 				        <td>${vo.board_writer}</td>
@@ -83,7 +119,7 @@
 		</table>
 		
 		
-		<!-- search -->
+	   <!-- search -->
 	   <div class="col-sm-12">
 			  <form action="./${board}List" id="frm">
 			    <input type="hidden" name="curPage" id="curPage" value="1">
@@ -91,16 +127,16 @@
 				    <div class="input-group search_wrap">
 					  	<div>
 						  <select class="form-control" id="kind" name="kind">
-						    <option>title</option>
-						    <option>writer</option>
-						    <option>contents</option>
+						    <option value="title" id="k_title">제목</option>
+						    <option value="writer" id="k_writer">작성자</option>
+						    <option value="contents" id="k_contents">내용</option>
 						  </select>
 						</div>
 						
 						<div>
 						    <input type="text" class="form-control" id="search" placeholder="Search" name="search">
 							    <div class="form-item">
-								    <button type="submit" style="background-color: #222; width:50px; height: 50px;">
+								    <button type="submit" id="search_btn" style="background-color: #222; width:50px; height: 50px;">
 								        <img alt="" src="${pageContext.request.contextPath}/resources/images/index/srch.png">
 								    </button>
 					    		</div>
@@ -129,7 +165,7 @@
 	   
 		<c:if test="${not empty member and member.mem_type eq '1'}">
 			<div id="board_write_btn" class="write_control">
-				 	 <input type="button" value="글작성">
+				<input type="button" value="글작성">
 			</div>
 		</c:if>
 	</div>
@@ -140,26 +176,34 @@
 </body>
 
 	<script>
-		$("#search").val('${param.search}');
 
-		var kind = '$(param.kind)'; //코드에 헛점있음 
-		if(kind != '')
-			{
-			$("#kind").val('${param.kind}');
+		$("#search").val('${param.search}');
+	
+		var kind = '$(param.kind)'; 
+
+		if(kind == '' || 'title'){
+			$("#k_title").setAttribute("selected","selected")
+			//$("#kind").val('${param.kind}');
+		} 
+		else if(kind == 'writer'){
+			$("#k_writer").setAttribute("selected","selected")
+			//$("#kind").val('${param.kind}');
 		}
-		
+		else if(kind == 'contents'){
+			$("#k_contents").setAttribute("selected","selected")
+			//$("#kind").val('${param.kind}');
+		} 
+	
 		$(".list").click(function(){
 				var curPage = ($(this).attr("title"));
 				$("#curPage").val(curPage);
 				
 				$("#frm").submit();
-			});
+		});
 		
 		$("#board_write_btn").click(function(){
 			location.href="/${board}/${board}Write"
 		});
-		
-		
 	</script>
 
 </html>
