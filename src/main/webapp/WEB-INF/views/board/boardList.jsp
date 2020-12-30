@@ -110,7 +110,7 @@
 				 <c:forEach items="${list}" var="vo">
 				      <tr class="list_tr">
 				        <td>${vo.board_num}</td>
-				        <td><a href="${board}Select?num=${vo.board_num}">${vo.board_title}</a></td>
+				        <td><a href="${board}Select?board_num=${vo.board_num}">${vo.board_title}</a></td>
 				        <td>${vo.board_writer}</td>
 				        <td>${vo.regDate}</td>
 				        <td>${vo.hit}</td>
@@ -176,23 +176,13 @@
 </body>
 
 	<script>
-
 		$("#search").val('${param.search}');
 	
-		var kind = '$(param.kind)'; 
-
-		if(kind == '' || 'title'){
-			$("#k_title").setAttribute("selected","selected")
-			//$("#kind").val('${param.kind}');
-		} 
-		else if(kind == 'writer'){
-			$("#k_writer").setAttribute("selected","selected")
-			//$("#kind").val('${param.kind}');
+		var kind = '$(param.kind)'; //코드에 헛점있음 
+		if(kind != '')
+			{
+			$("#kind").val('${param.kind}');
 		}
-		else if(kind == 'contents'){
-			$("#k_contents").setAttribute("selected","selected")
-			//$("#kind").val('${param.kind}');
-		} 
 	
 		$(".list").click(function(){
 				var curPage = ($(this).attr("title"));

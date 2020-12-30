@@ -92,5 +92,17 @@ public class NoticeController {
 		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
+	
+	@GetMapping("noticeSelect")
+	public ModelAndView getOne(BoardVO boardVO) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		boardVO =  noticeService.getOne(boardVO);
+	
+		mv.addObject("vo", boardVO);
+		mv.setViewName("board/boardSelect");
+		
+		return mv;
+	}
 
 }
