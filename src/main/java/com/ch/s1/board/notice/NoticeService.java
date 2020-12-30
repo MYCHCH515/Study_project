@@ -34,12 +34,16 @@ public class NoticeService implements BoardService{
 	@Value("${board.notice.filePath}")
 	private String filePath;
 	
-	public String summernote(MultipartFile file, HttpSession session)throws Exception{
+	public String summernote(MultipartFile file)throws Exception{
 		
-		String path = session.getServletContext().getRealPath("/upload/notice");
-		System.out.println(path);
-		File dest = new File(path);
-		String fileName = fileManager.saveFileCopy(file, dest);
+		File files = filePathGenerator.getUseResourceLoader(this.filePath);
+		System.out.println("uuid전경로명-------"+files);
+		
+		String fileName = fileManager.saveFileCopy(file, files);
+		
+//		String name = files+File.separator+fileName;
+//		System.out.println("s최종경로명--------"+name);
+
 		return fileName;
 	}
 	

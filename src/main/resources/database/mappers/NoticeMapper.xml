@@ -10,7 +10,7 @@
 	</insert>
 	
 	<insert id="setInsertFile" parameterType="FileVO">
-		insert into noticeFiles(fileNum,fileName,oriName) values (#{fileNum}, #{fileName}, #{oriName})
+		insert into noticeFiles(fileName,oriName,board_num) values (#{fileName}, #{oriName},#{board_num})
 	</insert>
 	
 	<sql id="getSearch">

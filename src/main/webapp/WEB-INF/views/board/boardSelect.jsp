@@ -32,8 +32,36 @@
 	<h3>Writer: ${vo.board_writer}</h3>
 	<h3>Contents: ${vo.board_contents}</h3>
 	
+	<br>
+	<h3>Files</h3>
+	
+	<c:forEach items="${vo.files}" var="file">
+		<p><a href="${board}FileDown?fileNum=${file.fileNum}">${file.oriName}</a></p>
+	</c:forEach>
+	
+	<button class="btn btn-primary go" title="Update">Update</button>
+	<button class="btn btn-danger go"  title="Delete">Delete</button>
+	
+	
 	</div>
 	
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
+
+	<script type="text/javascript">
+		$(".go").click(function(){
+			var board='${board}';
+			var t = $(this).attr("title");
+	
+			$("#frm").attr("action", board+t);
+	
+			if(t=='Delete'){
+				$("#frm").attr("method","post");
+			}
+			
+			$("#frm").submit();
+			
+			});
+	</script>
+
 </html>

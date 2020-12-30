@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ch.s1.board.BoardVO;
+import com.ch.s1.board.file.FileVO;
+import com.ch.s1.util.FilePathGenerator;
 import com.ch.s1.util.Pager;
+
 
 @Controller
 @RequestMapping(value="/notice/**")
@@ -71,13 +75,13 @@ public class NoticeController {
 	}
 	
 	@PostMapping("summernote")
-	public ModelAndView summernote(MultipartFile file, HttpSession session)throws Exception{
+	public ModelAndView summernote(MultipartFile file)throws Exception{
 		ModelAndView mv = new ModelAndView();
 
-		String fileName = noticeService.summernote(file, session);
+		String fileName = noticeService.summernote(file);
+		System.out.println("UUID경로명----------"+fileName);
 		
-		String name = session.getServletContext().getContextPath()+File.separator;
-		name = name+"upload"+File.separator+"notice"+File.separator+fileName;
+		String name = File.separator+"upload"+File.separator+"notice"+File.separator+fileName;
 		System.out.println(name);
 		mv.addObject("msg", name);
 		mv.setViewName("common/ajaxResult");
@@ -102,6 +106,21 @@ public class NoticeController {
 	
 		mv.addObject("vo", boardVO);
 		mv.setViewName("board/boardSelect");
+		
+		return mv;
+	}
+	
+	@Value("${board.notice.filePath}")
+	private String filePath;
+	
+	@GetMapping("noticeFileDown")
+	public ModelAndView getNoticeFileDown(FileVO fileVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		fileVO = noticeService.getFile(fileVO);
+		
+		mv.addObject("fileVO", fileVO);
+		mv.addObject("filePath", filePath); 
+		mv.setViewName("fileDown");
 		
 		return mv;
 	}
