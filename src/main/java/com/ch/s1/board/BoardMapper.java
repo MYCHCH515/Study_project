@@ -22,4 +22,6 @@ public interface BoardMapper {
 	public long getCount(Pager pager) throws Exception;
 	
 	public FileVO getFile(FileVO fileVO) throws Exception;
+	
+	public int setInsertHits(long board_num) throws Exception;
 }

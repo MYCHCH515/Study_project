@@ -24,18 +24,20 @@
   	
   	.list_form{
   		margin: 0 auto;
-  		height: 700px;
+  		height: 450px;
   		width: 90%;
-  		padding: 50px 0;
+  		padding: 30px 0;
+  		text-align: center;
+  	}
+  	.list_footer{
   		text-align: center;
   	}
   	
   	.list_form .table td{
-  		height: 60px;
+  		height: 65px;
   		vertical-align: middle;
   	}
   	
-
   	.write_control input {
   		border: none;
  		width: 90px;
@@ -43,6 +45,10 @@
   		float: right;
   		background-color: #00a5bd;
   		color: white;
+  	}
+  	
+  	#bw_btn_wrap{
+  		padding-bottom: 20px;
   	}
   	
   	.search_wrap{
@@ -64,6 +70,36 @@
   		height: 50px; 
   		border: 1px solid #ddd;
   	}
+  	
+  	#search_btn{
+  		background-color: #111; 
+  		opacity: 70%;
+  		border: none;
+  		width: 50px; 
+  		height: 50px;
+  	}
+  	
+  	.pagination{
+  		margin: 10px;
+  	}
+ 
+  	.pagination>li>a, .pagination>li>span {
+	    position: relative;
+	    float: left;
+	    padding: 6px 12px;
+	    margin-left: -1px;		
+	    line-height: 1.42857143;
+	    color: #333;
+	    text-decoration: none;
+	    border: none;
+	    font-size: 15px;
+    }
+    
+    .pagination>li>a:hover , .pagination>li>span:hover {
+    	background: none;
+    	font-weight: bold;
+	}
+    
   </style>
   
   
@@ -90,35 +126,30 @@
 	<c:import url="../template/header.jsp"></c:import>
 	
 	<div class="container">
-	<h3 class="table_list_title">뉴스&이벤트</h3>
+	<h3 class="table_list_title">뉴스&amp;이벤트</h3>
 
-	
-
-
-	
 	<!-- list -->
 	<div class="list_form">
 		<table class="table">
 				<tr class="list_tr">
-					<td class="col-sm-1">번호</td>
-					<td class="col-sm-7">제목</td>
-					<td class="col-sm-1">작성</td>
+					<td class="col-sm-1">글 번호</td>
+					<td class="col-sm-8">제목</td>
 					<td class="col-sm-2">날짜</td>
 					<td class="col-sm-1">조회</td>
 				</tr>
 				
-				 <c:forEach items="${list}" var="vo">
-				      <tr class="list_tr">
+				<c:forEach items="${list}" var="vo">
+			      <tr class="list_tr">
 				        <td>${vo.board_num}</td>
-				        <td><a href="${board}Select?board_num=${vo.board_num}">${vo.board_title}</a></td>
-				        <td>${vo.board_writer}</td>
+				        <td><a href="${board}Select?board_num=${vo.board_num}">${vo.board_title}</a></td> 
 				        <td>${vo.regDate}</td>
 				        <td>${vo.hit}</td>
-				      </tr>
-		    	 </c:forEach>
+			      </tr>
+		    	</c:forEach>
 		</table>
-		
-		
+	</div>
+	
+	<div class="list_footer">	
 	   <!-- search -->
 	   <div class="col-sm-12">
 			  <form action="./${board}List" id="frm">
@@ -127,8 +158,8 @@
 				    <div class="input-group search_wrap">
 					  	<div>
 						  <select class="form-control" id="kind" name="kind">
+						    <option value="all" id="k_all">전체</option>
 						    <option value="title" id="k_title">제목</option>
-						    <option value="writer" id="k_writer">작성자</option>
 						    <option value="contents" id="k_contents">내용</option>
 						  </select>
 						</div>
@@ -136,8 +167,8 @@
 						<div>
 						    <input type="text" class="form-control" id="search" placeholder="Search" name="search">
 							    <div class="form-item">
-								    <button type="submit" id="search_btn" style="background-color: #222; width:50px; height: 50px;">
-								        <img alt="" src="${pageContext.request.contextPath}/resources/images/index/srch.png">
+								    <button type="submit" id="search_btn">
+								        <img alt="" src="../images/srch.png">
 								    </button>
 					    		</div>
 						</div>
@@ -149,7 +180,7 @@
 	   <div class="col-sm-12">
 	  	   <ul class="pagination">
 	  	   		<c:if test="${pager.before}">
-	  	   			<li><a href="#" class="list" title="${pager.startNum-1}">이전</a></li>
+	  	   			<li><a href="#" class="list" title="${pager.startNum-1}">&lt;</a></li>
 	  	   		</c:if>
 	  	   
 			  <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
@@ -157,18 +188,19 @@
 			  </c:forEach>
 			  
 			  <c:if test="${pager.after}">
-	  	   			<li><a href="#" class="list" title="${pager.lastNum+1}">다음</a></li>
+	  	   			<li><a href="#" class="list" title="${pager.lastNum+1}">&gt;</a></li>
 	  	   		</c:if>
 		   </ul>
 	   </div>
+	   </div>
 	   
-	   
-		<c:if test="${not empty member and member.mem_type eq '1'}">
-			<div id="board_write_btn" class="write_control">
-				<input type="button" value="글작성">
-			</div>
-		</c:if>
-	</div>
+	   <div class="col-sm-12" id="bw_btn_wrap">
+			<c:if test="${not empty member and member.mem_type eq '1'}">
+				<div id="board_write_btn" class="write_control">
+					<input type="button" value="글작성">
+				</div>
+			</c:if>
+		</div>
 	
 	</div>
 	
@@ -180,15 +212,15 @@
 	
 		var kind = '$(param.kind)'; //코드에 헛점있음 
 		if(kind != '')
-			{
+		{
 			$("#kind").val('${param.kind}');
 		}
 	
 		$(".list").click(function(){
-				var curPage = ($(this).attr("title"));
-				$("#curPage").val(curPage);
-				
-				$("#frm").submit();
+			var curPage = ($(this).attr("title"));
+			$("#curPage").val(curPage);
+			
+			$("#frm").submit();
 		});
 		
 		$("#board_write_btn").click(function(){

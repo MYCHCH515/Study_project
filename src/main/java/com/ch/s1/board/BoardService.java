@@ -20,4 +20,5 @@ public interface BoardService {
 	public BoardVO getOne(BoardVO boardVO) throws Exception;
 	
 	public FileVO getFile(FileVO fileVO) throws Exception;
+	
 }

@@ -95,8 +95,9 @@ public class NoticeController {
 	
 	@GetMapping("noticeSelect")
 	public ModelAndView getOne(BoardVO boardVO) throws Exception{
-		
 		ModelAndView mv = new ModelAndView();
+		
+		noticeService.setInsertHits(boardVO.getBoard_num());
 		boardVO =  noticeService.getOne(boardVO);
 	
 		mv.addObject("vo", boardVO);

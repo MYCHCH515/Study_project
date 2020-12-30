@@ -22,7 +22,7 @@
 	<c:import url="../template/header.jsp"></c:import>
 	
 	<div class="container">
-	<h3 class="table_list_title">뉴스&이벤트</h3>
+	<h3 class="table_list_title">뉴스&amp;이벤트</h3>
 	
 	<form action="" id="frm">
 		<input type="hidden" value="${vo.board_num}" name="board_num">

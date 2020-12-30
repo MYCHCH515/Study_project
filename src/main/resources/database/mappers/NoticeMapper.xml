@@ -15,17 +15,17 @@
 	
 	<sql id="getSearch">
 		<choose>
+			<when test="kind=='all'">
+				board_title or board_contents
+			</when>
 			<when test="kind=='title'">
 				board_title
-			</when>
-			<when test="kind='writer'">
-				board_writer
 			</when>
 			<otherwise>
 				board_contents
 			</otherwise>
 		</choose> 
-		like concat('%', #{search},'%') and board_num >0
+		like concat('%',#{search},'%') and board_num >0
 	</sql>
 	
 	<select id="getCount" resultType="Long" parameterType="Pager">
@@ -54,6 +54,10 @@
 		on N.board_num = NF.board_num 
 		where N.board_num=#{board_num}
 	</select>
+	
+	<update id="setInsertHits" parameterType="Long">
+    		update notice set hit=hit+1 where board_num=#{board_num}
+    </update> 
 	
 	<resultMap type="NoticeVO" id="getOneResult">
 		<id column="board_num" property="board_num"></id>

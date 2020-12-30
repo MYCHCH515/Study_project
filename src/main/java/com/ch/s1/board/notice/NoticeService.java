@@ -52,6 +52,11 @@ public class NoticeService implements BoardService{
 		}
 		return result;
 	}
+	
+	public int setInsertHits(long board_num) throws Exception{
+		int result = noticeMapper.setInsertHits(board_num);
+		return result;
+	}
 		
 	@Override
 	public int setInsert(BoardVO boardVO, MultipartFile [] files) throws Exception {
@@ -104,6 +109,6 @@ public class NoticeService implements BoardService{
 	public FileVO getFile(FileVO fileVO) throws Exception {
 		return noticeMapper.getFile(fileVO);
 	}
-
 	
+
 }

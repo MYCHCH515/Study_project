@@ -32,7 +32,7 @@ public class Pager {
 	public void makePage(long totalCount) {
 		
 		long totalPage = totalCount/perPage;
-		if(this.getTotalCount()%perPage !=0) {
+		if(totalCount%perPage !=0) {
 			totalPage++;
 		}
 		
@@ -84,4 +84,11 @@ public class Pager {
 		}
 		return search;
 	}
+	
+//	public String getKind() {
+//		if(this.kind == null) {
+//			this.kind="title";
+//		}
+//		return kind;
+//	}
 }
