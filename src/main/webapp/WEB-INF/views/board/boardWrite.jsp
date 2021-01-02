@@ -163,9 +163,13 @@
 		 }
 		
 	 });
-
+	 
 	 $("#board_submit_btn").click(function(){
 			$("#write_frm").submit();
+	 });
+
+	 $(".go_list").click(function(){
+			location.href="./${board}List"
 	 });
 	 
 	 

@@ -5,8 +5,8 @@
     
     <mapper namespace="com.ch.s1.member.MemberMapper">
     	<insert id="setMemberJoin" parameterType="MemberVO">
-    		insert into member(mem_id,mem_pw,mem_name,mem_phone,mem_email,mem_type)
-    		values(#{mem_id}, #{mem_pw}, #{mem_name}, #{mem_phone}, #{mem_email}, 0)
+    		insert into member(mem_id,mem_pw,mem_name,mem_phone,mem_email,mem_type,mem_regDate)
+    		values(#{mem_id}, #{mem_pw}, #{mem_name}, #{mem_phone}, #{mem_email}, 0, sysdate())
     	</insert>
     	
     	<select id="getMemberLogin" parameterType="MemberVO" resultType="MemberVO">

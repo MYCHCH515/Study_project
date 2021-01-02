@@ -1,5 +1,7 @@
 package com.ch.s1.member;
 
+import java.sql.Date;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
@@ -33,4 +35,6 @@ public class MemberVO {
 	private String mem_email;
 	
 	private int mem_type;
+	
+	private Date mem_regDate;
 }

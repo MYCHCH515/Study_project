@@ -12,7 +12,7 @@ public class SeatController {
 	@GetMapping("seatList")
 	public ModelAndView getList() throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("seat/seatList");
+		mv.setViewName("seat/seatList2");
 		return mv;
 	}
 
