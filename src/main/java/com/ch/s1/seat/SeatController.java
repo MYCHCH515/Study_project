@@ -15,5 +15,12 @@ public class SeatController {
 		mv.setViewName("seat/seatList2");
 		return mv;
 	}
+	
+	@GetMapping("seatReserve")
+	public ModelAndView setInsert() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("seat/seatReserve");
+		return mv;
+	}
 
 }

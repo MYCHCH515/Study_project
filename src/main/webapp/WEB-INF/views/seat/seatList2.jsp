@@ -218,43 +218,43 @@
 
 		<div class="seat_s1">
 			<div id="s1_1">
-				<button class="btn_seat" id="1" value=1>1</button>
+				<button class="btn_seat" id="1" name=1>1</button>
 			</div>
 			<div id="s1_2">
-				<button class="btn_seat" id="2" value=2>2</button>
+				<button class="btn_seat" id="2" name=2>2</button>
 			</div>
 			<div id="s1_3">
-				<button class="btn_seat" id="3" value=3>3</button>
+				<button class="btn_seat" id="3" name=3>3</button>
 			</div>
 			<div id="s1_4">
-				<button class="btn_seat" id="4" value=4>4</button>
+				<button class="btn_seat" id="4" name=4>4</button>
 			</div>
 			<div id="s1_5">
-				<button class="btn_seat" id="5" value=5>5</button>
+				<button class="btn_seat" id="5" name=5>5</button>
 			</div>
 			<div id="s1_6">
-				<button class="btn_seat" id="6" value=6>6</button>
+				<button class="btn_seat" id="6" name=6>6</button>
 			</div>
 		</div>
 		
 		<div class="seat_s2">
 			<div id="s2_1">
-				<button class="btn_seat" id="7" value=7>7</button>
+				<button class="btn_seat" id="7" name=7>7</button>
 			</div>
 			<div id="s2_2">
-				<button class="btn_seat" id="8" value=8>8</button>
+				<button class="btn_seat" id="8" name=8>8</button>
 			</div>
 			<div id="s2_3">
-				<button class="btn_seat" id="9" value=9>9</button>
+				<button class="btn_seat" id="9" name=9>9</button>
 			</div>
 			<div id="s2_4">
-				<button class="btn_seat" id="10" value=10>10</button>
+				<button class="btn_seat" id="10" name=10>10</button>
 			</div>
 			<div id="s2_5">
-				<button class="btn_seat" id="11" value=11>11</button>
+				<button class="btn_seat" id="11" name=11>11</button>
 			</div>
 			<div id="s2_6">
-				<button class="btn_seat" id="12" value=12>12</button>
+				<button class="btn_seat" id="12" name=12>12</button>
 			</div>
 		</div>
 		
@@ -264,43 +264,43 @@
 				<div class="seat_s3">
 					<div class="seat_s3_left">
 						<div id="s3_1">
-							<button class="btn_seat" id="13" value=13>13</button>
+							<button class="btn_seat" id="13" name=13>13</button>
 						</div>
 						<div id="s3_2">
-							<button class="btn_seat" id="14" value=14>14</button>
+							<button class="btn_seat" id="14" name=14>14</button>
 						</div>
 						<div id="s3_3">
-							<button class="btn_seat" id="15" value=15>15</button>
+							<button class="btn_seat" id="15" name=15>15</button>
 						</div>
 						<div id="s3_4">
-							<button class="btn_seat" id="16" value=16>16</button>
+							<button class="btn_seat" id="16" name=16>16</button>
 						</div>
 						<div id="s3_5">
-							<button class="btn_seat" id="17" value=17>17</button>
+							<button class="btn_seat" id="17" name=17>17</button>
 						</div>
 						<div id="s3_6">
-							<button class="btn_seat" id="18" value=18>18</button>
+							<button class="btn_seat" id="18" name=18>18</button>
 						</div>
 					</div>
 					
 					<div class="seat_s3_right">
 						<div id="s3_7">
-							<button class="btn_seat" id="19" value=19>19</button>
+							<button class="btn_seat" id="19" name=19>19</button>
 						</div>
 						<div id="s3_8">
-							<button class="btn_seat" id="20" value=20>20</button>
+							<button class="btn_seat" id="20" name=20>20</button>
 						</div>
 						<div id="s3_9">
-							<button class="btn_seat" id="21" value=21>21</button>
+							<button class="btn_seat" id="21" name=21>21</button>
 						</div>
 						<div id="s3_10">
-							<button class="btn_seat" id="22" value=22>22</button>
+							<button class="btn_seat" id="22" name=22>22</button>
 						</div>
 						<div id="s3_11">
-							<button class="btn_seat" id="23" value=23>23</button>
+							<button class="btn_seat" id="23" name=23>23</button>
 						</div>
 						<div id="s3_12">
-							<button class="btn_seat" id="24" value=24>24</button>
+							<button class="btn_seat" id="24" name=24>24</button>
 						</div>
 					</div>
 				</div>
@@ -310,43 +310,43 @@
 				<div class="seat_s4">
 					<div class="seat_s4_left">
 						<div id="s4_1">
-							<button class="btn_seat" id="25" value=25>25</button>
+							<button class="btn_seat" id="25" name=25>25</button>
 						</div>
 						<div id="s4_2">
-							<button class="btn_seat" id="26" value=26>26</button>
+							<button class="btn_seat" id="26" name=26>26</button>
 						</div>
 						<div id="s4_3">
-							<button class="btn_seat" id="27" value=27>27</button>
+							<button class="btn_seat" id="27" name=27>27</button>
 						</div>
 						<div id="s4_4">
-							<button class="btn_seat" id="28" value=28>28</button>
+							<button class="btn_seat" id="28" name=28>28</button>
 						</div>
 						<div id="s4_5">
-							<button class="btn_seat" id="29" value=29>29</button>
+							<button class="btn_seat" id="29" name=29>29</button>
 						</div>
 						<div id="s4_6">
-							<button class="btn_seat" id="30" value=30>30</button>
+							<button class="btn_seat" id="30" name=30>30</button>
 						</div>
 					</div>
 					
 					<div class="seat_s4_right">
 						<div id="s4_7">
-							<button class="btn_seat" id="31" value=31>31</button>
+							<button class="btn_seat" id="31" name=31>31</button>
 						</div>
 						<div id="s4_8">
-							<button class="btn_seat" id="32" value=32>32</button>
+							<button class="btn_seat" id="32" name=32>32</button>
 						</div>
 						<div id="s4_9">
-							<button class="btn_seat" id="33" value=33>33</button>
+							<button class="btn_seat" id="33" name=33>33</button>
 						</div>
 						<div id="s4_10">
-							<button class="btn_seat" id="34" value=34>34</button>
+							<button class="btn_seat" id="34" name=34>34</button>
 						</div>
 						<div id="s4_11">
-							<button class="btn_seat" id="35" value=35>35</button>
+							<button class="btn_seat" id="35" name=35>35</button>
 						</div>
 						<div id="s4_12">
-							<button class="btn_seat" id="36" value=36>36</button>
+							<button class="btn_seat" id="36" name=36>36</button>
 						</div>
 					</div>
 				</div>
@@ -355,22 +355,22 @@
 		
 		<div class="seat_s5">
 			<div id="s5_1">
-				<button class="btn_seat" id="37" value=37>37</button>
+				<button class="btn_seat" id="37" name=37>37</button>
 			</div>
 			<div id="s5_2">
-				<button class="btn_seat" id="38" value=38>38</button>
+				<button class="btn_seat" id="38" name=38>38</button>
 			</div>
 			<div id="s5_3">
-				<button class="btn_seat" id="39" value=39>39</button>
+				<button class="btn_seat" id="39" name=39>39</button>
 			</div>
 			<div id="s5_4">
-				<button class="btn_seat" id="40" value=40>40</button>
+				<button class="btn_seat" id="40" name=40>40</button>
 			</div>
 			<div id="s5_5">
-				<button class="btn_seat" id="41" value=41>41</button>
+				<button class="btn_seat" id="41" name=41>41</button>
 			</div>
 			<div id="s5_6">
-				<button class="btn_seat" id="42" value=42>42</button>
+				<button class="btn_seat" id="42" name=42>42</button>
 			</div>
 		</div>
 		
@@ -408,11 +408,7 @@
 
 		if(${not empty member}){
 			if(confirm(seat_num+"번 자리 예약을 진행하시겠습니까?")==true){
-				$.get("./seatReserve?seat_num="+seat_num,function(data){
-					data=data.trim();
-					
-
-				});
+				location.href="./seatReserve?seat_num="+seat_num
 			}
 			else{
 				return;
