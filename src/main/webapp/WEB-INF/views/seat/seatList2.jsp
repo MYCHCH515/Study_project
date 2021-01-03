@@ -408,7 +408,7 @@
 
 		if(${not empty member}){
 			if(confirm(seat_num+"번 자리 예약을 진행하시겠습니까?")==true){
-				location.href="./seatReserve?seat_num="+seat_num
+				location.href="../reserve/reserveForm?seat_num="+seat_num
 			}
 			else{
 				return;
