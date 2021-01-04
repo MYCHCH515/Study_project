@@ -12,6 +12,6 @@ public class ReserveVO {
 	private int seat_num;
 	private int product_num;
 	private Date reserve_regDate;
-	private Date reserve_strt_tm;
-	private Date reserve_end_tm;
+	private String reserve_strt_tm;
+	private String reserve_end_tm;
 }

@@ -1,0 +1,186 @@
+@charset "UTF-8";
+
+	.table_list_title{
+  		padding: 50px 0 30px 0;
+  		text-align: center;
+  	}
+  	
+  	.seat_wrap{
+  		margin: 0 auto;
+  		width: 80%;
+  		height: 800px;
+  		margin-bottom: 100px;
+  		background-color: #F6F6F6;
+  		border: 5px solid gray;
+  		box-sizing: content-box;
+  		font-size: 18px;
+  		font-weight: bold;
+  	}
+  	
+  	.seat_wrap button{
+  		background: #E3F0F2;
+  		border: 1px solid #F6F6F6;
+  	}
+  	
+  	.seat_wrap button:hover{
+  		background :#C0D7DA;
+  		border: 1px solid #F6F6F6;
+  	}
+  	
+  	.color_wrap, .color_wrap div{
+  		float: left;
+  	}
+  	
+  	.color_wrap div{
+  		margin: 5px;
+  	}
+  
+  	.color_type {
+  		width: 10px;
+  		height: 10px;
+  	}
+  	
+  	.ct1{
+  		background-color: #BAC1C2;
+  	}
+  	
+  	.ct2{
+  		background-color:  #E3F0F2;
+  	}
+  	
+  	.ct3{
+  		background-color: #00a5bd;
+  	}
+  	
+  	.leave_list{
+  		width: 80%;
+  		margin: 0 auto;
+  		text-align: right;
+  	}
+  	
+  	.leave_list button{
+  		
+  		margin: 10px 0 ;
+  		width: 100px;
+  		height: 30px;
+  		
+  	}
+  	
+  	.seat_s1{
+  		margin: 0 auto;
+  		width: 80%;
+  		height: 90px;
+  		padding: 0 50px;
+  	}
+  	
+  	.seat_s1 button{
+  		margin: 0 2px;
+  	}
+  	
+  	.seat_s2{
+		float:left;
+  		width: 100px;
+  		height: 600px;
+  	}
+  	
+  	.seat_wrap2{
+  		float: left;
+  		width: 78%;
+  		height: 600px;
+  	}
+  	
+  	.seat_s3_wrap, .seat_s4_wrap{
+  		width: 100%;
+  		height: 300px;
+		padding: 50px;
+  	}
+  	
+  	.seat_s3_left, .seat_s3_right, .seat_s4_left, .seat_s4_right{
+  		float: left;
+  		width: 50%;
+  		height:200px;
+  		padding: 10px 0;
+  	}
+  	
+  	.seat_s3, .seat_s4{
+  		height: 200px;
+  	}
+  	
+  	.seat_s5{
+		float: right;
+  		width: 100px;
+  		height: 600px;
+  	}
+  	
+  	.facility{
+  		clear:both;
+  		width: 100%;
+  		height: 110px;
+  	}
+  	
+  	.facility span{
+  		margin: 0 auto;
+  	}
+  	
+  	#f1_wrap, #f3_wrap{
+  		float:left;
+  		width: 20%;
+  		height: 110px;
+  		padding: 20px 0;
+  	}
+  	
+  	#f1, #f3{
+  		text-align: center;
+  		width: 100%;
+  		height: 70px;
+  		border: 5px solid gray;
+  		color: #00a5bd;
+  	}
+  	
+  	#f1 span, #f3 span{
+  		line-height: 60px;
+  	}
+  	
+  	#f1{
+  		border-left: none;
+  	}
+  	
+  	#f3{
+  		border-right: none;
+  	}
+  	
+  	#f2_wrap{
+  		float:left;
+  		width: 60%;
+  		height: 110px;
+  		padding-top: 80px;
+  	}
+  	
+  	#f2{
+  		margin: 0 auto;
+  		text-align: center;
+  		width: 80%;
+  		height: 30px;
+  		color: #00a5bd;
+  		border: 5px solid gray;
+  		border-bottom: none;
+  	}
+  	
+  	.btn_seat{
+  		width:100px;
+  		height:90px;
+  		float:left;
+  		
+  	}	
+  	
+  	.seat_s2 button, .seat_s5 button{
+  		margin-bottom: 7px;
+  	}
+  	
+  	.seat_s3_left button, .seat_s4_left button{
+  		float:left;	
+  	}
+  	
+  	.seat_s3_right button, .seat_s4_right button{
+  		float:right;	
+  	}

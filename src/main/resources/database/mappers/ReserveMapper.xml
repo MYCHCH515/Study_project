@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.ch.s1.reserve.ReserveMapper">
+    	<select id="getList" resultType="ReserveVO">
+    		select * from reserve
+    	</select>
+    	
+    	<insert id="setInsert" parameterType="ReserveVO">
+    		insert into reserve (mem_num,seat_num,product_num,reserve_regDate,reserve_strt_tm,reserve_end_tm)
+    		values(#{mem_num},#{seat_num},#{product_num},sysdate(),#{reserve_strt_tm},#{reserve_end_tm})
+    	</insert>
+    </mapper>
+    

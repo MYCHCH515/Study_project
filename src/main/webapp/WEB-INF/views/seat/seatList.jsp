@@ -9,95 +9,147 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <c:import url="../template/bootStrap.jsp"></c:import>
   <link href="../css/common.css" rel="stylesheet">
-  
-  <style type="text/css">
-  	
-  </style>
+   <link href="../css/seat.css" rel="stylesheet">
 </head>
-
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	
 	<div class="container">
 	<h3 class="table_list_title">개인석</h3>
+	<div class="leave_list" ><button>퇴실 예정석</button></div>
+	<ul class="color_wrap">
+		<li><div class="color_type ct1"></div>이용불가</li>
+		<li><div class="color_type ct2"></div>이용가능</li>
+		<li><div class="color_type ct3"></div>내 예약</li>
+	</ul>
 	
-	
-	
-	
-	<div id=wrap>
-
-		<div class="G1"></div>
-		<div class="G2"></div>
-		<div class="G3"></div>
-		<div class="G4"></div>
-
-		<div>
-			<div class="s_box" style="top: 0px; left: 0px">
-				<table>
-					<tbody>
-						<tr>
-							<td width="40px" id="G101_no">7</td>
-							<td width="*" colspan="2" id="G101_name">7</td>
-						</tr>
-						<tr>
-							<td colspan="4" id="G101_inOut" align="center">7</td>
-						</tr>
-						<tr>
-							<td colspan="4" class="clearfix">
-								<!-- <button class="btnIn" id="G101_btnIn" value="G101">입실</button> -->
-								<button class="btnOut" id="7"
-									value="G101">퇴실</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+	<div class=seat_wrap>
+		<div class="seat_s1">
+			<c:forEach items="${list}" var="vo">
+				<c:if test="${vo.seat_num /6 <= 1}">
+					<div id="s1_${vo.seat_num}">
+						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+					</div>
+				</c:if>
+			</c:forEach>
+		</div>
+		
+		<div class="seat_s2">
+			<c:forEach items="${list}" var="vo">
+				<c:if test="${vo.seat_num/6 > 1 && vo.seat_num /6 <= 2}">
+					<div id="s2_${vo.seat_num}">
+						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+					</div>
+				</c:if>	
+			</c:forEach>
+		</div>
+		
+		<div class="seat_wrap2">
+			<div class="seat_s3_wrap">
+				<div class="seat_s3">
+					<div class="seat_s3_left">
+						<c:forEach items="${list}" var="vo">
+							<c:if test="${vo.seat_num/6 > 2 && vo.seat_num /6 <= 3}">
+								<div id="s3_${vo.seat_num}">
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+								</div>
+							</c:if>
+						</c:forEach>
+					</div>
+					
+					<div class="seat_s3_right">
+						<c:forEach items="${list}" var="vo">
+							<c:if test="${vo.seat_num/6 > 3 && vo.seat_num /6 <= 4}">
+								<div id="s3_${vo.seat_num}">
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+								</div>
+							</c:if>
+						</c:forEach>
+					</div>
+				</div>
 			</div>
-
-			<div class="s_box" style="top: 0px; left: 100px">
-				<table>
-					<tbody>
-						<tr>
-							<td width="40px" id="G102_no">8</td>
-							<td width="*" colspan="2" id="G102_name">8</td>
-						</tr>
-						<tr>
-							<td colspan="4" id="G102_inOut" align="center">8</td>
-						</tr>
-						<tr>
-							<td colspan="4" class="clearfix">
-								<!-- <button class="btnIn" id="G102_btnIn" value="G102">입실</button> -->
-								<button class="btnOut" id="8"
-									value="G102">퇴실</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+			
+			<div class="seat_s4_wrap">
+				<div class="seat_s4">
+					<div class="seat_s4_left">
+						<c:forEach items="${list}" var="vo">
+							<c:if test="${vo.seat_num/6 > 3 && vo.seat_num /6 <= 4}">
+								<div id="s4_${vo.seat_num}">
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+								</div>
+							</c:if>
+						</c:forEach>
+					</div>
+					
+					<div class="seat_s4_right">
+						<c:forEach items="${list}" var="vo">
+							<c:if test="${vo.seat_num/6 > 4 && vo.seat_num /6 <= 5}">
+								<div id="s4_${vo.seat_num}">
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+								</div>
+							</c:if>
+						</c:forEach>
+					</div>
+				</div>
 			</div>
-
+		</div>
+		
+		<div class="seat_s5">
+			<c:forEach items="${list}" var="vo">
+				<c:if test="${vo.seat_num/6 > 6 && vo.seat_num /6 <= 7}">
+					<div id="s5_${vo.seat_num}">
+						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+					</div>
+				</c:if>
+			</c:forEach>
+		</div>
+		
+		<div class="facility">
+			<div id="f1_wrap">
+				<div id="f1">
+					<span>Locker</span>
+				</div>
+			</div>
+			
+			<div id="f2_wrap">
+				<div id="f2">
+					<span>출입문</span>
+				</div>
+			</div>
+			
+			<div id="f3_wrap">
+				<div id="f3">
+					<span>Rest Area</span>
+				</div>
+			</div>
 			
 		</div>
-	
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	</div>
-	
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
+
+<script type="text/javascript">
+
+	$('.btn_seat').click(function(){
+		var seat_num = $(this).attr("id");
+
+		if(${not empty member}){
+			if(confirm(seat_num+"번 자리 예약을 진행하시겠습니까?")==true){
+				location.href="../reserve/reserveForm?seat_num="+seat_num
+			}
+			else{
+				return;
+			}
+		}
+		else{
+			if(confirm("로그인이 필요한 서비스 입니다.") == true){
+				location.href="../member/memberLogin";
+			}
+			else{
+				return;
+			}
+		}
+	});
+</script>
 </html>
