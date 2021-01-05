@@ -37,15 +37,15 @@
   	.write_control {
   		margin-top: 10px;
   		border: none;
- 		width: 90px;
- 		height: 40px;
+ 		width: 100px;
+ 		height: 50px;
   		float: right;
   		background-color: #00a5bd;
   		text-align: center;
   	}
   	
   	.write_control a{
-  		line-height: 40px;
+  		line-height: 50px;
   		color: white;
   	}
   	
@@ -78,22 +78,24 @@
 		<!-- Write Form -->
 		<div class="write_form">
 	  		<form:form modelAttribute="boardVO" id="write_frm" enctype="multipart/form-data" >
-	  
+	  			<form:hidden path="board_num" name="board_num" value="${vo.board_num}"/>
 			    <div class="form-group">
 			      <label for="title">글 제목</label>
-			      <form:input path="board_title" class="form-control empty" id="title" title="제목"/>
+			      <form:input path="board_title" class="form-control empty" id="title" title="제목" value="${vo.board_title}" />
 			      <div class="errors"><form:errors path="board_title" cssClass="error" ></form:errors></div>
 			    </div>
-		    
-			    <div class="form-group">
-			      <label for="writer">작성자</label>
-			      <input type="text" class="form-control" value="" id="writer" name="board_writer">
-			    </div> 
-
+		   
 			     <div class="form-group">
+			      <label for="contents">작성자</label>
+			      <form:input path="board_writer" class="form-control empty" id="writer" title="writer" value="${vo.board_writer}" readonly="true"/>
+			      <div class="errors"><form:errors path="board_writer" cssClass="error"></form:errors></div>
+			    </div>
+
+			    <div class="form-group">
 			      <label for="contents">내용</label>
-			      <form:textarea  path="board_contents" class="form-control empty" id="contents" rows="20" cols="30" title="내용"/>
-			      <div class="errors"><form:errors path="board_contents" cssClass="error" ></form:errors></div>
+			      <textarea class="form-control empty" rows="20" cols="30" id="contents" name="board_contents" title="내용">
+			      	${vo.board_contents}
+			      </textarea>
 			    </div>
 			   
 				<div id="files" class="col-sm-12" style="border: 1px solid #ddd">
@@ -105,7 +107,7 @@
 	  		
 	  		<div>
 				<div id="board_submit_btn" class="write_control">
-					 <a href="#">글작성</a>
+					 <a href="#">수정</a>
 				</div>
 				
 				<div  class="write_control go_list">
@@ -166,7 +168,7 @@
 		 }
 		
 	 });
-	 
+
 	 $("#board_submit_btn").click(function(){
 			$("#write_frm").submit();
 	 });

@@ -14,10 +14,11 @@ public class BoardVO {
 	@NotEmpty
 	private String board_title;
 	
+	@NotEmpty
 	private String board_writer;
 	
-	@NotEmpty
 	private String board_contents;
+	
 	private Date regDate;
 	private int hit;
 }

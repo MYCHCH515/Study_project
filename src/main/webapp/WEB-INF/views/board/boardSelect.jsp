@@ -17,8 +17,14 @@
   	}
   	
   	.board_wrap{
+  		margin: 0 auto;
+  		width: 90%;
   		
-  		margin: 50px 0;
+  	}
+  	
+  	.btn_control_wrap{
+  		margin: 0 auto;
+  		width: 90%;
   	}
   	
   	.board_header strong{
@@ -59,6 +65,10 @@
     	margin-bottom: 10px;
     	float: right;
     	width:100px;
+    }
+    
+    #board_del button{
+    	background-color: #e65c53;
     }
     
     .board_files{

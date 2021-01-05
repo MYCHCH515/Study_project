@@ -87,7 +87,7 @@ public class Pager {
 	
 //	public String getKind() {
 //		if(this.kind == null) {
-//			this.kind="title";
+//			this.kind="all";
 //		}
 //		return kind;
 //	}

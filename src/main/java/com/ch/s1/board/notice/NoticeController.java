@@ -22,7 +22,6 @@ import com.ch.s1.board.file.FileVO;
 import com.ch.s1.util.FilePathGenerator;
 import com.ch.s1.util.Pager;
 
-
 @Controller
 @RequestMapping(value="/notice/**")
 public class NoticeController {
@@ -57,6 +56,7 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 	
 		if(bindingResult.hasErrors()) {
+			System.out.println("write오류");
 			mv.setViewName("board/boardWrite");
 			return mv;
 		}
@@ -126,12 +126,49 @@ public class NoticeController {
 	}
 	
 	@GetMapping("noticeUpdate")
-	public ModelAndView setUpdate() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
+	public ModelAndView setUpdate(BoardVO boardVO, ModelAndView mv) throws Exception{
+		boardVO = noticeService.getOne(boardVO);
+		mv = new ModelAndView();
+		mv.setViewName("board/boardUpdate");
+		mv.addObject("vo", boardVO);
 		return mv;
 	}
 	
+	@PostMapping("noticeUpdate")
+	public ModelAndView setUpdate(@Valid BoardVO boardVO, BindingResult bindingResult) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		if(bindingResult.hasErrors()) {
+			System.out.println("update오류");
+			mv.setViewName("board/boardUpdate");
+			return mv;
+		}
+		
+		else {
+			int result = noticeService.setUpdate(boardVO);
+			String message="수정 실패했습니다.";	
+			if(result>0) {
+			    message = "수정 성공했습니다.";
+				mv.addObject("path", "./noticeList");
+				mv.addObject("msg", message);
+				mv.setViewName("common/result");
+			}
+			return mv;	
+		}		
+	}	
 	
+	@PostMapping("noticeDelete")
+	public ModelAndView setDelete(BoardVO boardVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = noticeService.setDelete(boardVO);
+		String message="삭제 실패했습니다.";	
+		if(result>0) {
+		    message = "삭제 성공했습니다.";
+			mv.addObject("path", "./noticeList");
+			mv.addObject("msg", message);
+			mv.setViewName("common/result");
+		}
+		return mv;	
+	}
 
 }

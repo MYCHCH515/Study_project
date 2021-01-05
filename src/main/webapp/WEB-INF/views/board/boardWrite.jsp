@@ -78,22 +78,22 @@
 		<!-- Write Form -->
 		<div class="write_form">
 	  		<form:form modelAttribute="boardVO" id="write_frm" enctype="multipart/form-data" >
-	  
 			    <div class="form-group">
 			      <label for="title">글 제목</label>
 			      <form:input path="board_title" class="form-control empty" id="title" title="제목"/>
 			      <div class="errors"><form:errors path="board_title" cssClass="error" ></form:errors></div>
 			    </div>
-		    
-			    <div class="form-group">
-			      <label for="writer">작성자</label>
-			      <input type="text" class="form-control" value="" id="writer" name="board_writer">
-			    </div> 
-
+		   
+			     <div class="form-group">
+			      <label for="contents">작성자</label>
+			      <form:input path="board_writer" class="form-control empty" id="writer" title="writer" value="${member.mem_id}" readonly="true"/>
+			      <div class="errors"><form:errors path="board_writer" cssClass="error"></form:errors></div>
+			    </div>
+	
 			     <div class="form-group">
 			      <label for="contents">내용</label>
-			      <form:textarea  path="board_contents" class="form-control empty" id="contents" rows="20" cols="30" title="내용"/>
-			      <div class="errors"><form:errors path="board_contents" cssClass="error" ></form:errors></div>
+			      <form:textarea path="board_contents" class="form-control empty" id="contents" rows="20" cols="30" title="내용"/>
+			      <div class="errors"><form:errors path="board_contents" cssClass="error"></form:errors></div>
 			    </div>
 			   
 				<div id="files" class="col-sm-12" style="border: 1px solid #ddd">

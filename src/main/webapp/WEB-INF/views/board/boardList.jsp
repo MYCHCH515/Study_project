@@ -40,17 +40,22 @@
   	
   	.write_control input {
   		border: none;
- 		width: 90px;
- 		height: 40px;
+ 		width: 100px;
+ 		height: 50px;
   		float: right;
   		background-color: #00a5bd;
   		color: white;
   	}
   	
-  	#bw_btn_wrap{
-  		padding-bottom: 20px;
+  	.btn_control_wrap{
+  		margin: 0 auto;
+  		width: 90%;
   	}
   	
+  	#board_write_btn input{
+  		margin: 10px 0;
+  	}
+  
   	.search_wrap{
   		margin: 0 auto;
   		text-align: center;
@@ -103,22 +108,7 @@
   </style>
   
   
- <!-- <script type="text/javascript">
-  $(document).ready(function(){
-	  	$("#search").val('${param.search}');
-	
-		var kind = '$(param.kind)'; 
-
-		if(kind == '' || 'title'){
-			$("#k_title").attr("selected","selected")
-		} 
-		else if(kind == 'writer'){
-			$("#k_writer").attr("selected","selected")
-		}
-		else if(kind == 'contents'){
-			$("#k_contents").attr("selected","selected")
-		}
-  </script>  -->
+ 
   
 </head>
 
@@ -152,7 +142,7 @@
 	<div class="list_footer">	
 	   <!-- search -->
 	   <div class="col-sm-12">
-			  <form action="./${board}List" id="frm">
+			  <form action="./${board}List" id="search_frm">
 			    <input type="hidden" name="curPage" id="curPage" value="1">
 			    
 				    <div class="input-group search_wrap">
@@ -177,55 +167,99 @@
 	   </div>
 		
 	   <!-- Page -->
+	   
 	   <div class="col-sm-12">
-	  	   <ul class="pagination">
+	   		
+ 		  <ul class="pagination">
 	  	   		<c:if test="${pager.before}">
 	  	   			<li><a href="#" class="list" title="${pager.startNum-1}">&lt;</a></li>
 	  	   		</c:if>
 	  	   
-			  <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-			  	<li><a href="#" class="list" title="${i}">${i}</a></li>
-			  </c:forEach>
+			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+			  		<li><a href="#" class="list" title="${i}">${i}</a></li>
+			    </c:forEach>
 			  
-			  <c:if test="${pager.after}">
+			    <c:if test="${pager.after}">
 	  	   			<li><a href="#" class="list" title="${pager.lastNum+1}">&gt;</a></li>
 	  	   		</c:if>
-		   </ul>
-	   </div>
+  		  </ul>
 	   </div>
 	   
-	   <div class="col-sm-12" id="bw_btn_wrap">
+	 </div>
+	 
+	 <div class="col-sm-12">		  
+	   	 <div class="btn_control_wrap">
 			<c:if test="${not empty member and member.mem_type eq '1'}">
 				<div id="board_write_btn" class="write_control">
 					<input type="button" value="글작성">
 				</div>
 			</c:if>
-		</div>
-	
-	</div>
+	     </div>
+     </div>
+	   
+	   </div>
 	
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
 
 	<script>
-		$("#search").val('${param.search}');
+	
+	/* 	$("#search").val('${param.search}');
 	
 		var kind = '$(param.kind)'; //코드에 헛점있음 
-		if(kind != '')
-		{
+
+		if($("#k_all").prop("selected","selected")){
 			$("#kind").val('${param.kind}');
 		}
+
+		 if(kind != '')
+		{
+			$("#kind").val('${param.kind}');
+		}  */
+
+
+		
+		/* 
+		if(kind == '' || 'all'){
+			$("#k_all").prop("selected","selected")
+		} 
+		else if(kind == 'title'){
+			$("#k_title").prop("selected","selected")
+		}
+		else if(kind == 'contents'){
+			$("#k_contents").prop("selected","selected")
+		} */
+
+
+		
 	
 		$(".list").click(function(){
 			var curPage = ($(this).attr("title"));
 			$("#curPage").val(curPage);
 			
-			$("#frm").submit();
+			$("#search_frm").submit();
 		});
 		
 		$("#board_write_btn").click(function(){
 			location.href="/${board}/${board}Write"
 		});
 	</script>
+	
+	<!-- <script type="text/javascript">
+  $(document).ready(function(){
+	  	$("#search").val('${param.search}');
+	
+		var kind = '$(param.kind)'; 
+
+		if(kind == '' || 'title'){
+			$("#k_title").attr("selected","selected")
+		} 
+		else if(kind == 'writer'){
+			$("#k_writer").attr("selected","selected")
+		}
+		else if(kind == 'contents'){
+			$("#k_contents").attr("selected","selected")
+		}
+  </script>  -->
 
 </html>
