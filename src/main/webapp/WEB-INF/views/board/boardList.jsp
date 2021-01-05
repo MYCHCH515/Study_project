@@ -104,12 +104,19 @@
     	background: none;
     	font-weight: bold;
 	}
+	
+	.list_none_wrap{
+		padding: 50px 0;
+	}
+	
+	.list_none{
+		font-size: 17px;
+		opacity: 50%;
+		text-align: center;
+	}
     
   </style>
-  
-  
  
-  
 </head>
 
 <body>
@@ -118,74 +125,87 @@
 	<div class="container">
 	<h3 class="table_list_title">뉴스&amp;이벤트</h3>
 
-	<!-- list -->
-	<div class="list_form">
-		<table class="table">
-				<tr class="list_tr">
-					<td class="col-sm-1">글 번호</td>
-					<td class="col-sm-8">제목</td>
-					<td class="col-sm-2">날짜</td>
-					<td class="col-sm-1">조회</td>
-				</tr>
-				
-				<c:forEach items="${list}" var="vo">
-			      <tr class="list_tr">
-				        <td>${vo.board_num}</td>
-				        <td><a href="${board}Select?board_num=${vo.board_num}">${vo.board_title}</a></td> 
-				        <td>${vo.regDate}</td>
-				        <td>${vo.hit}</td>
-			      </tr>
-		    	</c:forEach>
-		</table>
-	</div>
-	
-	<div class="list_footer">	
-	   <!-- search -->
-	   <div class="col-sm-12">
-			  <form action="./${board}List" id="search_frm">
-			    <input type="hidden" name="curPage" id="curPage" value="1">
-			    
-				    <div class="input-group search_wrap">
-					  	<div>
-						  <select class="form-control" id="kind" name="kind">
-						    <option value="all" id="k_all">전체</option>
-						    <option value="title" id="k_title">제목</option>
-						    <option value="contents" id="k_contents">내용</option>
-						  </select>
-						</div>
-						
-						<div>
-						    <input type="text" class="form-control" id="search" placeholder="Search" name="search">
-							    <div class="form-item">
-								    <button type="submit" id="search_btn">
-								        <img alt="" src="../images/srch.png">
-								    </button>
-					    		</div>
-						</div>
-					</div>       
-			 </form>
-	   </div>
+	 <c:choose>
+	 <c:when test="${pager.totalCount ne 0}">
+		<!-- list -->
+		<div class="list_form">
+			<table class="table">
+					<tr class="list_tr">
+						<td class="col-sm-1">글 번호</td>
+						<td class="col-sm-8">제목</td>
+						<td class="col-sm-2">날짜</td>
+						<td class="col-sm-1">조회</td>
+					</tr>
+					
+					<c:forEach items="${list}" var="vo">
+				      <tr class="list_tr">
+					        <td>${vo.board_num}</td>
+					        <td><a href="${board}Select?board_num=${vo.board_num}">${vo.board_title}</a></td> 
+					        <td>${vo.regDate}</td>
+					        <td>${vo.hit}</td>
+				      </tr>
+			    	</c:forEach>
+			</table>
+		</div>
 		
-	   <!-- Page -->
-	   
-	   <div class="col-sm-12">
-	   		
- 		  <ul class="pagination">
-	  	   		<c:if test="${pager.before}">
-	  	   			<li><a href="#" class="list" title="${pager.startNum-1}">&lt;</a></li>
-	  	   		</c:if>
-	  	   
-			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-			  		<li><a href="#" class="list" title="${i}">${i}</a></li>
-			    </c:forEach>
-			  
-			    <c:if test="${pager.after}">
-	  	   			<li><a href="#" class="list" title="${pager.lastNum+1}">&gt;</a></li>
-	  	   		</c:if>
-  		  </ul>
-	   </div>
-	   
-	 </div>
+		<div class="list_footer">	
+		   <!-- search -->
+		   <div class="col-sm-12">
+				  <form action="./${board}List" id="search_frm">
+				    <input type="hidden" name="curPage" id="curPage" value="1">
+				    
+					    <div class="input-group search_wrap">
+						  	<div>
+							  <select class="form-control" id="kind" name="kind">
+							  	<option value="all" id="k_all">전체</option>
+							    <option value="title" id="k_title">제목</option>
+							    <option value="contents" id="k_contents">내용</option>
+							  </select>
+							</div>
+							
+							<div>
+							    <input type="text" class="form-control" id="search" placeholder="Search" name="search">
+								    <div class="form-item">
+									    <button type="button" id="search_btn">
+									        <img alt="" src="../images/srch.png">
+									    </button>
+						    		</div>
+							</div>
+						</div>       
+				 </form>
+		   </div>
+			
+		   <!-- Page -->
+		   <div class="col-sm-12">
+	 		  <ul class="pagination">	
+		 		  		<c:if test="${pager.before}">
+		  	   				<li><a href="#" class="list" title="${pager.startNum-1}">&lt;</a></li>
+		  	   			</c:if>
+		  	   
+					    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+					  		<li><a href="#" class="list" title="${i}">${i}</a></li>
+					    </c:forEach>
+				  
+					    <c:if test="${pager.after}">
+			  	   			<li><a href="#" class="list" title="${pager.lastNum+1}">&gt;</a></li>
+			  	   		</c:if>
+	  		  </ul>
+		   </div>
+		   
+		 </div>
+	 </c:when>
+	 
+	 <c:otherwise>
+	 	<div class="list_form">
+	 		<div class="list_none_wrap">
+	 			<img alt="" src="../images/list_none.jpg">
+	 			<p class="list_none">검색결과가 없습니다.</p>
+	 		</div>
+	 		
+	 	</div>
+	 </c:otherwise>
+	
+	 </c:choose>
 	 
 	 <div class="col-sm-12">		  
 	   	 <div class="btn_control_wrap">
@@ -203,40 +223,31 @@
 </body>
 
 	<script>
-	
-	/* 	$("#search").val('${param.search}');
-	
-		var kind = '$(param.kind)'; //코드에 헛점있음 
-
-		if($("#k_all").prop("selected","selected")){
-			$("#kind").val('${param.kind}');
-		}
-
+		$("#search").val('${param.search}');
+		var kind = '${param.kind}'; 
 		 if(kind != '')
 		{
-			$("#kind").val('${param.kind}');
-		}  */
-
-
-		
-		/* 
-		if(kind == '' || 'all'){
-			$("#k_all").prop("selected","selected")
+			$("#kind").val(kind);
 		} 
-		else if(kind == 'title'){
-			$("#k_title").prop("selected","selected")
+		else{
+			$("#kind").val("all");
 		}
-		else if(kind == 'contents'){
-			$("#k_contents").prop("selected","selected")
-		} */
 
+	   var search_frm = $("#search_frm");
 
-		
-	
+		$("#search_btn").on("click", function(){
+			var s_search = false;
+			if(!search_frm.find("input[name='search']").val()){
+				alert("키워드를 입력하세요");
+			}else{
+				s_search = true;
+				search_frm.submit();
+			}
+		}); 
+
 		$(".list").click(function(){
 			var curPage = ($(this).attr("title"));
 			$("#curPage").val(curPage);
-			
 			$("#search_frm").submit();
 		});
 		
@@ -244,22 +255,5 @@
 			location.href="/${board}/${board}Write"
 		});
 	</script>
-	
-	<!-- <script type="text/javascript">
-  $(document).ready(function(){
-	  	$("#search").val('${param.search}');
-	
-		var kind = '$(param.kind)'; 
-
-		if(kind == '' || 'title'){
-			$("#k_title").attr("selected","selected")
-		} 
-		else if(kind == 'writer'){
-			$("#k_writer").attr("selected","selected")
-		}
-		else if(kind == 'contents'){
-			$("#k_contents").attr("selected","selected")
-		}
-  </script>  -->
 
 </html>

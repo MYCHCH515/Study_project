@@ -96,7 +96,6 @@ public class NoticeService implements BoardService{
 
 	@Override
 	public List<BoardVO> getList(Pager pager) throws Exception {
-		
 		pager.makeRow();
 		long totalCount = noticeMapper.getCount(pager);
 		pager.makePage(totalCount);

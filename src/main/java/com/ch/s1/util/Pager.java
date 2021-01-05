@@ -31,11 +31,13 @@ public class Pager {
 	
 	public void makePage(long totalCount) {
 		
+		this.totalCount = totalCount;
+		
 		long totalPage = totalCount/perPage;
 		if(totalCount%perPage !=0) {
 			totalPage++;
 		}
-		
+	
 		long perBlock = 5;
 		long totalBlock = totalPage/perBlock;
 		if(totalPage%perBlock !=0) {
@@ -49,7 +51,7 @@ public class Pager {
 		
 		this.startNum = (curBlock-1)*perBlock+1;
 		this.lastNum = curBlock*perBlock;
-		
+	
 		if(curBlock == totalBlock) {
 			this.lastNum = totalPage;
 		}
@@ -78,17 +80,14 @@ public class Pager {
 		return this.curPage;
 	}
 	
+	public long getTotalCount() {
+		return totalCount;
+	}
+	
 	public String getSearch() {
 		if(this.search == null) {
 			this.search="";
 		}
 		return search;
 	}
-	
-//	public String getKind() {
-//		if(this.kind == null) {
-//			this.kind="all";
-//		}
-//		return kind;
-//	}
 }
