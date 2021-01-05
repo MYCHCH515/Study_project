@@ -124,5 +124,14 @@ public class NoticeController {
 		
 		return mv;
 	}
+	
+	@GetMapping("noticeUpdate")
+	public ModelAndView setUpdate() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
+	}
+	
+	
 
 }

@@ -16,7 +16,7 @@
 	
   <style type="text/css">
   	.table_list_title{
-  			padding: 50px 0 30px 0;
+  		padding: 50px 0 30px 0;
   		text-align: center;
   	}
   	
@@ -52,6 +52,7 @@
   	.go_list{
   		background-color: gray;
   		margin-right: 10px;
+  		margin-bottom: 10px;
   	}
   	
   	.write_form #title, .write_form #writer{
@@ -145,8 +146,10 @@
 			 },
 			 
 			 onMediaDelete:function(files){
-				 var fileName = $(files[0]).attr("src");
+				var fileName = $(files[0]).attr("src");
+				console.log(fileName);
 				fileName = fileName.substring(fileName.lastIndexOf("\\")+1);
+				console.log(fileName);
 				
 				$.ajax({
 					type:"POST",

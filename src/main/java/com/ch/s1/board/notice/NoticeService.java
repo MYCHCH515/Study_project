@@ -48,7 +48,7 @@ public class NoticeService implements BoardService{
 	}
 	
 	public boolean summernoteDelete(String file, HttpSession session)throws Exception{
-		String path = session.getServletContext().getRealPath("/resources/upload/dominoNews");
+		String path = session.getServletContext().getRealPath("/upload/notice");
 		File file2 = new File(path, file);
 		boolean result = false;
 		if(file2.exists()) {
@@ -79,8 +79,7 @@ public class NoticeService implements BoardService{
 			fileVO.setFileName(fileName);
 			fileVO.setOriName(multipartFile.getOriginalFilename());
 			fileVO.setBoard_num(boardVO.getBoard_num());
-			
-			result = noticeMapper.setInsertFile(fileVO);
+			noticeMapper.setInsertFile(fileVO);
 		}
 		return result;
 	}

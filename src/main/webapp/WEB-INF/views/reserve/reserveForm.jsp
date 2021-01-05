@@ -95,7 +95,6 @@
 		</div>
 	</div>
 	</div>
-	
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
 
@@ -112,6 +111,26 @@
 
 		var pd_time = parseInt(pd_time);
 		showTime(pd_time);
+		
+/* 		$.ajax({
+			url : "./reserveTime",
+			type : "get",
+			success : 
+				function(time){
+					$("#brList").html(time)
+					/* var year = "${time.y}";
+					var month = "${time.m}";
+					var date = "${time.d}";
+					var hours = "${time.h}";
+					var minutes = "${time.mi}";
+
+					var msg = year+ "-" + month.toString().padStart(2,'0') + "-" + date.toString().padStart(2,'0')+ " ";
+					msg += hours.toString().padStart(2,'0') + ":" + minutes.toString().padStart(2,'0');
+					$("#reserve_info_date").text(msg);	
+				}
+		});  */
+	
+
 	});
 
 	function showTime(pd_time){
@@ -129,11 +148,9 @@
 		var endHours = hours+pd_time;
 		var endDate = date;
 
-	
 		if(endHours>=24){
 			endDate ++;
 			endHours = endHours-24
-			endHours = "0"+endHours.toString();
 		}
 
 		var msg2 = year+ "-" + month.toString().padStart(2,'0') + "-" + endDate.toString().padStart(2,'0')+ " ";
@@ -151,6 +168,8 @@
 		}
 	});
 
+
+	<!--라디오버튼 공백검사-->
 	var productCheckResult = true;
 	function productCheck() {
 		productCheckResult = true;
