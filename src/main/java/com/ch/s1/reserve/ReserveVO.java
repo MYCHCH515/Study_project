@@ -1,6 +1,9 @@
 package com.ch.s1.reserve;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.ch.s1.product.ProductVO;
 
 import lombok.Data;
 
@@ -14,4 +17,6 @@ public class ReserveVO {
 	private Date reserve_regDate;
 	private String reserve_strt_tm;
 	private String reserve_end_tm;
+	
+	List<ProductVO> productVOs;
 }

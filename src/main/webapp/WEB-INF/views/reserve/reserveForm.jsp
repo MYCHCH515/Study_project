@@ -93,10 +93,91 @@
 				  </div>
 			</form>
 		</div>
+		
+		
+		<div id="brList"></div>
 	</div>
 	</div>
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
+
+
+<!-- <form name="form" method="post"> 
+예약시간 : 
+</p> 
+- 예약 시작 시간 : 
+<select name="reservS" id="reservS" onchange="selectReservStart(this.value)"> 
+<option value = "">시간선택(시작)</option> 
+<option value = "0600">06:00</option> 
+<option value = "0630">06:30</option> 
+<option value = "0700">07:00</option> 
+<option value = "0730">07:30</option> 
+<option value = "0800">08:00</option> 
+<option value = "0830">08:30</option> 
+<option value = "0900">09:00</option> 
+... 
+<option value = "2400">24:00</option> 
+</select> 
+<br></p> 
+- 예약 종료 시간 : 
+<select name="reservE" id="reservE" onchange="selectReservEnd(this.value)"> 
+</select> 
+</form>  -->
+
+<!-- 
+<script type="text/javascript">
+$(document).ready(function() { 
+  $("#reservE").append("<option value=''>시간선택(종료)</option>"); 
+  $('#reservS').change(function(){ 
+    var rstart = $("#reservS").val(); 
+    var rsSi = parseInt(rstart.substring(0,2)); 
+    var rsBun = rstart.substring(2,4); 
+    if(rstart != ''){ 
+      $("#reservE option").each(function() { 
+        $(this).remove(); 
+     }); 
+     $("#reservE").append("<option value=''>시간선택(종료)</option>"); 
+     for(var i=0; i<8; i++){ 
+       if(rsBun == 30){ 
+         rsSi = rsSi + 1; 
+         rsBun = "00"; 
+         }else if(rsBun == 00){ 
+         rsBun = "30"; 
+      } 
+      if(rsSi > 9){ 
+        $("#reservE").append("<option value='"+ rsSi + rsBun + "'>"+ rsSi + ":" + rsBun + "</option>"); 
+        } else { 
+        $("#reservE").append("<option value='0"+ rsSi + rsBun + "'>0"+ rsSi + ":" + rsBun + "</option>"); 
+     } 
+  } 
+  }else{ 
+  $("#reservE option").each(function() { 
+    $(this).remove(); 
+ }); 
+  $("#reservE").append("<option value=''>시간선택(종료)</option>"); 
+} 
+}); 
+}); 
+function selectReservEnd(){ 
+  var rs = $("#reservS").val(); 
+  var re = $("#reservE").val(); 
+  var ra; 
+  // ajax 부분은 조건에 맞게 수정하세요. 
+  $.ajax({ 
+    type:"POST", 
+    url:"", 
+    dataType:"json", 
+    data:{ rs:rs, re:re }, 
+    success:function(data){ 
+      if(data == "true"){ 
+        $("#form").submit();   
+        }else{ 
+        alert("중복된 예약이 있습니다."); 
+     } 
+  } 
+});     
+} 
+</script> -->
 
 <script type="text/javascript">
 	
@@ -111,14 +192,15 @@
 
 		var pd_time = parseInt(pd_time);
 		showTime(pd_time);
-		
-/* 		$.ajax({
-			url : "./reserveTime",
-			type : "get",
+		/* 
+ 		$.ajax({
+			url : "./reserveCheckTime",
+			type : "get", 
+			data:{ msg:msg }, 
 			success : 
-				function(time){
-					$("#brList").html(time)
-					/* var year = "${time.y}";
+				function(data){
+					$("#brList").html(data)
+					/* var year = "${data.y}";
 					var month = "${time.m}";
 					var date = "${time.d}";
 					var hours = "${time.h}";
@@ -129,7 +211,22 @@
 					$("#reserve_info_date").text(msg);	
 				}
 		});  */
-	
+
+
+		/* 		$.ajax({
+					url : "./reserveTime",
+					type : "get",
+					dataType:"json", 
+					data:{ msg:msg, msg2:msg2 }, 
+					success : 
+						function(data){
+						 if(data == "true"){ 
+					        //$("#form").submit();   
+					        }else{ 
+					        alert("중복된 예약이 있습니다."); 
+					     } 
+					}
+				});  */
 
 	});
 
@@ -155,19 +252,25 @@
 
 		var msg2 = year+ "-" + month.toString().padStart(2,'0') + "-" + endDate.toString().padStart(2,'0')+ " ";
 		msg2 += endHours.toString().padStart(2,'0') + ":" + minutes.toString().padStart(2,'0')+ ":" + seconds.toString().padStart(2,'0');
+
+		console.log(msg);
+		console.log(msg2);
 	    
 	    $("#reserve_info_date").text(msg+" ~ "+msg2);	  
 	    $("#reserve_strt_tm").val(msg);
 	    $("#reserve_end_tm").val(msg2);
+
+	    return msg;
 	}
 
 	$(".reserve_btn").click(function(){
 		productCheck();
 		if(productCheckResult&&paymentCheckResult){
-			$("#frm").submit();
+
+			$("#frm").submit();	
+				
 		}
 	});
-
 
 	<!--라디오버튼 공백검사-->
 	var productCheckResult = true;

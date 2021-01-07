@@ -37,5 +37,9 @@ public class ReserveService {
  
 		return reserveMapper.setInsert(reserveVO);
 	}
+	
+	public ReserveVO getOne(ReserveVO reserveVO) throws Exception{
+		return reserveMapper.getOne(reserveVO);
+	}
 
 }
