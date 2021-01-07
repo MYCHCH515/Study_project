@@ -10,6 +10,7 @@
   <c:import url="../template/bootStrap.jsp"></c:import>
   <link href="../css/common.css" rel="stylesheet">
    <link href="../css/member.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
    
   <style type="text/css">
   .form-group{
@@ -101,63 +102,8 @@
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
 
-
-<!-- <form name="form" method="post"> 
-예약시간 : 
-</p> 
-- 예약 시작 시간 : 
-<select name="reservS" id="reservS" onchange="selectReservStart(this.value)"> 
-<option value = "">시간선택(시작)</option> 
-<option value = "0600">06:00</option> 
-<option value = "0630">06:30</option> 
-<option value = "0700">07:00</option> 
-<option value = "0730">07:30</option> 
-<option value = "0800">08:00</option> 
-<option value = "0830">08:30</option> 
-<option value = "0900">09:00</option> 
-... 
-<option value = "2400">24:00</option> 
-</select> 
-<br></p> 
-- 예약 종료 시간 : 
-<select name="reservE" id="reservE" onchange="selectReservEnd(this.value)"> 
-</select> 
-</form>  -->
-
 <!-- 
 <script type="text/javascript">
-$(document).ready(function() { 
-  $("#reservE").append("<option value=''>시간선택(종료)</option>"); 
-  $('#reservS').change(function(){ 
-    var rstart = $("#reservS").val(); 
-    var rsSi = parseInt(rstart.substring(0,2)); 
-    var rsBun = rstart.substring(2,4); 
-    if(rstart != ''){ 
-      $("#reservE option").each(function() { 
-        $(this).remove(); 
-     }); 
-     $("#reservE").append("<option value=''>시간선택(종료)</option>"); 
-     for(var i=0; i<8; i++){ 
-       if(rsBun == 30){ 
-         rsSi = rsSi + 1; 
-         rsBun = "00"; 
-         }else if(rsBun == 00){ 
-         rsBun = "30"; 
-      } 
-      if(rsSi > 9){ 
-        $("#reservE").append("<option value='"+ rsSi + rsBun + "'>"+ rsSi + ":" + rsBun + "</option>"); 
-        } else { 
-        $("#reservE").append("<option value='0"+ rsSi + rsBun + "'>0"+ rsSi + ":" + rsBun + "</option>"); 
-     } 
-  } 
-  }else{ 
-  $("#reservE option").each(function() { 
-    $(this).remove(); 
- }); 
-  $("#reservE").append("<option value=''>시간선택(종료)</option>"); 
-} 
-}); 
-}); 
 function selectReservEnd(){ 
   var rs = $("#reservS").val(); 
   var re = $("#reservE").val(); 
@@ -180,7 +126,7 @@ function selectReservEnd(){
 </script> -->
 
 <script type="text/javascript">
-	
+
 	$(".product").click(function(){
 		var pd_num = $(this).attr("title");
 	
@@ -192,41 +138,6 @@ function selectReservEnd(){
 
 		var pd_time = parseInt(pd_time);
 		showTime(pd_time);
-		/* 
- 		$.ajax({
-			url : "./reserveCheckTime",
-			type : "get", 
-			data:{ msg:msg }, 
-			success : 
-				function(data){
-					$("#brList").html(data)
-					/* var year = "${data.y}";
-					var month = "${time.m}";
-					var date = "${time.d}";
-					var hours = "${time.h}";
-					var minutes = "${time.mi}";
-
-					var msg = year+ "-" + month.toString().padStart(2,'0') + "-" + date.toString().padStart(2,'0')+ " ";
-					msg += hours.toString().padStart(2,'0') + ":" + minutes.toString().padStart(2,'0');
-					$("#reserve_info_date").text(msg);	
-				}
-		});  */
-
-
-		/* 		$.ajax({
-					url : "./reserveTime",
-					type : "get",
-					dataType:"json", 
-					data:{ msg:msg, msg2:msg2 }, 
-					success : 
-						function(data){
-						 if(data == "true"){ 
-					        //$("#form").submit();   
-					        }else{ 
-					        alert("중복된 예약이 있습니다."); 
-					     } 
-					}
-				});  */
 
 	});
 
@@ -265,10 +176,53 @@ function selectReservEnd(){
 
 	$(".reserve_btn").click(function(){
 		productCheck();
-		if(productCheckResult&&paymentCheckResult){
 
-			$("#frm").submit();	
-				
+		var paymentCheck = $('input[name="payment_option"]:checked').val();
+		if (paymentCheck == 1){
+			 $(function(){
+			        var IMP = window.IMP; 
+			        var pd_num = $('input[name="product_num"]:checked').val();
+					var pd_price=$("#product_price"+pd_num).text();
+					var totalPrice = pd_price.substr(0, pd_price.length-1);
+					totalPrice = parseInt(totalPrice);
+	        
+			        IMP.init('imp25357816'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+			       
+			        IMP.request_pay({
+			            pg : 'kakaopay',
+			            pay_method : 'card',
+			            merchant_uid : 'merchant_' + new Date().getTime(),
+			            name : '거북이의기적: 상품결제',
+			            amount : totalPrice,
+			            buyer_email : '${member.mem_email}',
+			            buyer_name : '${member.mem_name}',
+			            buyer_tel : '${member.mem_phone}',
+
+			        }, function(rsp) {
+			            if ( rsp.success ) {
+		                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+		                    
+			                 var msg = '결제가 완료되었습니다.';
+			                      msg += '\n고유ID : ' + rsp.imp_uid;
+			                      msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+			                      msg += '\n결제 금액 : ' + rsp.paid_amount;
+			                      msg += '\n카드 승인번호 : ' + rsp.apply_num;
+			                      alert(msg);  
+
+		                      if(productCheckResult&&paymentCheckResult){
+			        				$("#frm").submit();		
+			        			} 
+			                      
+		                    }else {	
+		                        var msg = '결제에 실패하였습니다.';
+		                        msg += '에러내용 : ' + rsp.error_msg;
+		                        alert(msg);  
+		                    }
+			            }); 
+			        });
+				}
+		else{
+			alert("결제 준비중입니다");
 		}
 	});
 
@@ -295,33 +249,10 @@ function selectReservEnd(){
 	         return false;
 			}
 	}
-		
 
+	 
+	 
 
-	<!-- 
-	$('.btnIn').click(function(){           // #의 필요성  ,  . 은 클래스 명을 가져올때
-	  console.log('입실로직 실행->' + $(this).val());
-	  $("#"+$(this).val()+"_name").html('정-'+$(this).val());
-	  $("#"+$(this).val()+"_status").attr('bgcolor', 'green');
-	  var now = new Date();
-	  var nowHHmmSS = now.getHours() + ":" + now.getHours() + ":" + now.getSeconds();
-	  $("#"+$(this).val()+"_inOut").html(nowHHmmSS);
-	  // 버튼 비 활성화 : 중복실행 방지...
-	  $(this).attr('disabled', true);
-	});
-	$('.btnOut').click(function(){
-	  if ($("#"+$(this).val()+"_name").html() == '') {
-		  console.log('빈자리임..');
-		  return;
-	  }
-	  console.log('퇴실로직 실행->' + $(this).val());
-	  $("#"+$(this).val()+"_name").html('');
-	  $("#"+$(this).val()+"_status").attr('bgcolor', 'efefef');
-	  $("#"+$(this).val()+"_inOut").html('');
-	  // 입실버튼 활성화
-	  $("#"+$(this).val()+"_btnIn").attr('disabled', false);
-	});
-	-->
 </script>
 
 </html>
