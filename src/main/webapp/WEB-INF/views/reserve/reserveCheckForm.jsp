@@ -24,7 +24,7 @@
 	<c:import url="../template/header.jsp"></c:import>
 	
 		<div class="container">
-		<h3 class="table_list_title">예약 확인</h3>
+		<h3 class="table_list_title">예약 내역 확인</h3>
 		${vo2.reserve_num}
 		${vo2.mem_num}
 		</div>

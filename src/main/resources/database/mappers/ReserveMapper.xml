@@ -9,8 +9,8 @@
     	</select>
     	
     	<insert id="setInsert" parameterType="ReserveVO">
-    		insert into reserve (mem_num,seat_num,product_num,reserve_regDate,reserve_strt_tm,reserve_end_tm)
-    		values(#{mem_num},#{seat_num},#{product_num},sysdate(),#{reserve_strt_tm},#{reserve_end_tm})
+    		insert into reserve (mem_num,seat_num,product_num,reserve_regDate,reserve_strt_tm,reserve_end_tm,payment_option)
+    		values(#{mem_num},#{seat_num},#{product_num},sysdate(),#{reserve_strt_tm},#{reserve_end_tm},#{payment_option})
     	</insert>
     	
     	<select id="getOne" parameterType="ReserveVO" resultMap="getOneResult">
@@ -28,13 +28,35 @@
 			<result column="reserve_regDate" property="reserve_regDate"></result>
 			<result column="reserve_strt_tm" property="reserve_strt_tm"></result>
 			<result column="reserve_end_tm" property="reserve_end_tm"></result>
+			<result column="payment_option" property="payment_option"></result>
 			<collection property="productVOs" javaType="List" ofType="ProductVO">
 				<result column="product_price" property="product_price"></result>
 				<result column="product_time" property="product_time"></result>	
 				<result column="product_type" property="product_type"></result>	
 			</collection>
 		</resultMap>
+		
+		<select id="getLatestOne" parameterType="ReserveVO" resultMap="getLatestOneResult">
+    		select R.*, P.* from reserve R 
+			left join product P on R.product_num = P.product_num 
+			where R.mem_num in(#{mem_num}) 
+			and R.reserve_strt_tm = (select MAX(reserve_strt_tm) from reserve where mem_num=#{mem_num})
+    	</select>
     	
-    	
+    	<resultMap type="ReserveVO" id="getLatestOneResult">
+			<id column="product_num" property="product_num"></id>
+			<result column="reserve_num" property="reserve_num"></result>
+			<result column="mem_num" property="mem_num"></result>
+			<result column="seat_num" property="seat_num"></result>
+			<result column="reserve_regDate" property="reserve_regDate"></result>
+			<result column="reserve_strt_tm" property="reserve_strt_tm"></result>
+			<result column="reserve_end_tm" property="reserve_end_tm"></result>
+			<result column="payment_option" property="payment_option"></result>
+			<collection property="productVOs" javaType="List" ofType="ProductVO">
+				<result column="product_price" property="product_price"></result>
+				<result column="product_time" property="product_time"></result>	
+				<result column="product_type" property="product_type"></result>	
+			</collection>
+		</resultMap>
     </mapper>
     

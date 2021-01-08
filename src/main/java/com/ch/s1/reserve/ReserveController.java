@@ -2,14 +2,17 @@ package com.ch.s1.reserve;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ch.s1.member.MemberVO;
 import com.ch.s1.product.ProductVO;
 
 @Controller
@@ -56,35 +59,40 @@ public class ReserveController {
 //	}
 	
 	@PostMapping("reserveForm")
-	public ModelAndView setInsert(ReserveVO reserveVO) throws Exception {
+	public ModelAndView setInsert(ReserveVO reserveVO, 	HttpSession session) throws Exception {
+		
 		ModelAndView mv = new ModelAndView();
 		int result = reserveService.setInsert(reserveVO);
 		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		long mem_num = memberVO.getMem_num();
+		
+		ReserveVO reserveVO2 = new ReserveVO();
+		reserveVO2.setMem_num(mem_num);
+
 		String message = "예약 실패했습니다.";
 		if (result > 0) {
+			reserveVO2 = reserveService.getLatestOne(reserveVO2);
 			System.out.println("성공");
-
-			message = "성공적으로 예약되었습니다.";
+			message = "성공적으로 예약되었습니다.\\n예약내역은 마이페이지에서 확인 가능합니다.";
+			mv.addObject("vo2", reserveVO2);
 			mv.addObject("path", "./reserveCheckForm");
-			mv.setViewName("reserve/reserveCheckForm");
 		}
 		
 		else {
-			System.out.println("실패");
-			mv.addObject("path", "redirect:../"); 
+			mv.addObject("path", "./");
 		}
 		
 		mv.addObject("msg", message);
 		mv.setViewName("common/result");
-	
 		return mv;
 	}
 
 	@GetMapping("reserveCheckForm")
-	public ModelAndView getOne() throws Exception {
-		
+	public ModelAndView getLatestOne() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("reserve/reserveCheckForm");
+		System.out.println("체크폼컨트롤ㄹㄹ");
 		return mv;
 	}
 

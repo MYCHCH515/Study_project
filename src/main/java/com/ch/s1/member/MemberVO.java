@@ -34,7 +34,7 @@ public class MemberVO {
 	@Pattern(regexp = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$")
 	private String mem_email;
 	
-	private int mem_type;
+	private long mem_type;
 	
 	private Date mem_regDate;
 }

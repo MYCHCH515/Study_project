@@ -84,8 +84,8 @@
 				  <div class="form-group">
 				  		<label for="payment_option">결제수단 선택</label>
 				  		<ul>
-				  			<li><input type="radio" class=payment name="payment_option" value="1"><span>카카오페이</span></li>
-				  			<li><input type="radio" class=payment name="payment_option"  value="2"><span>계좌이체</span></li>
+				  			<li><input type="radio" class=payment name="payment_option" value="카카오페이"><span>카카오페이</span></li>
+				  			<li><input type="radio" class=payment name="payment_option"  value="계좌이체"><span>계좌이체</span></li>
 				  		</ul>
 				  </div> 
 				  <hr>
@@ -178,7 +178,7 @@ function selectReservEnd(){
 		productCheck();
 
 		var paymentCheck = $('input[name="payment_option"]:checked').val();
-		if (paymentCheck == 1){
+		if (paymentCheck == '카카오페이'){
 			 $(function(){
 			        var IMP = window.IMP; 
 			        var pd_num = $('input[name="product_num"]:checked').val();
@@ -205,8 +205,7 @@ function selectReservEnd(){
 			                 var msg = '결제가 완료되었습니다.';
 			                      msg += '\n고유ID : ' + rsp.imp_uid;
 			                      msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-			                      msg += '\n결제 금액 : ' + rsp.paid_amount;
-			                      msg += '\n카드 승인번호 : ' + rsp.apply_num;
+			                      msg += '\n결제 금액 : ' + rsp.paid_amount +"원";
 			                      alert(msg);  
 
 		                      if(productCheckResult&&paymentCheckResult){
@@ -221,8 +220,9 @@ function selectReservEnd(){
 			            }); 
 			        });
 				}
-		else{
+		else if(paymentCheck == '계좌이체'){
 			alert("결제 준비중입니다");
+			$("#frm").submit();		
 		}
 	});
 

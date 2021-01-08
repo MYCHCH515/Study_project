@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class BoardVO {
 	
-	private int board_num;
+	private long board_num;
 	
 	@NotEmpty
 	private String board_title;
@@ -20,5 +20,5 @@ public class BoardVO {
 	private String board_contents;
 	
 	private Date regDate;
-	private int hit;
+	private long hit;
 }

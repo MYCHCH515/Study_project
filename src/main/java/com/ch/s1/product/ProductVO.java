@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class ProductVO {
 	
-	private int product_num;
-	private int product_price;
+	private long product_num;
+	private long product_price;
 	private String product_time;
-	private int product_type;
+	private long product_type;
 
 }

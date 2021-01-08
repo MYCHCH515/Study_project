@@ -8,4 +8,6 @@ public interface ReserveMapper {
 	public int setInsert(ReserveVO reserveVO) throws Exception;
 
 	public ReserveVO getOne(ReserveVO reserveVO) throws Exception;
+	
+	public ReserveVO getLatestOne(ReserveVO reserveVO) throws Exception;
 }
