@@ -30,52 +30,18 @@ public class ReserveController {
 		mv.setViewName("reserve/reserveForm");
 		return mv;
 	}
-
-//	@PostMapping("reserveForm")
-//	public ModelAndView setInsert(ReserveVO reserveVO) throws Exception {
-//		ModelAndView mv = new ModelAndView();
-//		int result = reserveService.setInsert(reserveVO);
-//		
-//		System.out.println("======="+reserveVO.getReserve_num());
-//		
-//		
-//		ReserveVO reserveVO2 = new ReserveVO();
-//		reserveVO2.setReserve_num(reserveVO.getReserve_num());
-//		
-//		if (result > 0) {
-//			reserveVO2 = reserveService.getOne(reserveVO2);
-//			mv.addObject("vo2", reserveVO2);
-//			mv.setViewName("reserve/reserveCheckForm");
-//		}
-//		
-//		else {
-//			String message = "예약 실패했습니다.";
-//			mv.addObject("path", "redirect:../"); 
-//			mv.addObject("msg", message);
-//			mv.setViewName("common/result");
-//		}
-//		
-//		return mv;
-//	}
 	
 	@PostMapping("reserveForm")
-	public ModelAndView setInsert(ReserveVO reserveVO, 	HttpSession session) throws Exception {
+	public ModelAndView setInsert(ReserveVO reserveVO) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		int result = reserveService.setInsert(reserveVO);
 		
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		long mem_num = memberVO.getMem_num();
-		
-		ReserveVO reserveVO2 = new ReserveVO();
-		reserveVO2.setMem_num(mem_num);
-
 		String message = "예약 실패했습니다.";
 		if (result > 0) {
-			reserveVO2 = reserveService.getLatestOne(reserveVO2);
 			System.out.println("성공");
+			
 			message = "성공적으로 예약되었습니다.\\n예약내역은 마이페이지에서 확인 가능합니다.";
-			mv.addObject("vo2", reserveVO2);
 			mv.addObject("path", "./reserveCheckForm");
 		}
 		
@@ -89,8 +55,16 @@ public class ReserveController {
 	}
 
 	@GetMapping("reserveCheckForm")
-	public ModelAndView getLatestOne() throws Exception {
+	public ModelAndView getLatestOne(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		System.out.println("체크폼컨트롤");
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		long mem_num = memberVO.getMem_num();
+		
+		ReserveVO reserveVO = new ReserveVO();
+		reserveVO.setMem_num(mem_num);
+		reserveVO = reserveService.getLatestOne(reserveVO);
+		mv.addObject("vo", reserveVO);
 		mv.setViewName("reserve/reserveCheckForm");
 		System.out.println("체크폼컨트롤ㄹㄹ");
 		return mv;

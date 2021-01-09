@@ -52,11 +52,11 @@
 			<result column="reserve_strt_tm" property="reserve_strt_tm"></result>
 			<result column="reserve_end_tm" property="reserve_end_tm"></result>
 			<result column="payment_option" property="payment_option"></result>
-			<collection property="productVOs" javaType="List" ofType="ProductVO">
+			<association property="productVOs" javaType="ProductVO">
+				<id column="product_type" property="product_type"></id>	
 				<result column="product_price" property="product_price"></result>
-				<result column="product_time" property="product_time"></result>	
-				<result column="product_type" property="product_type"></result>	
-			</collection>
+				<result column="product_time" property="product_time"></result>
+			</association>
 		</resultMap>
     </mapper>
     

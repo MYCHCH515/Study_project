@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <c:import url="../template/bootStrap.jsp"></c:import>
   <link href="../css/common.css" rel="stylesheet">
-   <link href="../css/member.css" rel="stylesheet">
+  <link href="../css/member.css" rel="stylesheet">
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
    
   <style type="text/css">
@@ -94,9 +94,7 @@
 				  </div>
 			</form>
 		</div>
-		
-		
-		<div id="brList"></div>
+	
 	</div>
 	</div>
 	<c:import url="../template/footer.jsp"></c:import>

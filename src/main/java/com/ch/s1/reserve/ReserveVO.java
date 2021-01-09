@@ -19,5 +19,5 @@ public class ReserveVO {
 	private String reserve_end_tm;
 	private String payment_option;
 	
-	List<ProductVO> productVOs;
+	private ProductVO productVOs;
 }
