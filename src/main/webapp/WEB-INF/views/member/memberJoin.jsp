@@ -58,9 +58,10 @@
 				  </div>
 				  
 				  <div class="form-group">
-					    <form:input path="mem_phone" class="form-control confirm_form1" id="phone" placeholder="전화번호"/>
-					  	<input type="button" class="repeat_chk" value="인증번호받기">	
-					  	<input type="text" class="form-control empty confirm_form2" placeholder="인증번호를 입력하세요">
+					    <form:input path="mem_phone" class="form-control confirm_form1" id="phone" placeholder="전화번호 ※특수기호없이 입력하세요※" readonly="false"/>
+					  	<input type="button" class="repeat_chk" value="인증번호받기" id="phone_sms_send">	
+					  	<input type="text" class="form-control empty confirm_form1" id="phone_sms_chk_input" placeholder="인증번호를 입력하세요">
+					  	<input type="button" class="repeat_chk" value="인증번호확인" id="phone_sms_chk">	
 					  	<div class="errors phoneResult"><form:errors path="mem_phone" cssClass="error"></form:errors></div>
 				  </div>
 				  
@@ -84,8 +85,7 @@
 	
 	<!--join버튼 누를 시-->
 	$(".join_btn").click(function(){
-			
-			if(idCheck && pwCheck && nameCheck && pwExpCheck && phoneCheck && emailCheck)
+			if(idCheck && pwCheck && nameCheck && pwExpCheck && phoneCheck && emailCheck && phone_sms_checkResult)
 			{
 				$("#frm").submit();
 			}
@@ -101,7 +101,7 @@
 	var regExpId = /^[A-Za-z0-9]{5,20}$/;
 	var regExpPw = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 	var regExpEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-	var regExpPhone = /^\d{3}-\d{3,4}-\d{4}$/;
+	var regExpPhone = /^\d{3}\d{3,4}\d{4}$/;
 
 	
 	$("#id").blur(function () {
@@ -251,6 +251,39 @@
 			$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
 		}
 	});
+
+	var phone_sms_checkResult = false;
+	var sms_msg = "";
+	$('#phone_sms_send').click(function(){
+		 var phone_sms_checkResult = false;
+         var phoneNumber = $('#phone').val();
+         alert('인증번호 발송 완료!')
+
+         $.ajax({
+             type: "GET",
+             url: "member/check/sendSMS",
+             data: {
+                 "phoneNumber" : phoneNumber
+             },
+             success: function(res){
+                 $('#phone_sms_chk').click(function(){
+                     if($.trim(res) ==$('#phone_sms_chk_input').val()){
+                    	 phone_sms_checkResult = true;
+                    	 $(".phoneResult").removeClass("chkNotice1").addClass("chkNotice2");
+                    	 $(".phoneResult").html("휴대폰 인증이 정상적으로 완료되었습니다.");
+                    	 $("#phone").attr("readonly",true);
+                    	 sms_msg = "휴대폰 인증이 정상적으로 완료되었습니다.";
+                	 }else{
+                		 phone_sms_checkResult = false;
+                		 $(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
+                    	 $(".phoneResult").html("인증번호가 올바르지 않습니다!");
+                		 sms_msg = "인증번호가 올바르지 않습니다!";
+                     }
+                     alert(sms_msg);
+                 })
+             }
+         })
+     });
 	
 </script>
 
