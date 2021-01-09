@@ -251,6 +251,7 @@
 			$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
 		}
 	});
+	
 </script>
 
 

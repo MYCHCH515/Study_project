@@ -1,8 +1,14 @@
 package com.ch.s1.member;
 
+import java.util.HashMap;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class MemberService {
@@ -61,6 +67,7 @@ public class MemberService {
 			result = true;
 		}
 		return result;
+
 	}
 
 }
