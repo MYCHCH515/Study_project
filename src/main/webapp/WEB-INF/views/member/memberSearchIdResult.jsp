@@ -32,7 +32,7 @@
   		<div class="search_box" style="padding: 50px 0;">	
 			  <form id="frm">
 				  <div class="form-group srch_id">
-				   	   <p>${vo.mem_name}님의 아이디는 : <strong> ${vo.mem_id} </strong></p>
+				   	   <p>${vo.mem_name}님의 아이디는 : <strong> ${findId}</strong></p>
 					   <p>가입일 : <strong> ${vo.mem_regDate} </strong></p>
 				  </div>
 				
@@ -54,10 +54,9 @@
 </body>
 
 	<script type="text/javascript">
-	$(.search_btn).click(function(){
+	$(".search_btn").click(function(){
 		location.href="/member/memberLogin";
 	});
-
 	</script>
 
 </html>

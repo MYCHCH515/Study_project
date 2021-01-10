@@ -77,6 +77,16 @@ public class MemberController {
 			mv.setViewName("common/result");
 		}
 		else { 
+			String findId = memberVO.getMem_id();
+			
+			//정규식 마스킹처리
+			if(findId.length()>5) {
+				findId = findId.replaceAll("(?<=.{4})." , "*");
+			}
+			else {
+				findId = findId.replaceAll("(?<=.{2})." , "*");
+			}
+			mv.addObject("findId", findId);
 			mv.addObject("vo", memberVO);
 			mv.setViewName("member/memberSearchIdResult");
 		}
