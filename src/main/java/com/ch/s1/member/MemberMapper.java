@@ -16,6 +16,7 @@ public interface MemberMapper {
 	
 	public MemberVO getMemberEmail(MemberVO memberVO) throws Exception;
 
-	@Transactional
 	public int updatePw(MemberVO memberVO) throws Exception;
+	
+	public MemberVO getSearchId(MemberVO memberVO) throws Exception;
 }

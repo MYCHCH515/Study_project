@@ -10,6 +10,14 @@
   <c:import url="../template/bootStrap.jsp"></c:import>
   <link href="../css/common.css" rel="stylesheet">
   <link href="../css/member.css" rel="stylesheet">
+  
+  <style type="text/css">
+  	#srch_pw_notice{
+  		color: red;
+  		font-size: 15px;
+  		text-align: center;
+  	}
+  </style>
 
 <body>
   <c:import url="../template/header.jsp"></c:import>
@@ -20,16 +28,21 @@
   	</div>
   	 	<div class="container">
   		<div class="search_box">
-			 <div class="form-group">
-		  		<input type="text" class="form-control empty" id="id" name="mem_id" placeholder="아이디 입력">
-				<div class="emptyResult idResult"></div>
-			 </div>
-			  
-			 <div class="form-group">
-			  	<input type="email" class="form-control empty" id="email" name="mem_email" placeholder="회원가입시 이메일 입력">
-			  	<div class="emptyResult emailResult"></div>
-			 </div>
  
+	  		<form id="frm">
+		  		 <div id="srch_pw_notice">입력된 정보로 임시 비밀번호가 전송됩니다.</div>
+	  			 <hr>
+				 <div class="form-group">
+			  		<input type="text" class="form-control empty" id="id" name="mem_id" placeholder="가입시 등록한 아이디를 입력하세요">
+					<div class="emptyResult idResult"></div>
+				 </div>
+				  
+				 <div class="form-group">
+				  	<input type="email" class="form-control empty" id="email" name="mem_email" placeholder="가입시 등록한 이메일을 입력하세요">
+				  	<div class="emptyResult emailResult"></div>
+				 </div>
+			</form>
+	 
 		     <div class="login_btn_wrap">
 				<button class="search_btn">비밀번호 찾기</button>
 		     </div>
@@ -48,17 +61,30 @@
 <script>
 	
 	$(".search_btn").click(function(){
-		$.ajax({
-			url : "/member/memberSearchPw",
-			type : "POST",
-			data : {
-				mem_id : $("#id").val(),
-				mem_email : $("#email").val()
-			},
-			success : function(result) {
-				alert(result);
-			},
-		})
+		var mem_id = $('#id').val();
+		var mem_email = $("#email").val();
+
+		if(mem_id != "" && mem_email !=""){
+			$.ajax({
+				url : "/member/memberSearchPw",
+				type : "POST",
+				data : {
+					mem_id : mem_id,
+					mem_email : mem_email
+				},
+				success : function(result) {
+					alert(result);
+				},
+			})
+		}
+		else{
+			if(mem_id == ""){
+				alert("아이디를 입력하세요");
+			}
+			else{
+				alert("이메일을 입력하세요");
+			}
+		}
 	});
 	
 </script>

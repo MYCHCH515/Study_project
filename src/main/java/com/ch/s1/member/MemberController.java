@@ -70,8 +70,17 @@ public class MemberController {
 	@PostMapping("memberSearchId")
 	public ModelAndView getMemberSearchId(MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
-		return mv;
+		memberVO= memberService.getSearchId(memberVO);
+
+		if(memberVO == null) {
+			mv.addObject("msg", "가입된 회원정보가 없습니다.");
+			mv.setViewName("common/result");
+		}
+		else { 
+			mv.addObject("vo", memberVO);
+			mv.setViewName("member/memberSearchIdResult");
+		}
+		return mv;	
 	}
 	
 	@GetMapping("memberSearchPw")
@@ -84,9 +93,16 @@ public class MemberController {
 
 	@PostMapping("memberSearchPw")
 	public ModelAndView getMemberSearchPw(HttpServletResponse response, MemberVO memberVO) throws Exception{
-		System.out.println("----멤서치뷰");
 		ModelAndView mv = new ModelAndView();
 		memberService.getfindPw(response, memberVO);
+		return mv;
+	}
+	
+	@GetMapping("memberSearchIdResult")
+	public ModelAndView getIdResult() throws Exception{
+		System.out.println("zzzzzzz------------");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberSearchIdResult");
 		return mv;
 	}
 	
@@ -99,8 +115,6 @@ public class MemberController {
 	
 	@GetMapping("memberJoin")
 	public ModelAndView setMemberJoin(MemberVO memberVO) throws Exception{
-		
-		System.out.println("memberJoin진입");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/memberJoin");
 		return mv;

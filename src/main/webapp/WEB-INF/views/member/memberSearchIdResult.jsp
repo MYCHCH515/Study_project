@@ -11,6 +11,16 @@
   <link href="../css/common.css" rel="stylesheet">
   <link href="../css/member.css" rel="stylesheet">
 
+  <style type="text/css">
+  	.srch_id p{
+  		font-size: 17px;
+  		text-align: left;
+  	}
+  	
+  	.srch_id p strong{
+  		font-size: 22px;
+  	}
+  </style>
 <body>
   <c:import url="../template/header.jsp"></c:import>
 	
@@ -20,20 +30,16 @@
   	</div>
   	<div class="container">
   		<div class="search_box" style="padding: 50px 0;">	
-			  <form action="./memberSearchId" method="post" id="frm">
-				  <div class="form-group">
-					    <input type="text" class="form-control empty" id="name" name="mem_name" placeholder="이름">
-					  	<div class="emptyResult nameResult"></div>
+			  <form id="frm">
+				  <div class="form-group srch_id">
+				   	   <p>${vo.mem_name}님의 아이디는 : <strong> ${vo.mem_id} </strong></p>
+					   <p>가입일 : <strong> ${vo.mem_regDate} </strong></p>
 				  </div>
-				  
-				  <div class="form-group">
-					  	<input type="text" class="form-control empty" id="email" name="mem_email" placeholder="가입시 등록했던 이메일을 입력하세요">
-					  	<div class="emptyResult emailResult"></div>
-			      </div>
+				
 			  </form>
 		
 		     <div class="login_btn_wrap">
-				<button class="search_btn">아이디 찾기</button>
+				<button class="search_btn">로그인</button>
 		     </div>
 		     
 		      <div class="join_link">
@@ -48,21 +54,8 @@
 </body>
 
 	<script type="text/javascript">
-	$(".search_btn").click(function(){
-		var mem_name = $('#name').val();
-		var mem_email = $("#email").val();
-
-		if(mem_name != "" && mem_email !=""){
-			$("#frm").submit();
-		}
-		else{
-			if(mem_name == ""){
-				alert("이름을 입력하세요");
-			}
-			else{
-				alert("이메일을 입력하세요");
-			}
-		}
+	$(.search_btn).click(function(){
+		location.href="/member/memberLogin";
 	});
 
 	</script>

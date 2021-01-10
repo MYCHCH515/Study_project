@@ -41,17 +41,21 @@ public class MemberService {
 		return memberMapper.getMemberEmail(memberVO);
 	}
 	
+	public MemberVO getSearchId(MemberVO memberVO) throws Exception{
+		return memberMapper.getSearchId(memberVO);
+	}
+	
 	//비밀번호 찾기 이메일발송
 	public void sendEmail(MemberVO memberVO, String div) throws Exception{
 		
 		//Mail Server 설정
 		String charSet = "utf-8";
-		String hostSMTP = "smtp.naver.com";		//SMTP 서버명
+		String hostSMTP = "smtp.gmail.com";		//SMTP 서버명
 		String hostSMTPid = "";
 		String hostSMTPpwd = "";
 		
 		//보내는 사람
-		String fromEmail = "nam1738@naver.com";
+		String fromEmail = "";
 		String fromName = "거북이의기적";
 		
 		String subject = ""; 	//메일 제목
@@ -59,7 +63,7 @@ public class MemberService {
 		
 		if(div.equals("findpw")) {
 			subject = "거북이의기적 임시 비밀번호 입니다.";
-			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+			msg += "<div align='center' style='width:300px; height: 500px; border:2px solid #00a5bd; font-family:verdana'>";
 			msg += "<h3 style='color: blue;'>";
 			msg += memberVO.getMem_id() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
 			msg += "<p>임시 비밀번호 : ";
