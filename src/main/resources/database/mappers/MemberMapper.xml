@@ -24,6 +24,10 @@
     	<select id="getMemberEmail" parameterType="MemberVO" resultType="MemberVO">
     		select * from member where mem_email = #{mem_email} 
     	</select>
-
+    	
+    	<update id="updatePw" >
+			update member set mem_pw = #{mem_pw} where mem_id = #{mem_id}
+		</update>
+   
     </mapper>
     

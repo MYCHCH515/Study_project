@@ -20,7 +20,13 @@
 	</properties>
 
 	<dependencies>
-	
+		<!-- 메일 api -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.5</version>
+		</dependency>
+			
 		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
 		<dependency>
 		    <groupId>org.hibernate.validator</groupId>

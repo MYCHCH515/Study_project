@@ -67,10 +67,26 @@ public class MemberController {
 		return mv;
 	}
 	
+	@PostMapping("memberSearchId")
+	public ModelAndView getMemberSearchId(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
+	}
+	
 	@GetMapping("memberSearchPw")
 	public ModelAndView getMemberSearchPw() throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/memberSearchPw");
+		return mv;
+	}
+	
+
+	@PostMapping("memberSearchPw")
+	public ModelAndView getMemberSearchPw(HttpServletResponse response, MemberVO memberVO) throws Exception{
+		System.out.println("----멤서치뷰");
+		ModelAndView mv = new ModelAndView();
+		memberService.getfindPw(response, memberVO);
 		return mv;
 	}
 	

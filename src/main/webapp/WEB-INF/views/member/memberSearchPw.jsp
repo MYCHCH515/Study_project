@@ -20,20 +20,16 @@
   	</div>
   	 	<div class="container">
   		<div class="search_box">
-			  <form action="./memberSearchId" method="post" id="frm">
-				  <div class="form-group">
-				  		<input type="text" class="form-control empty" id="id" name="mem_id" placeholder="아이디">
-						<div class="emptyResult idResult"></div>
-				  </div>
-				  
-				  <div class="form-group">
-				  	<input type="email" class="form-control empty confirm_form1" id="email" name="mem_email" placeholder="이메일">
-				  	<input type="button" class="repeat_chk" value="인증번호받기">	
-				  	<input type="text" class="form-control empty confirm_form2" placeholder="인증번호를 입력하세요">
-				  	<div class="emptyResult emailResult"></div>
-				  </div>
-			  </form>
-			     
+			 <div class="form-group">
+		  		<input type="text" class="form-control empty" id="id" name="mem_id" placeholder="아이디 입력">
+				<div class="emptyResult idResult"></div>
+			 </div>
+			  
+			 <div class="form-group">
+			  	<input type="email" class="form-control empty" id="email" name="mem_email" placeholder="회원가입시 이메일 입력">
+			  	<div class="emptyResult emailResult"></div>
+			 </div>
+ 
 		     <div class="login_btn_wrap">
 				<button class="search_btn">비밀번호 찾기</button>
 		     </div>
@@ -48,5 +44,23 @@
   
   <c:import url="../template/footer.jsp"></c:import>
 </body>
+
+<script>
+	
+	$(".search_btn").click(function(){
+		$.ajax({
+			url : "/member/memberSearchPw",
+			type : "POST",
+			data : {
+				mem_id : $("#id").val(),
+				mem_email : $("#email").val()
+			},
+			success : function(result) {
+				alert(result);
+			},
+		})
+	});
+	
+</script>
 
 </html>

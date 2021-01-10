@@ -58,7 +58,8 @@
 				  </div>
 				  
 				  <div class="form-group">
-					    <form:input path="mem_phone" class="form-control confirm_form1" id="phone" placeholder="전화번호 ※특수기호없이 입력하세요※" readonly="false"/>
+					    <form:input path="mem_phone" class="form-control confirm_form1" id="phone" placeholder="전화번호"/>
+					  	<p class="confirm_form1" style="opacity: 70%; float: left; text-align: left; font-size: 12px;">※특수기호없이 입력하세요※</p>
 					  	<input type="button" class="repeat_chk" value="인증번호받기" id="phone_sms_send">	
 					  	<input type="text" class="form-control empty confirm_form1" id="phone_sms_chk_input" placeholder="인증번호를 입력하세요">
 					  	<input type="button" class="repeat_chk" value="인증번호확인" id="phone_sms_chk">	
@@ -85,11 +86,11 @@
 	
 	<!--join버튼 누를 시-->
 	$(".join_btn").click(function(){
-			if(idCheck && pwCheck && nameCheck && pwExpCheck && phoneCheck && emailCheck && phone_sms_checkResult)
-			{
-				$("#frm").submit();
-			}
-		});
+		if(idCheck && pwCheck && nameCheck && pwExpCheck && phoneCheck && emailCheck && phone_sms_checkResult)
+		{
+			$("#frm").submit();
+		}
+	});
 
 	<!-- 중복검사, 유효성 검사 -->
 	var idCheck=false;
@@ -152,7 +153,6 @@
 			$(".pwResult1").html("필수 항목입니다.")
 			$(".pwResult1").removeClass("chkNotice2").addClass("chkNotice1");
 		}
-
 	});
 
 	$("#pw2").blur(function(){
@@ -191,8 +191,75 @@
 		}
 		$(".nameResult").html(str);
 	});
+	
+	var phoneCheck=false;
+	var phone_sms_checkResult = false;
+	
+	$('#phone_sms_send').click(function(){
+		var phoneCheck=false;
+		var phone_sms_checkResult = false;
+		var phone = $('#phone').val();
+		if(phone !=''){
+			$.get("./memberPhoneCheck?mem_phone="+phone,function(data){
+				data=data.trim();
+				var str = "";
+				$(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
+				
+				if(data==0){
+					if(!regExpPhone.test($("input[id='phone']").val())) {
+						str="형식에 맞지않는 전화번호 입니다.";
+						$(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
+						phoneCheck=false;
+					}
+					else{
+						phoneCheck=true;
+						if(phoneCheck){
+					         var phoneNumber = $('#phone').val();
+					         alert('인증번호를 발송했습니다. 인증번호가 오지 않으면 입력하신 정보가 회원정보와 일치하는지 확인해 주세요.')
+					
+					         $.ajax({
+					             type: "GET",
+					             url: "member/check/sendSMS",
+					             data: {
+					                 "phoneNumber" : phoneNumber
+					             },
+					             success: function(res){
+					                 $('#phone_sms_chk').click(function(){
+					                     if($.trim(res) ==$('#phone_sms_chk_input').val()){
+					                    	 phone_sms_checkResult = true;
+					                    	 $(".phoneResult").removeClass("chkNotice1").addClass("chkNotice2");
+					                    	 $(".phoneResult").html("휴대폰 인증이 정상적으로 완료되었습니다.");
+					                    	 sms_msg = "휴대폰 인증이 정상적으로 완료되었습니다.";
+					                    	 $('#phone').attr('readonly',true);
+					                    	 $('#phone_sms_chk_input').attr('readonly',true);
+					                    	 $('#phone_sms_send').attr("disabled","disabled");
+					                    	 $('#phone_sms_chk').attr("disabled","disabled");
+					                	 }else{
+					                		 phone_sms_checkResult = false;
+					                		 $(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
+					                    	 $(".phoneResult").html("인증번호가 올바르지 않습니다!");
+					                		 sms_msg = "인증번호가 올바르지 않습니다!";
+					                     }
+					                     alert(sms_msg);
+					                 })
+					             }
+					         })
+					     }
+					}	
+				}
+				else{
+					str="이미 사용중인 전화번호 입니다.";
+				}
+				$(".phoneResult").html(str);
+			});
+		}
+		else{
+			$(".phoneResult").html("필수 항목입니다.")
+			$(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
+		}
+		});
 
-	$("#phone").blur(function () {
+	/* $("#phone").blur(function (){
 		phoneCheck=false;
 		var phone = $(this).val();
 		if(phone !=''){
@@ -222,6 +289,45 @@
 		}
 	});
 
+	var phone_sms_checkResult = false;
+	var sms_msg = "";
+	
+	$('#phone_sms_send').click(function(){
+		var phone_sms_checkResult = false;
+		if(phoneCheck){
+	         var phoneNumber = $('#phone').val();
+	         alert('인증번호 발송 완료!')
+	
+	         $.ajax({
+	             type: "GET",
+	             url: "member/check/sendSMS",
+	             data: {
+	                 "phoneNumber" : phoneNumber
+	             },
+	             success: function(res){
+	                 $('#phone_sms_chk').click(function(){
+	                     if($.trim(res) ==$('#phone_sms_chk_input').val()){
+	                    	 phone_sms_checkResult = true;
+	                    	 $(".phoneResult").removeClass("chkNotice1").addClass("chkNotice2");
+	                    	 $(".phoneResult").html("휴대폰 인증이 정상적으로 완료되었습니다.");
+	                    	 sms_msg = "휴대폰 인증이 정상적으로 완료되었습니다.";
+	                    	 $('#phone_sms_chk_input').attr('readonly',true);
+	                	 }else{
+	                		 phone_sms_checkResult = false;
+	                		 $(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
+	                    	 $(".phoneResult").html("인증번호가 올바르지 않습니다!");
+	                		 sms_msg = "인증번호가 올바르지 않습니다!";
+	                     }
+	                     alert(sms_msg);
+	                 })
+	             }
+	         })
+	     }
+	     else{
+				alert("전화번호를 다시 확인해주세요");
+			}
+	}); */
+	
 	$("#email").blur(function () {
 		emailCheck=false;
 		var email = $(this).val();
@@ -251,39 +357,7 @@
 			$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
 		}
 	});
-
-	var phone_sms_checkResult = false;
-	var sms_msg = "";
-	$('#phone_sms_send').click(function(){
-		 var phone_sms_checkResult = false;
-         var phoneNumber = $('#phone').val();
-         alert('인증번호 발송 완료!')
-
-         $.ajax({
-             type: "GET",
-             url: "member/check/sendSMS",
-             data: {
-                 "phoneNumber" : phoneNumber
-             },
-             success: function(res){
-                 $('#phone_sms_chk').click(function(){
-                     if($.trim(res) ==$('#phone_sms_chk_input').val()){
-                    	 phone_sms_checkResult = true;
-                    	 $(".phoneResult").removeClass("chkNotice1").addClass("chkNotice2");
-                    	 $(".phoneResult").html("휴대폰 인증이 정상적으로 완료되었습니다.");
-                    	 $("#phone").attr("readonly",true);
-                    	 sms_msg = "휴대폰 인증이 정상적으로 완료되었습니다.";
-                	 }else{
-                		 phone_sms_checkResult = false;
-                		 $(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
-                    	 $(".phoneResult").html("인증번호가 올바르지 않습니다!");
-                		 sms_msg = "인증번호가 올바르지 않습니다!";
-                     }
-                     alert(sms_msg);
-                 })
-             }
-         })
-     });
+	
 	
 </script>
 

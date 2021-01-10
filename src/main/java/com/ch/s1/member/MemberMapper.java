@@ -1,6 +1,7 @@
 package com.ch.s1.member;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.transaction.annotation.Transactional;
 
 @Mapper
 public interface MemberMapper {
@@ -14,4 +15,7 @@ public interface MemberMapper {
 	public MemberVO getMemberPhone(MemberVO memberVO) throws Exception;
 	
 	public MemberVO getMemberEmail(MemberVO memberVO) throws Exception;
+
+	@Transactional
+	public int updatePw(MemberVO memberVO) throws Exception;
 }
