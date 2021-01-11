@@ -13,6 +13,11 @@
     		values(#{mem_num},#{seat_num},#{product_num},sysdate(),#{reserve_strt_tm},#{reserve_end_tm},#{payment_option})
     	</insert>
     	
+    	<select id="getSeatNum" parameterType="Long" resultType="ReserveVO">
+    		select seat_num from reserve where mem_num=#{mem_num}
+    	</select>
+    	
+    	
     	<select id="getOne" parameterType="ReserveVO" resultMap="getOneResult">
     		select R.*, P.*
     		from reserve R left join product P

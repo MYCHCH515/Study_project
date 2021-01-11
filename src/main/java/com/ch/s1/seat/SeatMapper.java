@@ -8,5 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface SeatMapper {
 	
 	public List<SeatVO> getList() throws Exception;
+	
+	public int setSeatEnter(long seat_num) throws Exception;
+	
+	public int setSeatExit(long seat_num) throws Exception;
 
 }

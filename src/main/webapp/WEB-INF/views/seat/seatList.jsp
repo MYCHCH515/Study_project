@@ -10,7 +10,25 @@
   <c:import url="../template/bootStrap.jsp"></c:import>
   <link href="../css/common.css" rel="stylesheet">
    <link href="../css/seat.css" rel="stylesheet">
+   
+   <style type="text/css">
+   .resPossible{
+   		background-color:  #E3F0F2;
+   }  
+   	.resPossible:hover{
+  		background :#C0D7DA;
+  	}
+   .resImpossible{
+   		background-color: #BAC1C2;
+   } 
+    .resImpossible:hover{
+   		background: #BAC1C2;
+   } 
+   </style>
+   
 </head>
+
+
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	
@@ -28,7 +46,7 @@
 			<c:forEach items="${list}" var="vo">
 				<c:if test="${vo.seat_num /6 <= 1}">
 					<div id="s1_${vo.seat_num}">
-						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
 					</div>
 				</c:if>
 			</c:forEach>
@@ -38,7 +56,7 @@
 			<c:forEach items="${list}" var="vo">
 				<c:if test="${vo.seat_num/6 > 1 && vo.seat_num /6 <= 2}">
 					<div id="s2_${vo.seat_num}">
-						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
 					</div>
 				</c:if>	
 			</c:forEach>
@@ -51,7 +69,7 @@
 						<c:forEach items="${list}" var="vo">
 							<c:if test="${vo.seat_num/6 > 2 && vo.seat_num /6 <= 3}">
 								<div id="s3_${vo.seat_num}">
-									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
 								</div>
 							</c:if>
 						</c:forEach>
@@ -61,7 +79,7 @@
 						<c:forEach items="${list}" var="vo">
 							<c:if test="${vo.seat_num/6 > 3 && vo.seat_num /6 <= 4}">
 								<div id="s3_${vo.seat_num}">
-									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
 								</div>
 							</c:if>
 						</c:forEach>
@@ -73,9 +91,9 @@
 				<div class="seat_s4">
 					<div class="seat_s4_left">
 						<c:forEach items="${list}" var="vo">
-							<c:if test="${vo.seat_num/6 > 3 && vo.seat_num /6 <= 4}">
+							<c:if test="${vo.seat_num/6 > 4 && vo.seat_num /6 <= 5}">
 								<div id="s4_${vo.seat_num}">
-									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
 								</div>
 							</c:if>
 						</c:forEach>
@@ -83,9 +101,9 @@
 					
 					<div class="seat_s4_right">
 						<c:forEach items="${list}" var="vo">
-							<c:if test="${vo.seat_num/6 > 4 && vo.seat_num /6 <= 5}">
+							<c:if test="${vo.seat_num/6 > 5 && vo.seat_num /6 <= 6}">
 								<div id="s4_${vo.seat_num}">
-									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
 								</div>
 							</c:if>
 						</c:forEach>
@@ -98,7 +116,7 @@
 			<c:forEach items="${list}" var="vo">
 				<c:if test="${vo.seat_num/6 > 6 && vo.seat_num /6 <= 7}">
 					<div id="s5_${vo.seat_num}">
-						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}">${vo.seat_name}</button>
+						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
 					</div>
 				</c:if>
 			</c:forEach>
@@ -131,6 +149,17 @@
 
 <script type="text/javascript">
 
+	$(".btn_seat").each(function() {
+		var num = $(this).attr("title"); 
+		if(num==0){
+			$(this).addClass("resImpossible");
+			$(this).attr('disabled',"disabled");
+		}else{
+			$(this).removeClass("resImpossible");
+			$(this).addClass("resPossible");
+		}	
+	});
+	
 	$('.btn_seat').click(function(){
 		var seat_num = $(this).attr("id");
 

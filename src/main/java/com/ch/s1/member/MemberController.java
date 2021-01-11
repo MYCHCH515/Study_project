@@ -222,4 +222,11 @@ public class MemberController {
         return numStr;
     }
 	
+	@GetMapping("memberPage")
+	public ModelAndView getMemberPage() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberPage");
+		return mv;
+	}
+	
 }

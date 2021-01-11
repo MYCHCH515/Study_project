@@ -18,12 +18,10 @@
   	}
   	
   	.seat_wrap button{
-  		background: #E3F0F2;
   		border: 1px solid #F6F6F6;
   	}
   	
   	.seat_wrap button:hover{
-  		background :#C0D7DA;
   		border: 1px solid #F6F6F6;
   	}
   	
@@ -59,11 +57,9 @@
   	}
   	
   	.leave_list button{
-  		
   		margin: 10px 0 ;
   		width: 100px;
   		height: 30px;
-  		
   	}
   	
   	.seat_s1{
@@ -95,7 +91,7 @@
 		padding: 50px;
   	}
   	
-  	.seat_s3_left, .seat_s3_right, .seat_s4_left, .seat_s4_right{
+  	.seat_s3_left, .seat_s4_left , .seat_s3_right, .seat_s4_right{
   		float: left;
   		width: 50%;
   		height:200px;
@@ -182,5 +178,5 @@
   	}
   	
   	.seat_s3_right button, .seat_s4_right button{
-  		float:right;	
+  		float:left;	
   	}

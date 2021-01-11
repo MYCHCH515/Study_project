@@ -14,5 +14,12 @@ public class SeatService {
 	public List<SeatVO> getList() throws Exception{
 		return seatMapper.getList();
 	}
-
+	
+	public int setSeatEnter(long seat_num) throws Exception{
+		return seatMapper.setSeatEnter(seat_num);
+	}
+	
+	public int setSeatExit(long seat_num) throws Exception{
+		return seatMapper.setSeatExit(seat_num);
+	}
 }

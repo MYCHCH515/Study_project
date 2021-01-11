@@ -10,4 +10,6 @@ public interface ReserveMapper {
 	public ReserveVO getOne(ReserveVO reserveVO) throws Exception;
 	
 	public ReserveVO getLatestOne(ReserveVO reserveVO) throws Exception;
+	
+	public ReserveVO getSeatNum(long mem_num) throws Exception;
 }

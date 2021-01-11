@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ch.s1.member.MemberVO;
 import com.ch.s1.product.ProductVO;
+import com.ch.s1.seat.SeatService;
 
 @Controller
 @RequestMapping(value = "/reserve/**")
@@ -21,6 +22,9 @@ public class ReserveController {
 
 	@Autowired
 	private ReserveService reserveService;
+	
+	@Autowired
+	private SeatService seatService;
 
 	@GetMapping("reserveForm")
 	public ModelAndView setInsert() throws Exception {
@@ -36,12 +40,14 @@ public class ReserveController {
 		
 		ModelAndView mv = new ModelAndView();
 		int result = reserveService.setInsert(reserveVO);
+		long seat_num = reserveVO.getSeat_num();
 		
 		String message = "예약 실패했습니다.";
 		if (result > 0) {
+			seatService.setSeatEnter(seat_num);
 			System.out.println("성공");
 			
-			message = "성공적으로 예약되었습니다.\\n예약내역은 마이페이지에서 확인 가능합니다.";
+			message = "성공적으로 예약되었습니다.";
 			mv.addObject("path", "./reserveCheckForm");
 		}
 		
@@ -67,26 +73,6 @@ public class ReserveController {
 		mv.addObject("vo", reserveVO);
 		mv.setViewName("reserve/reserveCheckForm");
 		System.out.println("체크폼컨트롤ㄹㄹ");
-		return mv;
-	}
-
-	@GetMapping("reserveCheckTime")
-	public ModelAndView getTime() throws Exception {
-		/*
-		 * Calendar ca = Calendar.getInstance(); int y = ca.get(Calendar.YEAR); int m =
-		 * ca.get(Calendar.MONTH)+1; int d = ca.get(Calendar.DATE); int h =
-		 * ca.get(Calendar.HOUR); int mi = ca.get(Calendar.MINUTE);
-		 * 
-		 * ArrayList<Integer> time = new ArrayList<>(); time.add(y); time.add(m);
-		 * time.add(d); time.add(h); time.add(mi);
-		 * 
-		 * time.toString();
-		 */
-		System.out.println("c체크아웃ㅅ");
-
-		ModelAndView mv = new ModelAndView();
-		// mv.addObject("msg", time);
-		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 }

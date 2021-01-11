@@ -7,5 +7,13 @@
     	<select id="getList" resultType="SeatVO">
     		select * from seat
     	</select>
+    	
+    	<update id="setSeatEnter" parameterType="Long">
+    		update seat set seat_reserve=0 where seat_num=#{seat_num};
+    	</update>
+    	
+    	<update id="setSeatExit" parameterType="Long">
+    		update seat set seat_reserve=1 where seat_num=#{seat_num};
+    	</update>
     </mapper>
     

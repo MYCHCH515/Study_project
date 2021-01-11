@@ -7,4 +7,5 @@ public class SeatVO {
 	
 	private long seat_num;
 	private String seat_name;
+	private long seat_reserve;
 }

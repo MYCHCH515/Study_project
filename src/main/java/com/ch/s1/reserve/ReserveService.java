@@ -32,5 +32,9 @@ public class ReserveService {
 	public ReserveVO getLatestOne(ReserveVO reserveVO) throws Exception{
 		return reserveMapper.getLatestOne(reserveVO);
 	}
+	
+	public ReserveVO getSeatNum(long mem_num) throws Exception{
+		return reserveMapper.getSeatNum(mem_num);
+	}
 
 }
