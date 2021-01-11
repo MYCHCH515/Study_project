@@ -52,6 +52,21 @@
   		color: white;
   	}
   	
+  	.chk_btn, .cancel_btn{
+  		width: 150px;
+  		height: 50px;
+  		border-radius: 0;
+  		border: none;
+  		background-color: #00a5bd;
+  		opacity: 60%;
+  		text-align: center;
+  		color: white;
+  	}
+  	
+  	.cancel_btn{
+  		background-color: gray;
+  	}
+  	
   	.login_btn:hover, .join_btn:hover, .search_btn:hover, .reserve_btn:hover{
   		opacity: 0.8;
   	}

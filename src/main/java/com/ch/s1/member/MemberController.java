@@ -16,12 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ch.s1.reserve.ReserveService;
+
 @Controller
 @RequestMapping(value="/member/**")
 public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ReserveService reserveService;
 
 	@GetMapping("memberLogin")
 	public ModelAndView getMemberLogin() throws Exception{
@@ -226,6 +231,21 @@ public class MemberController {
 	public ModelAndView getMemberPage() throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/memberPage");
+		return mv;
+	}
+	
+	@GetMapping("memberReservation")
+	public ModelAndView getMemberReservation() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		//reserveService.getList(pager);
+		mv.setViewName("member/memberReservation");
+		return mv;
+	}
+	
+	@GetMapping("memberInquiry")
+	public ModelAndView getMemberInquiry() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberInquiry");
 		return mv;
 	}
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ch.s1.product.ProductMapper;
 import com.ch.s1.product.ProductVO;
+import com.ch.s1.util.Pager;
 
 @Service
 public class ReserveService {
@@ -17,6 +18,9 @@ public class ReserveService {
 	@Autowired
 	private ProductMapper productMapper;
 
+	public List<ReserveVO> getList(Pager pager) throws Exception{
+		return reserveMapper.getList(pager);
+	}
 	public List<ProductVO> getProductList() throws Exception {
 		return productMapper.getList();
 	}

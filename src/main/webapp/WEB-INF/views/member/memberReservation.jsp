@@ -69,28 +69,49 @@
 	    </div>
 	
 	    <div class="col-sm-10 mypage_contents">
-	      <h3><strong>회원정보확인</strong></h3>
+	      <h3><strong>예약정보확인</strong></h3>
 	      <hr>
+	       <input type="hidden" name="curPage" id="curPage" value="1">
 	      <p style="margin: 20px 0;"><span style="color:blue;">${member.mem_name}</span>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다.</p>
-	      <form action="./memberPage" method="post">
-	      <div class="list_form">
-			<table class="table">
-					<tr class="list_tr" style="height: 60px;">
-						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >아이디</td>
-						<td class="col-sm-9"><div style="font-size: 17px; height: 50px; width: 250px;  padding: 10px 0;">${member.mem_id}</div></td>
+	    
+	      <!-- list -->
+		  <div class="list_form">
+				<table class="table">
+					<tr class="list_tr">
+						<td class="col-sm-1">글 번호</td>
+						<td class="col-sm-8">제목</td>
+						<td class="col-sm-2">날짜</td>
+						<td class="col-sm-1">조회</td>
 					</tr>
 					
-					<tr class="list_tr" style="height: 60px;">
-						<td class="col-sm-3" style=" background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center">비밀번호</td>
-	      			    <td class="col-sm-9"><input type="text" name="mem_pw" id="pw" style="height: 50px; width: 250px;"></td>
-					</tr>	
-			</table>
-		</div>
-		</form>
-		<div class="login_btn_wrap">
-			<button type="button" class="chk_btn">확인</button>
-			<button type="button" class="cancel_btn">취소</button>
-		</div>
+					<c:forEach items="${list}" var="vo">
+				      <tr class="list_tr">
+					        <td>${vo.board_num}</td>
+					        <td><a href="${board}Select?board_num=${vo.board_num}">${vo.board_title}</a></td> 
+					        <td>${vo.regDate}</td>
+					        <td>${vo.hit}</td>
+				      </tr>
+			    	</c:forEach>
+				</table>
+		  </div>
+	      
+	        <!-- Page -->
+		   <div class="col-sm-12">
+	 		  <ul class="pagination">	
+		 		  		<c:if test="${pager.before}">
+		  	   				<li><a href="#" class="list" title="${pager.startNum-1}">&lt;</a></li>
+		  	   			</c:if>
+		  	   
+					    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+					  		<li><a href="#" class="list" title="${i}">${i}</a></li>
+					    </c:forEach>
+				  
+					    <c:if test="${pager.after}">
+			  	   			<li><a href="#" class="list" title="${pager.lastNum+1}">&gt;</a></li>
+			  	   		</c:if>
+	  		  </ul>
+		   </div>
+		  
 	    </div>
 	  </div>
 </div>
