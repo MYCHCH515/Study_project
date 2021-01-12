@@ -19,16 +19,16 @@
     .row.content {
     	width: 90%;
     	margin: 0 auto;
-    	height: 900px
+    	height: 1000px
     }
     
     .sidenav {
       	background-color: #f1f1f1;
-      	height: 800px;
+      	height: 900px;
     }
     
     .mypage_contents{
-    	height: 800px;
+    	height: 900px;
     	border: 1px solid #f1f1f1;
     }
     
@@ -41,6 +41,18 @@
      	color: black;
      	font-size: 18px;
      }
+     
+    .chkNotice1, .error{
+		color: red;
+	}
+	
+	.chkNotice2{
+		color: blue;
+	}
+	
+	.errors{
+		text-align: left;
+	}
     
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
@@ -77,50 +89,76 @@
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
 						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >이름</td>
 						<td class="col-sm-9">
-							<input type="text" name="mem_id" id="id" value="${vo.mem_name}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
+							<input type="text" id="name" value="${vo.mem_name}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
 						</td>
 					</tr>
 			
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
 						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >아이디</td>
 						<td class="col-sm-9">
-							<input type="text" name="mem_id" id="id" value="${vo.mem_id}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
+							<input type="text" id="id" value="${vo.mem_id}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
 						</td>
 					</tr>
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3" style=" background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center">현재 비밀번호</td>
-	      			    <td class="col-sm-9"><input type="password" id="origin_pw" style="height: 50px; width: 250px;"></td>
+						<td class="col-sm-3" style=" background:#eef1f8; font-size: 17px; text-align: center; vertical-align:middle; line-height: 60px;">비밀번호 변경</td>
+	      			    <td class="col-sm-9">
+	      			    	<table>			
+								<tr class="list_tr" style="height: 60px;">
+									<td class="col-sm-3" style="font-size: 15px; padding: 20px 0; text-align: center">현재 비밀번호</td>
+				      			    <td class="col-sm-9"><input type="password" id="origin_pw" style="height: 35px; width: 250px;"></td>
+								</tr>	
+								
+								<tr class="list_tr" style="height: 60px; ">
+									<td class="col-sm-3" style="font-size: 15px; padding: 20px 0; text-align: center">새 비밀번호</td>
+				      			    <td class="col-sm-9"><input type="password" id="new_pw" style="height: 35px; width: 250px;"></td>
+								</tr>	
+								
+							
+								<tr class="list_tr" style="height: 60px;">
+									<td class="col-sm-3" style="font-size: 15px; padding: 20px 0; text-align: center">비밀번호 확인</td>
+				      			    <td class="col-sm-9"><input type="password" name="mem_pw" id="new_pw_chk" style="height: 35px; width: 250px;"></td>
+								</tr>
+								
+								<tr class="list_tr" style="height: 60px;">
+									<td class="col-sm-3"></td>
+				      			    <td class="col-sm-9" style="text-align: right;">
+				      			    	<button type="button" style="border: 1px solid black; color:white; background-color: gray; padding: 5px;">비밀번호변경</button>
+				      			    </td>
+								</tr>
+	      			    	</table>
+	      			    </td>
 					</tr>	
+				
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3" style=" background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center">새 비밀번호</td>
-	      			    <td class="col-sm-9"><input type="password" id="new_pw" style="height: 50px; width: 250px;"></td>
-					</tr>	
-					
-					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3" style=" background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center">비밀번호 확인</td>
-	      			    <td class="col-sm-9"><input type="password" name="mem_pw" id="new_pw_chk" style="height: 50px; width: 250px;"></td>
-					</tr>	
-					
-					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >전화번호</td>
+						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center; vertical-align:middle;">전화번호</td>
 						<td class="col-sm-9">
-							<input type="text" name="mem_id" id="id" value="${vo.mem_phone}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
+							<input type="text" id="origin_phone" value="${vo.mem_phone}" readonly="readonly" style="height: 50px; width: 265px; border: none;">
+							<button type="button" id="change_phone" style="border: 1px solid black; color:white; background-color: gray; padding: 5px; display: inline-block;">전화번호변경</button>
+							<button type="button" id="change_phone_cancel" style="border: 1px solid black; color:white; background-color: gray; padding: 5px; display: none;">전화번호 변경취소</button>
+							<input type="text" id="new_phone" name="mem_phone" value="${vo.mem_phone}" style="height: 40px; width: 265px; display: none;">
+							<button type="button" id="change_phone_submit" style="border: 1px solid black; color:white; background-color: gray; padding: 5px; display: none;">전화번호수정</button>
+							<span class="phoneResult"></span>
 						</td>
 					</tr>
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
 						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >이메일</td>
 						<td class="col-sm-9">
-							<input type="text" name="mem_id" id="id" value="${vo.mem_email}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
+							<input type="text" id="origin_email" value="${vo.mem_email}" readonly="readonly" style="height: 50px; width: 265px; border: none;">
+							<button type="button" id="change_email" style="border: 1px solid black; color:white; background-color: gray; padding: 5px; display: inline-block;">이메일변경</button>
+							<button type="button" id="change_email_cancel" style="border: 1px solid black; color:white; background-color: gray; padding: 5px; display: none;">이메일 변경취소</button>
+							<input type="text" id="new_email" value="${vo.mem_email}" style="height: 40px; width: 265px; display: none;">	
+							<button type="button" id="change_email_submit" style="border: 1px solid black; color:white; background-color: gray; padding: 5px; display: none;">이메일수정</button>
+							<span class="emailResult"></span>
 						</td>
 					</tr>
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >가입일</td>
+						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center; vertical-align:middle;">가입일</td>
 						<td class="col-sm-9">
-							<input type="text" name="mem_id" id="id" value="${vo.mem_regDate}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
+							<input type="text" name="mem_regDate" id="regDate" value="${vo.mem_regDate}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
 						</td>
 					</tr>
 			</table>
@@ -142,61 +180,101 @@
 
 <script type="text/javascript">
 
-$('origin_pw').blur(function(){
-	var origin_pw = $("#origin_pw").val();
-	$.post("./originPwCheck",{origin_pw:origin_pw},function(data){
+$("#change_phone").click(function(){
+	if($("#change_phone").css("display")!="none"){
+		$("#change_phone").hide();
+		$("#change_phone_cancel").show();
+	}
 	
-	});
+	if($("#new_phone").css("display")=="none"){
+		$("#new_phone").show();
+		$("#change_phone_submit").show();
+	}
 });
 
-$("#faq_result").on("click",".faq_del_btn", function(){
-	var board_num = $(this).attr("title");
-	var check= confirm("정말로 삭제하겠습니까?");
+$("#change_phone_cancel").click(function(){
+	if($("#change_phone_cancel").css("display")!="none"){
+		$("#change_phone_cancel").hide();
+		$("#change_phone").show();
+	}
 	
-	if(check){
-		$.post("./faqDelete",{board_num:board_num}, function(data){
+	if($("#new_phone").css("display")!="none"){
+		$("#new_phone").hide();
+		$("#change_phone_submit").hide();
+	}
+});
+
+$("#change_email").click(function(){
+	if($("#change_email").css("display")!="none"){
+		$("#change_email").hide();
+		$("#change_email_cancel").show();
+	}
+	
+	if($("#new_email").css("display")=="none"){
+		$("#new_email").show();
+		$("#change_email_submit").show();
+	}
+});
+
+$("#change_email_cancel").click(function(){
+	if($("#change_email_cancel").css("display")!="none"){
+		$("#change_email_cancel").hide();
+		$("#change_email").show();
+	}
+	
+	if($("#new_email").css("display")!="none"){
+		$("#new_email").hide();
+		$("#change_email_submit").hide();
+	}
+});
+
+var regExpEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+$("#change_email_submit").click(function(){
+	emailCheck=false;
+	var email = $("#new_email").val();
+	var id = $("#id").val();
+	if(email !=''){
+		$.get("./memberEmailCheck?mem_email="+email,function(data){
 			data=data.trim();
-			if(data>0){		
-				alert("삭제 성공했습니다.");
-				location.reload();
+			var str = "수정되었습니다."
+			$(".emailResult").removeClass("chkNotice1").addClass("chkNotice2");
+			if(data==0){
+				if(!regExpEmail.test($("input[id='new_email']").val())) {
+					str="형식에 맞지않는 이메일 입니다.";
+					$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
+					emailCheck=false;
+				}
+				else{
+					emailCheck=true;
+				    $.post("./memberModifyEmail",
+						    {"mem_email":email, "mem_id":id},
+						    function(result){
+						    	if(result < 1){
+									alert("이메일 수정에 실패했습니다.")	
+									return
+						    	}
+						    	else{
+						    		alert("수정되었습니다.")
+						    		location.reload();	
+							    }
+					});
+				}
 			}
 			else{
-				alert("삭제 실패했습니다.");
+				str = "이미 사용중인 이메일입니다."
+				$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
+				
 			}
+			$(".emailResult").html(str);
 		});
 	}
+
 	else{
-		return false;
+		$(".emailResult").html("필수 항목입니다.")
+		$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
 	}
-	
 });
 
-
-
-
-
-
-
-
-var mem_pw = ${vo.mem_pw}
-$(".chk_btn").click(function(){
-	var originPwCheck = false;
-	var origin_pw = $("#origin_pw").val();
-
-	if(mem_pw==origin_pw){
-		originPwCheck = true;	
-	}
-	else{
-		originPwCheck = false;	
-	}
-
-	console.log(originPwCheck);			
-});
-
-
-$(".cancel.btn").click(function(){
-	
-})
 
 </script>
 

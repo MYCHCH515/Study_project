@@ -52,6 +52,10 @@ public class MemberService {
 		return memberMapper.setMemberSecession(memberVO);
 	}
 	
+	public int setModifyEmail(MemberVO memberVO) throws Exception{
+		return memberMapper.setModifyEmail(memberVO);
+	}
+	
 	//비밀번호 찾기 이메일발송
 	public void sendEmail(MemberVO memberVO, String div) throws Exception{
 		

@@ -9,7 +9,7 @@
 	      	<a href="#"><span class="ft ft_txt2">고객문의</span></a>
 	       	<a href="#"><span class="ft ft_txt2">이용약관</span></a>
 	        <a href="#"><span class="ft ft_txt2">개인정보처리방침</span></a>
-	       	<a href="https://blog.naver.com/turtlesmiracle"><span class="ft ft_txt2">블로그</span></a>
+	       	<a href="https://blog.naver.com/turtlesmiracle" target="_blank"><span class="ft ft_txt2">블로그</span></a>
        	</div>
        	
 	    <div class="policy_area">

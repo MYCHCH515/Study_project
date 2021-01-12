@@ -295,6 +295,17 @@ public class MemberController {
 		return mv;	
 	}
 	
+	@PostMapping("memberModifyEmail")
+	public ModelAndView setMemberModifyEmail(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = memberService.setModifyEmail(memberVO);
+
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+	
+		return mv;	
+	}
+	
 	
 	
 }

@@ -23,4 +23,6 @@ public interface MemberMapper {
 	public MemberVO getMemberInfo(MemberVO memberVO) throws Exception;
 	
 	public int setMemberSecession(MemberVO memberVO) throws Exception;
+	
+	public int setModifyEmail(MemberVO memberVO) throws Exception;
 }
