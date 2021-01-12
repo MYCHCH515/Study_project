@@ -111,7 +111,6 @@ public class MemberController {
 	
 	@GetMapping("memberSearchIdResult")
 	public ModelAndView getIdResult() throws Exception{
-		System.out.println("zzzzzzz------------");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/memberSearchIdResult");
 		return mv;
@@ -207,8 +206,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/check/sendSMS")
-    public @ResponseBody
-    String sendSMS(String phoneNumber) {
+    public @ResponseBody String sendSMS(String phoneNumber) {
 
         Random rand  = new Random();
         String numStr = "";
@@ -237,7 +235,7 @@ public class MemberController {
 		
 		if(memberVO != null) {
 			mv.addObject("vo", memberVO);
-			mv.setViewName("member/memberUpdate");
+			mv.setViewName("member/memberModify");
 		}
 		
 		else {
@@ -256,10 +254,10 @@ public class MemberController {
 		return mv;
 	}
 	
-	@GetMapping("memberUpdate")
+	@GetMapping("memberModify")
 	public ModelAndView getMemberUpdate() throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/memberUpdate");
+		mv.setViewName("member/memberModify");
 		return mv;
 	}
 	
@@ -268,6 +266,33 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/memberInquiry");
 		return mv;
+	}
+	
+	@GetMapping("memberSecession")
+	public ModelAndView getMemberSecession() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberSecession");
+		return mv;
+	}
+	
+	@PostMapping("memberSecession")
+	public ModelAndView setMemberSecession(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		memberVO = memberService.getMemberInfo(memberVO);
+		
+		if(memberVO != null) {
+			memberService.setMemberSecession(memberVO);
+			mv.addObject("msg","회원탍퇴되셨습니다.");
+			mv.addObject("path", "../");
+			mv.setViewName("common/result");
+		}
+		
+		else {
+			mv.addObject("msg","비밀번호가 일치하지 않습니다.");
+			mv.addObject("path", "./memberSecession");
+			mv.setViewName("common/result");
+		}
+		return mv;	
 	}
 	
 	

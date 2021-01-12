@@ -21,4 +21,6 @@ public interface MemberMapper {
 	public MemberVO getSearchId(MemberVO memberVO) throws Exception;
 	
 	public MemberVO getMemberInfo(MemberVO memberVO) throws Exception;
+	
+	public int setMemberSecession(MemberVO memberVO) throws Exception;
 }

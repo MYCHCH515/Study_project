@@ -19,16 +19,16 @@
     .row.content {
     	width: 90%;
     	margin: 0 auto;
-    	height: 800px
+    	height: 900px
     }
     
     .sidenav {
       	background-color: #f1f1f1;
-      	height: 700px;
+      	height: 800px;
     }
     
     .mypage_contents{
-    	height: 700px;
+    	height: 800px;
     	border: 1px solid #f1f1f1;
     }
     
@@ -71,7 +71,7 @@
 	    <div class="col-sm-10 mypage_contents">
 	      <h3><strong>회원정보수정</strong></h3>
 	      <hr>
-	      <form action="./memberUpdate" method="post" id="mem_form">
+	      <form action="./memberModify" method="post" id="mem_form">
 	      <div class="list_form">
 			<table class="table">
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
@@ -82,8 +82,8 @@
 					</tr>
 			
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3 cs3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >아이디</td>
-						<td class="col-sm-9 cs9">
+						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >아이디</td>
+						<td class="col-sm-9">
 							<input type="text" name="mem_id" id="id" value="${vo.mem_id}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
 						</td>
 					</tr>
@@ -104,31 +104,35 @@
 					</tr>	
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3 cs3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >전화번호</td>
-						<td class="col-sm-9 cs9">
+						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >전화번호</td>
+						<td class="col-sm-9">
 							<input type="text" name="mem_id" id="id" value="${vo.mem_phone}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
 						</td>
 					</tr>
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3 cs3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >이메일</td>
-						<td class="col-sm-9 cs9">
+						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >이메일</td>
+						<td class="col-sm-9">
 							<input type="text" name="mem_id" id="id" value="${vo.mem_email}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
 						</td>
 					</tr>
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3 cs3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >가입일</td>
-						<td class="col-sm-9 cs9">
+						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >가입일</td>
+						<td class="col-sm-9">
 							<input type="text" name="mem_id" id="id" value="${vo.mem_regDate}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
 						</td>
 					</tr>
 			</table>
 		</div>
 		</form>
+		<p style="margin: 20px 0; text-align: right;">탈퇴를 원하시면 우측의 회원탈퇴 버튼을 눌러주세요. 
+			<a href="./memberSecession" style="border: 1px solid black; color:white; background-color: gray; padding: 5px;">회원탈퇴</a> 
+		</p> 
+
 		<div class="login_btn_wrap">
 			<button type="button" class="chk_btn">수정</button>
-			<button type="button" class="cancel_btn">취소</button>
+			<button type="button" class="cancel_btn"  onclick="history.go(-1)">취소</button>
 		</div>
 	    </div>
 	  </div>

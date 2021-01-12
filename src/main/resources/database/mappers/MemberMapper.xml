@@ -25,7 +25,7 @@
     		select * from member where mem_email = #{mem_email} 
     	</select>
     	
-    	<update id="updatePw" >
+    	<update id="updatePw">
 			update member set mem_pw = #{mem_pw} where mem_id = #{mem_id}
 		</update>
 		
@@ -36,6 +36,10 @@
 		<select id="getMemberInfo" parameterType="MemberVO" resultType="MemberVO">
 			select * from member where mem_id = #{mem_id} and mem_pw = #{mem_pw}
 		</select>
+		
+		<delete id="setMemberSecession" parameterType="MemberVO">
+			delete from member where mem_num = #{mem_num}
+		</delete>
    
     </mapper>
     

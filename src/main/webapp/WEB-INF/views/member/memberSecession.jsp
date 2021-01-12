@@ -69,28 +69,35 @@
 	    </div>
 	
 	    <div class="col-sm-10 mypage_contents">
-	      <h3><strong>회원정보확인</strong></h3>
+	      <h3><strong>회원탈퇴</strong></h3>
 	      <hr>
-	      <p style="margin: 20px 0;"><span style="color:blue;">${member.mem_name}</span>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다.</p>
-	      <form action="./memberPage" method="post" id="mem_form">
+	      <p style="margin: 20px 0; color:blue;">보안을 위해 회원님의 이름과 아이디 및 비밀번호를 확인 합니다.</p>
+	      <form action="./memberSecession" method="post" id="mem_form">
 	      <div class="list_form">
 			<table class="table">
-					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >아이디</td>
-						<td class="col-sm-9">
-							<input type="text" name="mem_id" id="id" value="${member.mem_id}" readonly="readonly" style="height: 50px; width: 250px; border: none; font-size: 17px;" >
-						</td>
-					</tr>
-					
-					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3" style=" background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center">비밀번호</td>
-	      			    <td class="col-sm-9"><input type="password" name="mem_pw" id="pw" style="height: 50px; width: 250px;"></td>
-					</tr>	
+				<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
+					<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >이름</td>
+					<td class="col-sm-9">
+						<input type="text" name="mem_name" id="name" value="${member.mem_name}" readonly="readonly" style="height: 50px; width: 250px; border: none; font-size: 17px;" >
+					</td>
+				</tr>
+
+				<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
+					<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >아이디</td>
+					<td class="col-sm-9">
+						<input type="text" name="mem_id" id="id" value="${member.mem_id}" readonly="readonly" style="height: 50px; width: 250px; border: none; font-size: 17px;" >
+					</td>
+				</tr>
+				
+				<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
+					<td class="col-sm-3" style=" background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center">비밀번호</td>
+      			    <td class="col-sm-9"><input type="password" name="mem_pw" id="pw" style="height: 50px; width: 250px;"></td>
+				</tr>	
 			</table>
 		</div>
 		</form>
 		<div class="login_btn_wrap">
-			<button type="button" class="chk_btn">확인</button>
+			<button type="button" class="chk_btn">본인확인</button>
 			<button type="button" class="cancel_btn" onclick="history.go(-1)">취소</button>
 		</div>
 	    </div>
