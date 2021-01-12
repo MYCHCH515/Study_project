@@ -19,4 +19,6 @@ public interface MemberMapper {
 	public int updatePw(MemberVO memberVO) throws Exception;
 	
 	public MemberVO getSearchId(MemberVO memberVO) throws Exception;
+	
+	public MemberVO getMemberInfo(MemberVO memberVO) throws Exception;
 }

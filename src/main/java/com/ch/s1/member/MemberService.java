@@ -6,7 +6,6 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.mail.HtmlEmail;
-
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +42,10 @@ public class MemberService {
 	
 	public MemberVO getSearchId(MemberVO memberVO) throws Exception{
 		return memberMapper.getSearchId(memberVO);
+	}
+	
+	public MemberVO getMemberInfo(MemberVO memberVO) throws Exception{
+		return memberMapper.getMemberInfo(memberVO);
 	}
 	
 	//비밀번호 찾기 이메일발송

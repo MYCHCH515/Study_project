@@ -19,16 +19,16 @@
     .row.content {
     	width: 90%;
     	margin: 0 auto;
-    	height: 1000px
+    	height: 800px
     }
     
     .sidenav {
       	background-color: #f1f1f1;
-      	height: 900px;
+      	height: 700px;
     }
     
     .mypage_contents{
-    	height: 900px;
+    	height: 700px;
     	border: 1px solid #f1f1f1;
     }
     
@@ -62,9 +62,9 @@
 	  <div class="row content">
 	    <div class="col-sm-2 sidenav">
 	      <ul class="nav nav-pills nav-stacked mypage_li">
-	        <li><a href="memberPage">나의정보</a></li>
-	        <li><a href="memberReservation">예약내역</a></li>
-	        <li><a href="memberInquiry">문의내역</a></li>
+	        <li><a href="/member/memberPage">나의정보</a></li>
+	        <li><a href="/reserve/memberReservation">예약내역</a></li>
+	        <li><a href="/member/memberInquiry">문의내역</a></li>
 	      </ul><br>
 	    </div>
 	

@@ -19,16 +19,16 @@
     .row.content {
     	width: 90%;
     	margin: 0 auto;
-    	height: 1000px
+    	height: 800px
     }
     
     .sidenav {
       	background-color: #f1f1f1;
-      	height: 900px;
+      	height: 700px;
     }
     
     .mypage_contents{
-    	height: 900px;
+    	height: 700px;
     	border: 1px solid #f1f1f1;
     }
     
@@ -62,9 +62,9 @@
 	  <div class="row content">
 	    <div class="col-sm-2 sidenav">
 	      <ul class="nav nav-pills nav-stacked mypage_li">
-	        <li><a href="memberPage">나의정보</a></li>
-	        <li><a href="memberReservation">예약내역</a></li>
-	        <li><a href="memberInquiry">문의내역</a></li>
+	        <li><a href="/member/memberPage">나의정보</a></li>
+	        <li><a href="/reserve/memberReservation">예약내역</a></li>
+	        <li><a href="/member/memberInquiry">문의내역</a></li>
 	      </ul><br>
 	    </div>
 	
@@ -72,17 +72,19 @@
 	      <h3><strong>회원정보확인</strong></h3>
 	      <hr>
 	      <p style="margin: 20px 0;"><span style="color:blue;">${member.mem_name}</span>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다.</p>
-	      <form action="./memberPage" method="post">
+	      <form action="./memberPage" method="post" id="mem_form">
 	      <div class="list_form">
 			<table class="table">
-					<tr class="list_tr" style="height: 60px;">
+					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
 						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >아이디</td>
-						<td class="col-sm-9"><div style="font-size: 17px; height: 50px; width: 250px;  padding: 10px 0;">${member.mem_id}</div></td>
+						<td class="col-sm-9">
+							<input type="text" name="mem_id" id="id" value="${member.mem_id}" readonly="readonly" style="height: 50px; width: 250px; border: none; font-size: 17px;" >
+						</td>
 					</tr>
 					
-					<tr class="list_tr" style="height: 60px;">
+					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
 						<td class="col-sm-3" style=" background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center">비밀번호</td>
-	      			    <td class="col-sm-9"><input type="text" name="mem_pw" id="pw" style="height: 50px; width: 250px;"></td>
+	      			    <td class="col-sm-9"><input type="password" name="mem_pw" id="pw" style="height: 50px; width: 250px;"></td>
 					</tr>	
 			</table>
 		</div>
@@ -96,4 +98,27 @@
 </div>
 <c:import url="../template/footer.jsp"></c:import>
 </body>
+
+<script type="text/javascript">
+
+
+$(".chk_btn").click(function(){
+	var pw = $("#pw").val();
+	if(pw!=""){
+		$("#mem_form").submit();
+	}
+	else{
+		alert("비밀번호를 입력해주세요")
+	}
+});
+
+$(".cancel.btn").click(function(){
+
+	
+})
+
+
+
+</script>
+
 </html>

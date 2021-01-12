@@ -19,6 +19,9 @@ public class ReserveService {
 	private ProductMapper productMapper;
 
 	public List<ReserveVO> getList(Pager pager) throws Exception{
+		pager.makeRow();
+		long totalCount =  reserveMapper.getCount(pager);
+		pager.makePage(totalCount);
 		return reserveMapper.getList(pager);
 	}
 	public List<ProductVO> getProductList() throws Exception {

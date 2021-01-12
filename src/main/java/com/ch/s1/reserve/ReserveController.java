@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ch.s1.member.MemberVO;
 import com.ch.s1.product.ProductVO;
 import com.ch.s1.seat.SeatService;
+import com.ch.s1.util.Pager;
 
 @Controller
 @RequestMapping(value = "/reserve/**")
@@ -73,6 +74,21 @@ public class ReserveController {
 		mv.addObject("vo", reserveVO);
 		mv.setViewName("reserve/reserveCheckForm");
 		System.out.println("체크폼컨트롤ㄹㄹ");
+		return mv;
+	}
+	
+	@GetMapping("memberReservation")
+	public ModelAndView getMemberReservation(HttpSession session, Pager pager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		long mem_num = memberVO.getMem_num();
+		pager.setMem_num(mem_num);
+		
+		List<ReserveVO> ar = reserveService.getList(pager);
+		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
+		mv.setViewName("reserve/memberReservation");
 		return mv;
 	}
 }

@@ -11,24 +11,23 @@
   <link href="../css/common.css" rel="stylesheet">
   <link href="../css/member.css" rel="stylesheet">
   <style>
-  
   	.table_list_title{
   		padding: 50px 0 30px 0;
   		text-align: center;
   	}
-    .row.content {
+     .row.content {
     	width: 90%;
     	margin: 0 auto;
-    	height: 1000px
+    	height: 800px
     }
     
     .sidenav {
       	background-color: #f1f1f1;
-      	height: 900px;
+      	height: 700px;
     }
     
     .mypage_contents{
-    	height: 900px;
+    	height: 700px;
     	border: 1px solid #f1f1f1;
     }
     
@@ -41,7 +40,43 @@
      	color: black;
      	font-size: 18px;
      }
+     
+     .pagination{
+  		margin: 10px;
+  	}
+ 
+  	.pagination>li>a, .pagination>li>span {
+	    position: relative;
+	    float: left;
+	    padding: 6px 12px;
+	    margin-left: -1px;		
+	    line-height: 1.42857143;
+	    color: #333;
+	    text-decoration: none;
+	    border: none;
+	    font-size: 15px;
+    }
     
+    .pagination>li>a:hover , .pagination>li>span:hover {
+    	background: none;
+    	font-weight: bold;
+	}
+	
+	.list_none_wrap{
+		padding: 50px 0;
+	}
+	
+	.list_none{
+		font-size: 17px;
+		opacity: 50%;
+		text-align: center;
+	}
+	
+	.list_form .table td{
+  		height: 65px;
+  		vertical-align: middle;
+  	}
+  	
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
@@ -62,41 +97,42 @@
 	  <div class="row content">
 	    <div class="col-sm-2 sidenav">
 	      <ul class="nav nav-pills nav-stacked mypage_li">
-	        <li><a href="memberPage">나의정보</a></li>
-	        <li><a href="memberReservation">예약내역</a></li>
-	        <li><a href="memberInquiry">문의내역</a></li>
+	        <li><a href="/member/memberPage">나의정보</a></li>
+	        <li><a href="/reserve/memberReservation">예약내역</a></li>
+	        <li><a href="/member/memberInquiry">문의내역</a></li>
 	      </ul><br>
 	    </div>
 	
 	    <div class="col-sm-10 mypage_contents">
 	      <h3><strong>예약정보확인</strong></h3>
 	      <hr>
-	       <input type="hidden" name="curPage" id="curPage" value="1">
-	      <p style="margin: 20px 0;"><span style="color:blue;">${member.mem_name}</span>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다.</p>
-	    
+	      <input type="hidden" name="curPage" id="curPage" value="1">
+
+	      <c:choose>
+		  <c:when test="${pager.totalCount ne 0}">
 	      <!-- list -->
 		  <div class="list_form">
 				<table class="table">
 					<tr class="list_tr">
-						<td class="col-sm-1">글 번호</td>
-						<td class="col-sm-8">제목</td>
-						<td class="col-sm-2">날짜</td>
-						<td class="col-sm-1">조회</td>
+						<td class="col-sm-2">예약번호</td>
+						<td class="col-sm-2">예약좌석</td>
+						<td class="col-sm-4">입실시간</td>
+						<td class="col-sm-4">퇴실시간</td>
 					</tr>
 					
 					<c:forEach items="${list}" var="vo">
 				      <tr class="list_tr">
-					        <td>${vo.board_num}</td>
-					        <td><a href="${board}Select?board_num=${vo.board_num}">${vo.board_title}</a></td> 
-					        <td>${vo.regDate}</td>
-					        <td>${vo.hit}</td>
+					        <td>${vo.reserve_num}</td>
+					  		<td>${vo.seat_num}번좌석</td>
+					        <td>${vo.reserve_strt_tm}</td>
+					        <td>${vo.reserve_end_tm}</td>
 				      </tr>
 			    	</c:forEach>
 				</table>
 		  </div>
 	      
 	        <!-- Page -->
-		   <div class="col-sm-12">
+		   <div class="col-sm-12" style="text-align: center;">
 	 		  <ul class="pagination">	
 		 		  		<c:if test="${pager.before}">
 		  	   				<li><a href="#" class="list" title="${pager.startNum-1}">&lt;</a></li>
@@ -111,7 +147,20 @@
 			  	   		</c:if>
 	  		  </ul>
 		   </div>
-		  
+		   
+		    </c:when>
+	 
+			 <c:otherwise>
+			 	<div class="list_form">
+			 		<div class="list_none_wrap" style="text-align: center;">
+			 			<img alt="" src="../images/list_none.jpg">
+			 			<p class="list_none">예약내역이 없습니다.</p>
+			 		</div>
+			 		
+			 	</div>
+			 </c:otherwise>
+	
+		 </c:choose>	  
 	    </div>
 	  </div>
 </div>

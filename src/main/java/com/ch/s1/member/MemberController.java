@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ch.s1.reserve.ReserveService;
 
 @Controller
 @RequestMapping(value="/member/**")
@@ -24,9 +23,6 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	
-	@Autowired
-	private ReserveService reserveService;
 
 	@GetMapping("memberLogin")
 	public ModelAndView getMemberLogin() throws Exception{
@@ -234,11 +230,28 @@ public class MemberController {
 		return mv;
 	}
 	
-	@GetMapping("memberReservation")
-	public ModelAndView getMemberReservation() throws Exception{
+	@PostMapping("memberPage")
+	public ModelAndView getMemberInfo(MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		//reserveService.getList(pager);
-		mv.setViewName("member/memberReservation");
+		memberVO = memberService.getMemberInfo(memberVO);
+		
+		if(memberVO != null) {
+			mv.addObject("vo", memberVO);
+			mv.setViewName("member/memberUpdate");
+		}
+		
+		else {
+			mv.addObject("msg","비밀번호가 일치하지 않습니다.");
+			mv.addObject("path", "./memberPage");
+			mv.setViewName("common/result");
+		}
+		return mv;	
+	}
+	
+	@GetMapping("memberUpdate")
+	public ModelAndView getMemberUpdate() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberUpdate");
 		return mv;
 	}
 	
@@ -248,5 +261,7 @@ public class MemberController {
 		mv.setViewName("member/memberInquiry");
 		return mv;
 	}
+	
+	
 	
 }

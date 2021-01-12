@@ -8,6 +8,10 @@
     		select * from reserve where mem_num=#{mem_num} order by reserve_num desc limit #{startRow}, #{perPage};
     	</select>
     	
+    	<select id="getCount" resultType="Long" parameterType="Pager">
+			select count(reserve_num) from reserve where mem_num=#{mem_num};
+		</select>
+    	
     	<insert id="setInsert" parameterType="ReserveVO">
     		insert into reserve (mem_num,seat_num,product_num,reserve_regDate,reserve_strt_tm,reserve_end_tm,payment_option)
     		values(#{mem_num},#{seat_num},#{product_num},sysdate(),#{reserve_strt_tm},#{reserve_end_tm},#{payment_option})

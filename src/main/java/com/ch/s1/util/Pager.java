@@ -21,6 +21,8 @@ public class Pager {
 	
 	private long totalCount;
 	
+	private long mem_num;
+	
 	public Pager() {
 		this.perPage=5;
 	}
