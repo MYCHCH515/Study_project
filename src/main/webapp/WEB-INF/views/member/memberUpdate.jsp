@@ -75,8 +75,8 @@
 	      <div class="list_form">
 			<table class="table">
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
-						<td class="col-sm-3 cs3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >이름</td>
-						<td class="col-sm-9 cs9">
+						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center" >이름</td>
+						<td class="col-sm-9">
 							<input type="text" name="mem_id" id="id" value="${vo.mem_name}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
 						</td>
 					</tr>
@@ -90,17 +90,17 @@
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
 						<td class="col-sm-3" style=" background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center">현재 비밀번호</td>
-	      			    <td class="col-sm-9"><input type="password" name="mem_pw" id="pw" style="height: 50px; width: 250px;"></td>
+	      			    <td class="col-sm-9"><input type="password" id="origin_pw" style="height: 50px; width: 250px;"></td>
 					</tr>	
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
 						<td class="col-sm-3" style=" background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center">새 비밀번호</td>
-	      			    <td class="col-sm-9"><input type="password" name="mem_pw" id="pw" style="height: 50px; width: 250px;"></td>
+	      			    <td class="col-sm-9"><input type="password" id="new_pw" style="height: 50px; width: 250px;"></td>
 					</tr>	
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
 						<td class="col-sm-3" style=" background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center">비밀번호 확인</td>
-	      			    <td class="col-sm-9"><input type="password" name="mem_pw" id="pw" style="height: 50px; width: 250px;"></td>
+	      			    <td class="col-sm-9"><input type="password" name="mem_pw" id="new_pw_chk" style="height: 50px; width: 250px;"></td>
 					</tr>	
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
@@ -138,23 +138,61 @@
 
 <script type="text/javascript">
 
-
-$(".chk_btn").click(function(){
-	var pw = $("#pw").val();
-	if(pw!=""){
-		$("#mem_form").submit();
-	}
-	else{
-		alert("비밀번호를 입력해주세요")
-	}
+$('origin_pw').blur(function(){
+	var origin_pw = $("#origin_pw").val();
+	$.post("./originPwCheck",{origin_pw:origin_pw},function(data){
+	
+	});
 });
 
-$(".cancel.btn").click(function(){
+$("#faq_result").on("click",".faq_del_btn", function(){
+	var board_num = $(this).attr("title");
+	var check= confirm("정말로 삭제하겠습니까?");
+	
+	if(check){
+		$.post("./faqDelete",{board_num:board_num}, function(data){
+			data=data.trim();
+			if(data>0){		
+				alert("삭제 성공했습니다.");
+				location.reload();
+			}
+			else{
+				alert("삭제 실패했습니다.");
+			}
+		});
+	}
+	else{
+		return false;
+	}
+	
+});
 
+
+
+
+
+
+
+
+var mem_pw = ${vo.mem_pw}
+$(".chk_btn").click(function(){
+	var originPwCheck = false;
+	var origin_pw = $("#origin_pw").val();
+
+	if(mem_pw==origin_pw){
+		originPwCheck = true;	
+	}
+	else{
+		originPwCheck = false;	
+	}
+
+	console.log(originPwCheck);			
+});
+
+
+$(".cancel.btn").click(function(){
 	
 })
-
-
 
 </script>
 

@@ -248,6 +248,14 @@ public class MemberController {
 		return mv;	
 	}
 	
+	@PostMapping("originPwCheck")
+	public ModelAndView getOriginPwCheck(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		
+		return mv;
+	}
+	
 	@GetMapping("memberUpdate")
 	public ModelAndView getMemberUpdate() throws Exception{
 		ModelAndView mv = new ModelAndView();
