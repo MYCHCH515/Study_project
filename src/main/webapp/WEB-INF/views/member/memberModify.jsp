@@ -19,16 +19,16 @@
     .row.content {
     	width: 90%;
     	margin: 0 auto;
-    	height: 1000px
+    	height: 900px
     }
     
     .sidenav {
       	background-color: #f1f1f1;
-      	height: 900px;
+      	height: 850px;
     }
     
     .mypage_contents{
-    	height: 900px;
+    	height: 850px;
     	border: 1px solid #f1f1f1;
     }
     
@@ -168,10 +168,6 @@
 			<a href="./memberSecession" style="border: 1px solid black; color:white; background-color: gray; padding: 5px;">회원탈퇴</a> 
 		</p> 
 
-		<div class="login_btn_wrap">
-			<button type="button" class="chk_btn">수정</button>
-			<button type="button" class="cancel_btn"  onclick="history.go(-1)">취소</button>
-		</div>
 	    </div>
 	  </div>
 </div>
@@ -227,6 +223,55 @@ $("#change_email_cancel").click(function(){
 		$("#change_email_submit").hide();
 	}
 });
+
+
+var regExpPhone = /^\d{3}\d{3,4}\d{4}$/;
+$("#change_phone_submit").click(function(){
+	phoneCheck=false;
+	var phone = $("#new_phone").val();
+	var id = $("#id").val();
+	if(phone !=''){
+		$.get("./memberPhoneCheck?mem_phone="+phone,function(data){
+			data=data.trim();
+			var str = "수정되었습니다."
+			$(".phoneResult").removeClass("chkNotice1").addClass("chkNotice2");
+			if(data==0){
+				if(!regExpPhone.test($("input[id='new_phone']").val())) {
+					str="형식에 맞지않는 전화번호 입니다.";
+					$(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
+					phoneCheck=false;
+				}
+				else{
+					phoneCheck=true;
+				    $.post("./memberModifyPhone",
+						    {"mem_phone":phone, "mem_id":id},
+						    function(result){
+						    	if(result < 1){
+									alert("휴대폰번호 수정에 실패했습니다.")	
+									return
+						    	}
+						    	else{
+						    		alert("수정되었습니다.")
+						    		location.reload();	
+							    }
+					});
+				}
+			}
+			else{
+				str = "이미 사용중인 휴대폰번호입니다."
+				$(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
+				
+			}
+			$(".phoneResult").html(str);
+		});
+	}
+
+	else{
+		$(".phoneResult").html("필수 항목입니다.")
+		$(".phoneResult").removeClass("chkNotice2").addClass("chkNotice1");
+	}
+});
+
 
 var regExpEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
 $("#change_email_submit").click(function(){

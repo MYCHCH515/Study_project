@@ -246,14 +246,6 @@ public class MemberController {
 		return mv;	
 	}
 	
-	@PostMapping("originPwCheck")
-	public ModelAndView getOriginPwCheck(MemberVO memberVO) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		
-		return mv;
-	}
-	
 	@GetMapping("memberModify")
 	public ModelAndView getMemberUpdate() throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -299,6 +291,17 @@ public class MemberController {
 	public ModelAndView setMemberModifyEmail(MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = memberService.setModifyEmail(memberVO);
+
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+	
+		return mv;	
+	}
+	
+	@PostMapping("memberModifyPhone")
+	public ModelAndView setMemberModifyPhone(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = memberService.setModifyPhone(memberVO);
 
 		mv.addObject("msg", result);
 		mv.setViewName("common/ajaxResult");

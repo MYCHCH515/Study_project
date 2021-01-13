@@ -2,6 +2,8 @@ package com.ch.s1.reserve;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +65,7 @@ public class ReserveController {
 	@GetMapping("reserveCheckForm")
 	public ModelAndView getLatestOne(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("체크폼컨트롤");
+		
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		long mem_num = memberVO.getMem_num();
 		
@@ -72,7 +74,7 @@ public class ReserveController {
 		reserveVO = reserveService.getLatestOne(reserveVO);
 		mv.addObject("vo", reserveVO);
 		mv.setViewName("reserve/reserveCheckForm");
-		System.out.println("체크폼컨트롤ㄹㄹ");
+		
 		return mv;
 	}
 	
@@ -89,5 +91,49 @@ public class ReserveController {
 		mv.addObject("pager", pager);
 		mv.setViewName("reserve/memberReservation");
 		return mv;
+	}
+	
+	@GetMapping("reserveModify")
+	public ModelAndView getReserveModify(@RequestParam long reserve_num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("reserve_num", reserve_num);
+		mv.setViewName("reserve/reserveModify");
+		return mv;
+	}
+	
+	@GetMapping("extendTime")
+	public ModelAndView setExtendTime(ReserveVO reserveVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("reserve/extendTime");
+		return mv;
+	}
+	
+	@GetMapping("changeSeat")
+	public ModelAndView setChangeSeat(ReserveVO reserveVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		
+		return mv;
+	}
+	
+	@PostMapping("checkOut")
+	public ModelAndView setCheckOut(ReserveVO reserveVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = reserveService.setCheckOut(reserveVO);
+		
+		if (result > 0) {
+			reserveVO = reserveService.getReserveInfo(reserveVO);
+			seatService.setSeatExit(reserveVO.getSeat_num());
+		}
+	
+		else {
+			System.out.println("퇴실실패");
+		}
+		
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;	
 	}
 }

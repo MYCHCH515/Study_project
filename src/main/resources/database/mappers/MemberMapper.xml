@@ -44,6 +44,10 @@
 		<update id="setModifyEmail">
 			update member set mem_email = #{mem_email} where mem_id=#{mem_id}
 		</update>
+		
+		<update id="setModifyPhone">
+			update member set mem_phone = #{mem_phone} where mem_id=#{mem_id}
+		</update>
    
     </mapper>
     

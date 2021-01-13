@@ -22,4 +22,8 @@ public interface ReserveMapper {
 	public ReserveVO getMemberSeat(long mem_num) throws Exception;
 	
 	public long getCount(Pager pager) throws Exception;
+	
+	public int setCheckOut(ReserveVO reserveVO) throws Exception;
+	
+	public ReserveVO getReserveInfo(ReserveVO reserveVO) throws Exception;
 }

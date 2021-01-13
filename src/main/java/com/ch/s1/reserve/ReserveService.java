@@ -47,5 +47,13 @@ public class ReserveService {
 	public ReserveVO getMemberSeat(long mem_num) throws Exception{
 		return reserveMapper.getMemberSeat(mem_num);
 	}
+	
+	public int setCheckOut(ReserveVO reserveVO) throws Exception{
+		return reserveMapper.setCheckOut(reserveVO);
+	}
+	
+	public ReserveVO getReserveInfo(ReserveVO reserveVO) throws Exception{
+		return reserveMapper.getReserveInfo(reserveVO);
+	}
 
 }

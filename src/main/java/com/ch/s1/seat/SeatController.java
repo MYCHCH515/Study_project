@@ -35,8 +35,8 @@ public class SeatController {
 			long mem_num= memberVO.getMem_num(); 
 			ReserveVO reserveVO = reserveService.getMemberSeat(mem_num); 
 			if(reserveVO!=null) {
+				System.out.println("----"+reserveVO.getReserve_num());
 				long seat_num = reserveVO.getSeat_num();
-				System.out.println("*********"+seat_num);
 				mv.addObject("seat_num", seat_num);
 				mv.addObject("reserveVO", reserveVO); 
 			}else {

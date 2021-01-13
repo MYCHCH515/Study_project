@@ -155,7 +155,8 @@
 
 <script type="text/javascript">
 	var mem_seat = "${seat_num}";
-	var reserve = "${reserveVO}";
+	var reserve_num = "${reserveVO.reserve_num}";
+
 	
 	$(".btn_seat").each(function() {
 		var num = $(this).attr("title"); 
@@ -178,12 +179,12 @@
 		var seat_num = $(this).attr("id");
 
 		if(${not empty member}){
-			if(reserve != ""){
+			if(reserve_num != ""){
 				if(mem_seat == seat_num){
-					location.href="../reserve/reserveModify?seat_num="+mem_seat;
+					location.href="../reserve/reserveModify?reserve_num="+reserve_num;
 				}else{
 					if(confirm("예약내역이 존재합니다. 기존 예약내역을 수정하시겠습니까?")==true){
-						location.href="../reserve/reserveModify?seat_num="+mem_seat;
+						location.href="../reserve/reserveModify?reserve_num="+reserve_num;
 					}
 					else{
 						return;
