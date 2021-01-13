@@ -13,15 +13,39 @@
 		</select>
     	
     	<insert id="setInsert" parameterType="ReserveVO">
-    		insert into reserve (mem_num,seat_num,product_num,reserve_regDate,reserve_strt_tm,reserve_end_tm,payment_option)
-    		values(#{mem_num},#{seat_num},#{product_num},sysdate(),#{reserve_strt_tm},#{reserve_end_tm},#{payment_option})
+    		insert into reserve (mem_num,seat_num,product_num,reserve_regDate,reserve_strt_tm,reserve_end_tm,payment_option,check_flag)
+    		values(#{mem_num},#{seat_num},#{product_num},sysdate(),#{reserve_strt_tm},#{reserve_end_tm},#{payment_option},'입실')
     	</insert>
     	
     	<select id="getSeatNum" parameterType="Long" resultType="ReserveVO">
     		select seat_num from reserve where mem_num=#{mem_num}
     	</select>
     	
+    	<select id="getMemberSeat" parameterType="Long" resultMap="getMemberSeatResult">
+    		select R.*, S.* from reserve R
+			left join seat S on S.seat_num = R.seat_num
+			where R.mem_num in(#{mem_num}) and R.check_flag = '입실' and 
+			R.reserve_strt_tm = (select MAX(reserve_strt_tm) from reserve where mem_num=#{mem_num});
+    	</select>
     	
+    	<resultMap type="ReserveVO" id="getMemberSeatResult">
+			<id column="seat_num" property="seat_num"></id>
+			<result column="reserve_num" property="reserve_num"></result>
+			<result column="mem_num" property="mem_num"></result>
+			<result column="product_num" property="product_num"></result>
+			<result column="reserve_regDate" property="reserve_regDate"></result>
+			<result column="reserve_strt_tm" property="reserve_strt_tm"></result>
+			<result column="reserve_end_tm" property="reserve_end_tm"></result>
+			<result column="payment_option" property="payment_option"></result>
+			<result column="check_flag" property="check_flag"></result>
+			<result column="check_out_tm" property="check_out_tm"></result>
+			<association property="seatVOs" javaType="SeatVO">
+				<result column="seat_name" property="seat_name"></result>
+				<result column="seat_reserve" property="seat_reserve"></result>
+			</association>
+		</resultMap>
+    	
+    
     	<select id="getOne" parameterType="ReserveVO" resultMap="getOneResult">
     		select R.*, P.*
     		from reserve R left join product P
@@ -38,6 +62,8 @@
 			<result column="reserve_strt_tm" property="reserve_strt_tm"></result>
 			<result column="reserve_end_tm" property="reserve_end_tm"></result>
 			<result column="payment_option" property="payment_option"></result>
+			<result column="check_flag" property="check_flag"></result>
+			<result column="check_out_tm" property="check_out_tm"></result>
 			<collection property="productVOs" javaType="List" ofType="ProductVO">
 				<result column="product_price" property="product_price"></result>
 				<result column="product_time" property="product_time"></result>	
@@ -61,6 +87,8 @@
 			<result column="reserve_strt_tm" property="reserve_strt_tm"></result>
 			<result column="reserve_end_tm" property="reserve_end_tm"></result>
 			<result column="payment_option" property="payment_option"></result>
+			<result column="check_flag" property="check_flag"></result>
+			<result column="check_out_tm" property="check_out_tm"></result>
 			<association property="productVOs" javaType="ProductVO">
 				<id column="product_type" property="product_type"></id>	
 				<result column="product_price" property="product_price"></result>

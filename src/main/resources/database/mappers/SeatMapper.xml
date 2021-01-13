@@ -15,5 +15,6 @@
     	<update id="setSeatExit" parameterType="Long">
     		update seat set seat_reserve=1 where seat_num=#{seat_num};
     	</update>
+ 
     </mapper>
     

@@ -19,5 +19,7 @@ public interface ReserveMapper {
 	
 	public ReserveVO getSeatNum(long mem_num) throws Exception;
 	
+	public ReserveVO getMemberSeat(long mem_num) throws Exception;
+	
 	public long getCount(Pager pager) throws Exception;
 }

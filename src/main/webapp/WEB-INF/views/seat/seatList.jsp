@@ -24,6 +24,10 @@
     .resImpossible:hover{
    		background: #BAC1C2;
    } 
+   
+   .myRes{
+   		background-color:#00a5bd;
+   	}
    </style>
    
 </head>
@@ -34,7 +38,9 @@
 	
 	<div class="container">
 	<h3 class="table_list_title">개인석</h3>
-	<div class="leave_list" ><button>퇴실 예정석</button></div>
+	<div class="leave_list" >
+		<button>퇴실 예정석</button>
+	</div>
 	<ul class="color_wrap">
 		<li><div class="color_type ct1"></div>이용불가</li>
 		<li><div class="color_type ct2"></div>이용가능</li>
@@ -148,12 +154,20 @@
 </body>
 
 <script type="text/javascript">
-
+	var mem_seat = "${seat_num}";
+	var reserve = "${reserveVO}";
+	
 	$(".btn_seat").each(function() {
 		var num = $(this).attr("title"); 
+		var seat_num = $(this).attr("id");
 		if(num==0){
-			$(this).addClass("resImpossible");
-			$(this).attr('disabled',"disabled");
+			if(mem_seat == seat_num){
+				$(this).addClass("myRes");
+			}
+			else{
+				$(this).addClass("resImpossible");
+				$(this).attr('disabled',"disabled");
+			}
 		}else{
 			$(this).removeClass("resImpossible");
 			$(this).addClass("resPossible");
@@ -164,11 +178,25 @@
 		var seat_num = $(this).attr("id");
 
 		if(${not empty member}){
-			if(confirm(seat_num+"번 자리 예약을 진행하시겠습니까?")==true){
-				location.href="../reserve/reserveForm?seat_num="+seat_num
+			if(reserve != ""){
+				if(mem_seat == seat_num){
+					location.href="../reserve/reserveModify?seat_num="+mem_seat;
+				}else{
+					if(confirm("예약내역이 존재합니다. 기존 예약내역을 수정하시겠습니까?")==true){
+						location.href="../reserve/reserveModify?seat_num="+mem_seat;
+					}
+					else{
+						return;
+					}
+				}
 			}
 			else{
-				return;
+				if(confirm(seat_num+"번 자리 예약을 진행하시겠습니까?")==true){
+					location.href="../reserve/reserveForm?seat_num="+seat_num
+				}
+				else{
+					return;
+				}
 			}
 		}
 		else{

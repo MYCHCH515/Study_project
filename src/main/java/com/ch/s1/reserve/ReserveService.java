@@ -43,5 +43,9 @@ public class ReserveService {
 	public ReserveVO getSeatNum(long mem_num) throws Exception{
 		return reserveMapper.getSeatNum(mem_num);
 	}
+	
+	public ReserveVO getMemberSeat(long mem_num) throws Exception{
+		return reserveMapper.getMemberSeat(mem_num);
+	}
 
 }

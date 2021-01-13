@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.ch.s1.product.ProductVO;
+import com.ch.s1.seat.SeatVO;
 
 import lombok.Data;
 
@@ -18,6 +19,9 @@ public class ReserveVO {
 	private String reserve_strt_tm;
 	private String reserve_end_tm;
 	private String payment_option;
+	private String check_flag;
+	private String check_out_tm;
 	
 	private ProductVO productVOs;
+	private SeatVO seatVOs;
 }

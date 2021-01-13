@@ -15,26 +15,34 @@ import com.ch.s1.reserve.ReserveService;
 import com.ch.s1.reserve.ReserveVO;
 
 @Controller
-@RequestMapping(value="/seat/**")
+@RequestMapping(value = "/seat/**")
 public class SeatController {
-	
+
 	@Autowired
 	private SeatService seatService;
-	
-	
+
+	@Autowired
+	private ReserveService reserveService;
+
 	@GetMapping("seatList")
-	public ModelAndView getList(HttpSession session) throws Exception{
+	public ModelAndView getList(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+
 		List<SeatVO> ar = seatService.getList();
-		
-		/*
-		 * MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		 * if(memberVO!=null) { long mem_num= memberVO.getMem_num(); ReserveVO reserveVO
-		 * = reserveService.getSeatNum(mem_num); if(reserveVO!=null) {
-		 * mv.addObject("seatNum", reserveVO); } }
-		 */
-		
+
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		if(memberVO!=null) { 
+			long mem_num= memberVO.getMem_num(); 
+			ReserveVO reserveVO = reserveService.getMemberSeat(mem_num); 
+			if(reserveVO!=null) {
+				long seat_num = reserveVO.getSeat_num();
+				System.out.println("*********"+seat_num);
+				mv.addObject("seat_num", seat_num);
+				mv.addObject("reserveVO", reserveVO); 
+			}else {
+				System.out.println("일치조건없음");
+			}
+		}
 		mv.addObject("list", ar);
 		mv.setViewName("seat/seatList");
 		return mv;

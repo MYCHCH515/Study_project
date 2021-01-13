@@ -38,7 +38,6 @@ public class ReserveController {
 	
 	@PostMapping("reserveForm")
 	public ModelAndView setInsert(ReserveVO reserveVO) throws Exception {
-		
 		ModelAndView mv = new ModelAndView();
 		int result = reserveService.setInsert(reserveVO);
 		long seat_num = reserveVO.getSeat_num();
