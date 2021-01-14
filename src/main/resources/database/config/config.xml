@@ -15,5 +15,7 @@
   		<typeAlias type="com.ch.s1.product.ProductVO" alias="ProductVO"/>
   		<typeAlias type="com.ch.s1.reserve.ReserveVO" alias="ReserveVO"/>
   		<typeAlias type="com.ch.s1.seat.SeatVO" alias="SeatVO"/>
+  		<typeAlias type="com.ch.s1.locker.LockerVO" alias="LockerVO"/>
+  		<typeAlias type="com.ch.s1.locker.LockerReserveVO" alias="LockerReserveVO"/>
   	</typeAliases>
   </configuration>

@@ -329,6 +329,14 @@ public class MemberController {
 		return mv;	
 	}
 	
+	@GetMapping("memberAdminPage")
+	public ModelAndView getAdminPage() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("member/memberAdminPage");
+		return mv;
+	}
+	
 	
 	
 }

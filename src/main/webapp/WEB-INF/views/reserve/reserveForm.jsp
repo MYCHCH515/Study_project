@@ -100,29 +100,6 @@
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
 
-<!-- 
-<script type="text/javascript">
-function selectReservEnd(){ 
-  var rs = $("#reservS").val(); 
-  var re = $("#reservE").val(); 
-  var ra; 
-  // ajax 부분은 조건에 맞게 수정하세요. 
-  $.ajax({ 
-    type:"POST", 
-    url:"", 
-    dataType:"json", 
-    data:{ rs:rs, re:re }, 
-    success:function(data){ 
-      if(data == "true"){ 
-        $("#form").submit();   
-        }else{ 
-        alert("중복된 예약이 있습니다."); 
-     } 
-  } 
-});     
-} 
-</script> -->
-
 <script type="text/javascript">
 
 	$(".product").click(function(){
