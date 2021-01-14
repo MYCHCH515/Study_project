@@ -55,5 +55,13 @@ public class ReserveService {
 	public ReserveVO getReserveInfo(ReserveVO reserveVO) throws Exception{
 		return reserveMapper.getReserveInfo(reserveVO);
 	}
+	
+	public int setChangeSeat(ReserveVO reserveVO) throws Exception{
+		return reserveMapper.setChangeSeat(reserveVO);
+	}
+	
+	public int setExtendTime(ReserveVO reserveVO) throws Exception{
+		return reserveMapper.setExtendTime(reserveVO);
+	}
 
 }

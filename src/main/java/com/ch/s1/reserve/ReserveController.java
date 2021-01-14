@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ch.s1.member.MemberVO;
 import com.ch.s1.product.ProductVO;
 import com.ch.s1.seat.SeatService;
+import com.ch.s1.seat.SeatVO;
 import com.ch.s1.util.Pager;
 
 @Controller
@@ -103,18 +104,77 @@ public class ReserveController {
 	}
 	
 	@GetMapping("extendTime")
-	public ModelAndView setExtendTime(ReserveVO reserveVO) throws Exception{
+	public ModelAndView getExtendTime(ReserveVO reserveVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		reserveVO = reserveService.getReserveInfo(reserveVO);
+		List<ProductVO> ar = reserveService.getProductList();
+		mv.addObject("reserveVO", reserveVO);
+		mv.addObject("list", ar);
 		mv.setViewName("reserve/extendTime");
 		return mv;
 	}
 	
-	@GetMapping("changeSeat")
-	public ModelAndView setChangeSeat(ReserveVO reserveVO) throws Exception{
+	@PostMapping("extendTime")
+	public ModelAndView setExtendTime(ReserveVO reserveVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		int result = reserveService.setExtendTime(reserveVO);
 		
+		String message = "다시 시도해주세요";
+		if (result > 0) {
+			System.out.println("성공");
+			message = "연장되었습니다.";
+			mv.addObject("path", "../");
+		}
 		
+		else {
+			mv.addObject("path", "redirect:../");
+		}
+		
+		mv.addObject("msg", message);
+		mv.setViewName("common/result");
 		return mv;
+	}
+	
+	@GetMapping("changeSeat")
+	public ModelAndView getChangeSeat(ReserveVO reserveVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<SeatVO> ar = seatService.getList();
+		
+		reserveVO = reserveService.getReserveInfo(reserveVO);
+		if(reserveVO!=null) {
+
+			long seat_num = reserveVO.getSeat_num();
+			mv.addObject("seat_num", seat_num);
+			mv.addObject("reserveVO", reserveVO); 
+		}else {
+			System.out.println("일치조건없음");
+		}
+		mv.addObject("list", ar);
+		mv.setViewName("reserve/changeSeat");
+		return mv;
+	}
+	
+	@PostMapping("changeSeat")
+	public ModelAndView setChangeSeat(ReserveVO reserveVO, @RequestParam long mem_seat) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("-------****^^"+reserveVO.getSeat_num());
+		
+		 int result = reserveService.setChangeSeat(reserveVO);
+		 
+		 if (result > 0) {  
+			 seatService.setSeatExit(mem_seat);
+			 reserveVO = reserveService.getReserveInfo(reserveVO);
+			 seatService.setSeatEnter(reserveVO.getSeat_num()); 		 
+		 }
+		  
+		 else { 
+			 System.out.println("자리이동실패"); 
+		  }
+		  
+		 mv.addObject("msg", result); 
+		 mv.setViewName("common/ajaxResult");
+
+		return mv;	
 	}
 	
 	@PostMapping("checkOut")
@@ -129,7 +189,7 @@ public class ReserveController {
 	
 		else {
 			System.out.println("퇴실실패");
-		}
+		} 
 		
 		mv.addObject("msg", result);
 		mv.setViewName("common/ajaxResult");

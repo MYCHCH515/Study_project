@@ -9,67 +9,207 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <c:import url="../template/bootStrap.jsp"></c:import>
   <link href="../css/common.css" rel="stylesheet">
-  <link href="../css/member.css" rel="stylesheet">
+   <link href="../css/seat.css" rel="stylesheet">
+   
+   <style type="text/css">
+   .resPossible{
+   		background-color:  #E3F0F2;
+   }  
+   	.resPossible:hover{
+  		background :#C0D7DA;
+  	}
+   .resImpossible{
+   		background-color: #BAC1C2;
+   } 
+    .resImpossible:hover{
+   		background: #BAC1C2;
+   } 
+   
+   .myRes{
+   		background-color:#00a5bd;
+   	}
+   </style>
+   
 </head>
 
-<style type="text/css">
- 	.modify_link_wrap{
- 		width: 80%;
- 		height: 500px;
- 		margin: 0 auto;
- 	}
- 	.modify_link{
- 		display: inline-block;
- 		width: 30%;
- 		height: 300px;
- 		margin: 100px 13px 0 13px;
- 		border: 2px solid #ddd;
- 		text-align: center;
- 		padding: 60px 0 ;
- 	}
-
- 	.modify_link p{
- 		margin: 10px 0 ;
- 		font-size: 25px;
- 	}
-</style>
 
 <body>
 	<c:import url="../template/header.jsp"></c:import>
-  	<div class="container" style="height: 700px;">
-  	   <input type="hidden" value="">
-  	
-  	   <div class="modify_link_wrap">
-  			
-  			<div class="modify_link">
-  				<a href="./extendTime?reserve_num=${reserve_num}"><img alt="" src="../images/m2.png"></a>
-  				<p>시간연장</p>
-  			</div>
-  			
-  			<div class="modify_link">
-  				<a href="./changeSeat?reserve_num=${reserve_num}"><img alt="" src="../images/m3.png"></a>
-  				<p>자리이동</p>
-  			</div>
-  			
-  			<div class="modify_link">
-  				<a href="./checkOut?reserve_num=${reserve_num}"><img alt="" src="../images/m1.png"></a>
-  				<p>퇴실</p>
-  			</div>
-  			
-  	   </div>
-  	   		   
-	   <div class="reserve_btn_wrap">
-	 	<button type="button" class="reserve_btn go_main">메인페이지</button>
-	   </div> 
-	   
+	
+	<div class="container">
+	<h3 class="table_list_title">자리이동</h3>
+	<div class="leave_list" >
+		<button>퇴실 예정석</button>
 	</div>
-
+	<ul class="color_wrap">
+		<li><div class="color_type ct1"></div>이용불가</li>
+		<li><div class="color_type ct2"></div>이용가능</li>
+		<li><div class="color_type ct3"></div>내 예약</li>
+	</ul>
+	
+	<div class=seat_wrap>
+		<div class="seat_s1">
+			<c:forEach items="${list}" var="vo">
+				<c:if test="${vo.seat_num /6 <= 1}">
+					<div id="s1_${vo.seat_num}">
+						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
+					</div>
+				</c:if>
+			</c:forEach>
+		</div>
+		
+		<div class="seat_s2">
+			<c:forEach items="${list}" var="vo">
+				<c:if test="${vo.seat_num/6 > 1 && vo.seat_num /6 <= 2}">
+					<div id="s2_${vo.seat_num}">
+						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
+					</div>
+				</c:if>	
+			</c:forEach>
+		</div>
+		
+		<div class="seat_wrap2">
+			<div class="seat_s3_wrap">
+				<div class="seat_s3">
+					<div class="seat_s3_left">
+						<c:forEach items="${list}" var="vo">
+							<c:if test="${vo.seat_num/6 > 2 && vo.seat_num /6 <= 3}">
+								<div id="s3_${vo.seat_num}">
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
+								</div>
+							</c:if>
+						</c:forEach>
+					</div>
+					
+					<div class="seat_s3_right">
+						<c:forEach items="${list}" var="vo">
+							<c:if test="${vo.seat_num/6 > 3 && vo.seat_num /6 <= 4}">
+								<div id="s3_${vo.seat_num}">
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
+								</div>
+							</c:if>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+			
+			<div class="seat_s4_wrap">
+				<div class="seat_s4">
+					<div class="seat_s4_left">
+						<c:forEach items="${list}" var="vo">
+							<c:if test="${vo.seat_num/6 > 4 && vo.seat_num /6 <= 5}">
+								<div id="s4_${vo.seat_num}">
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
+								</div>
+							</c:if>
+						</c:forEach>
+					</div>
+					
+					<div class="seat_s4_right">
+						<c:forEach items="${list}" var="vo">
+							<c:if test="${vo.seat_num/6 > 5 && vo.seat_num /6 <= 6}">
+								<div id="s4_${vo.seat_num}">
+									<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
+								</div>
+							</c:if>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="seat_s5">
+			<c:forEach items="${list}" var="vo">
+				<c:if test="${vo.seat_num/6 > 6 && vo.seat_num /6 <= 7}">
+					<div id="s5_${vo.seat_num}">
+						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
+					</div>
+				</c:if>
+			</c:forEach>
+		</div>
+		
+		<div class="facility">
+			<div id="f1_wrap">
+				<div id="f1">
+					<span>Locker</span>
+				</div>
+			</div>
+			
+			<div id="f2_wrap">
+				<div id="f2">
+					<span>출입문</span>
+				</div>
+			</div>
+			
+			<div id="f3_wrap">
+				<div id="f3">
+					<span>Rest Area</span>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	</div>
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
 
 <script type="text/javascript">
-	$(".go_main").click(function(){
-		location.href="../";
+	var mem_seat = "${seat_num}";
+	var reserve_num = "${reserveVO.reserve_num}";
+
+	$(".btn_seat").each(function() {
+		var num = $(this).attr("title"); 
+		var seat_num = $(this).attr("id");
+		if(num==0){
+			if(mem_seat == seat_num){
+				$(this).addClass("myRes");
+			}
+			else{
+				$(this).addClass("resImpossible");
+				$(this).attr('disabled',"disabled");
+			}
+		}else{
+			$(this).removeClass("resImpossible");
+			$(this).addClass("resPossible");
+		}	
+	});
+	
+	$('.btn_seat').click(function(){
+		var seat_num = $(this).attr("id");
+
+		if(${not empty member}){
+			if(reserve_num != ""){
+				if(mem_seat == seat_num){
+					alert("이동하실 자리를 선택해주세요");
+				}else{
+					if(confirm(seat_num+"번 자리로 이동하시겠습니까?")==true){
+					    $.post("./changeSeat",
+							    {"reserve_num":reserve_num,"mem_seat":mem_seat,"seat_num":seat_num},
+							    function(result){
+							    	if(result < 1){
+										alert("다시 시도해주세요")	
+										return
+							    	}
+							    	else{
+							    		location.reload();	
+							    		alert("자리이동 되었습니다.")
+								    }
+						});
+					}
+					else{
+						return;
+					}
+				}
+			}
+		}
+		else{
+			if(confirm("로그인이 필요한 서비스 입니다.") == true){
+				location.href="../member/memberLogin";
+			}
+			else{
+				return;
+			}
+		}
 	});
 </script>
 </html>

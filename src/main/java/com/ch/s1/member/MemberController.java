@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ch.s1.reserve.ReserveService;
+import com.ch.s1.reserve.ReserveVO;
+import com.ch.s1.seat.SeatService;
+
 
 @Controller
 @RequestMapping(value="/member/**")
@@ -23,7 +27,11 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-
+	@Autowired
+	private ReserveService reserveService;
+	@Autowired
+	private SeatService seatService;
+	
 	@GetMapping("memberLogin")
 	public ModelAndView getMemberLogin() throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -268,14 +276,26 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberSecession")
-	public ModelAndView setMemberSecession(MemberVO memberVO) throws Exception{
+	public ModelAndView setMemberSecession(MemberVO memberVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		memberVO = memberService.getMemberInfo(memberVO);
 		
 		if(memberVO != null) {
+			long mem_num =  memberVO.getMem_num();
+			ReserveVO reserveVO = new ReserveVO();
+			reserveVO.setMem_num(mem_num);
+			reserveVO = reserveService.getLatestOne(reserveVO);
+			
+			if(reserveVO != null) {
+				long seat_num = reserveVO.getSeat_num();
+				seatService.setSeatExit(seat_num);	
+			}
+			
 			memberService.setMemberSecession(memberVO);
-			mv.addObject("msg","회원탍퇴되셨습니다.");
+			
+			mv.addObject("msg","회원탈퇴 되셨습니다.");
 			mv.addObject("path", "../");
+			session.invalidate();
 			mv.setViewName("common/result");
 		}
 		

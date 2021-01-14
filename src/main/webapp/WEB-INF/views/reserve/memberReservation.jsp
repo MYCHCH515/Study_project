@@ -116,8 +116,7 @@
 					<tr class="list_tr">
 						<td class="col-sm-2">예약번호</td>
 						<td class="col-sm-2">예약좌석</td>
-						<td class="col-sm-2">예약날짜</td>
-						<td class="col-sm-3">입실시간</td>
+						<td class="col-sm-5">사용기간</td>
 						<td class="col-sm-3">퇴실시간</td>
 					</tr>
 					
@@ -125,8 +124,7 @@
 				      <tr class="list_tr">
 					        <td>${vo.reserve_num}</td>
 					  		<td>${vo.seat_num}번좌석</td>
-					  		<td>${vo.reserve_regDate}</td>
-					        <td>${vo.reserve_strt_tm}</td>
+					        <td>${vo.reserve_strt_tm} ~ ${vo.reserve_end_tm}</td>
 					        <td>${vo.check_out_tm}</td>
 				      </tr>
 			    	</c:forEach>

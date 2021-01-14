@@ -32,6 +32,10 @@
  		margin: 10px 0 ;
  		font-size: 25px;
  	}
+ 	
+ 	#m1{
+ 		cursor: pointer;
+ 	}
 </style>
 
 <body>

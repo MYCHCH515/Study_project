@@ -238,7 +238,7 @@
 		$("#search_btn").on("click", function(){
 			var s_search = false;
 			if(!search_frm.find("input[name='search']").val()){
-				alert("키워드를 입력하세요");
+				alert("검색어를 입력하세요");
 			}else{
 				s_search = true;
 				search_frm.submit();

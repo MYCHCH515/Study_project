@@ -29,6 +29,11 @@
     		update reserve set seat_num =#{seat_num} where reserve_num=#{reserve_num}
     	</update>
     	
+    	<update id="setExtendTime" parameterType="ReserveVO">
+    		update reserve set reserve_end_tm = #{reserve_end_tm}, product_num = #{product_num},
+    		payment_option=#{payment_option} where reserve_num = #{reserve_num}
+    	</update>
+    	
     	<update id="setCheckOut" parameterType="ReserveVO">
     		update reserve set check_flag ="퇴실" , check_out_tm = sysdate()
 			where  reserve_num=#{reserve_num}
