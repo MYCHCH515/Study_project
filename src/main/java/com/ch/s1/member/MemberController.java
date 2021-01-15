@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ch.s1.locker.LockerReserveVO;
+import com.ch.s1.locker.LockerService;
+import com.ch.s1.locker.LockerVO;
 import com.ch.s1.reserve.ReserveService;
 import com.ch.s1.reserve.ReserveVO;
 import com.ch.s1.seat.SeatService;
@@ -31,6 +34,8 @@ public class MemberController {
 	private ReserveService reserveService;
 	@Autowired
 	private SeatService seatService;
+	@Autowired
+	private LockerService lockerService;
 	
 	@GetMapping("memberLogin")
 	public ModelAndView getMemberLogin() throws Exception{
@@ -242,6 +247,13 @@ public class MemberController {
 		memberVO = memberService.getMemberInfo(memberVO);
 		
 		if(memberVO != null) {
+			long mem_num = memberVO.getMem_num();
+			LockerReserveVO lockerReserveVO= lockerService.getMemberLocker(mem_num);
+			if(lockerReserveVO != null) {
+				String locker_name = lockerReserveVO.getLockerVOs().getLocker_name();
+				mv.addObject("locker_name", locker_name);
+			}
+			
 			mv.addObject("vo", memberVO);
 			mv.setViewName("member/memberModify");
 		}

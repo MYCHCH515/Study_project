@@ -19,16 +19,16 @@
     .row.content {
     	width: 90%;
     	margin: 0 auto;
-    	height: 800px
+    	height: 900px
     }
     
     .sidenav {
       	background-color: #f1f1f1;
-      	height: 700px;
+      	height: 800px;
     }
     
     .mypage_contents{
-    	height: 700px;
+    	height: 800px;
     	border: 1px solid #f1f1f1;
     }
     

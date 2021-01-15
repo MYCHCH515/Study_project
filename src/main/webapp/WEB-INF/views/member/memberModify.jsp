@@ -19,16 +19,16 @@
     .row.content {
     	width: 90%;
     	margin: 0 auto;
-    	height: 900px
+    	height: 1000px
     }
     
     .sidenav {
       	background-color: #f1f1f1;
-      	height: 850px;
+      	height: 900px;
     }
     
     .mypage_contents{
-    	height: 850px;
+    	height: 900px;
     	border: 1px solid #f1f1f1;
     }
     
@@ -152,6 +152,13 @@
 							<input type="text" id="new_email" value="${vo.mem_email}" style="height: 40px; width: 265px; display: none;">	
 							<button type="button" id="change_email_submit" style="border: 1px solid black; color:white; background-color: gray; padding: 5px; display: none;">이메일수정</button>
 							<span class="emailResult"></span>
+						</td>
+					</tr>
+					
+					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
+						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center; vertical-align:middle;">사물함</td>
+						<td class="col-sm-9">
+							<input type="text" name="mem_regDate" id="regDate" value="${locker_name}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
 						</td>
 					</tr>
 					
