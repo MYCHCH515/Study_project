@@ -15,5 +15,36 @@
     	<update id="setLockerExit" parameterType="Long">
     		update locker set locker_reserve=1 where locker_num=#{locker_num};
     	</update>
+    	
+    	<insert id="setInsert" parameterType="LockerReserveVO">
+    		insert into reserve_locker 
+    		(mem_num,locker_num,reserve_regDate,reserve_strt_tm,reserve_end_tm,payment_option,check_flag,locker_type)
+    		values(#{mem_num},#{locker_num},sysdate(),#{reserve_strt_tm},#{reserve_end_tm},#{payment_option},'사용중',#{locker_type})
+    	</insert>
+    	
+    	<select id="getMemberLocker" parameterType="Long" resultMap="getMemberLockerResult">
+    		select L.*, RL.* from reserve_locker RL 
+			left join locker L on L.locker_num = RL.locker_num
+			where RL.mem_num in(#{mem_num}) and RL.check_flag = '사용중' and 
+			RL.reserve_strt_tm = (select MAX(reserve_strt_tm) from reserve_locker where mem_num=#{mem_num});
+    	</select>
+    	
+    	<resultMap type="LockerReserveVO" id="getMemberLockerResult">
+			<id column="locker_num" property="locker_num"></id>
+			<result column="reserve_locker_num" property="reserve_locker_num"></result>
+			<result column="mem_num" property="mem_num"></result>
+			<result column="reserve_regDate" property="reserve_regDate"></result>
+			<result column="reserve_strt_tm" property="reserve_strt_tm"></result>
+			<result column="reserve_end_tm" property="reserve_end_tm"></result>
+			<result column="payment_option" property="payment_option"></result>
+			<result column="check_flag" property="check_flag"></result>
+			<result column="locker_type" property="locker_type"></result>
+			<association property="lockerVOs" javaType="LockerVO">
+				<result column="locker_name" property="locker_name"></result>
+				<result column="locker_reserve" property="locker_reserve"></result>
+			</association>
+		</resultMap>
+    	
+    	
     </mapper>
     

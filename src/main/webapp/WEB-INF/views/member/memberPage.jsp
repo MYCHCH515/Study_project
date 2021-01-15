@@ -112,12 +112,6 @@ $(".chk_btn").click(function(){
 	}
 });
 
-$(".cancel.btn").click(function(){
-
-	
-})
-
-
 
 </script>
 

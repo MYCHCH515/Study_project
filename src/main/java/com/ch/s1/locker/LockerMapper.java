@@ -12,4 +12,8 @@ public interface LockerMapper {
 	public int setLockerEnter(long locker_num) throws Exception;
 	
 	public int setLockerExit(long locker_num) throws Exception;
+	
+	public LockerReserveVO getMemberLocker(long mem_num) throws Exception;
+	
+	public int setInsert(LockerReserveVO lockerReserveVO) throws Exception;
 }

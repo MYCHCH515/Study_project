@@ -37,7 +37,7 @@
 	<c:import url="../template/header.jsp"></c:import>
 	
 	<div class="container">
-	<h3 class="table_list_title">사물함</h3>
+	<h3 class="table_list_title">사물함 예약</h3>
 
 	<ul class="color_wrap">
 		<li><div class="color_type ct1"></div>이용불가</li>
@@ -45,14 +45,44 @@
 		<li><div class="color_type ct3"></div>내 예약</li>
 	</ul>
 	
-	<div class=seat_wrap>
-		<div class="seat_s1">
+	<div class=seat_wrap style="width: 70%; height: 700px;">
+		<div class="seat_s1" style="width: 100%; height: 700px; padding: 80px 32px;">
 			<c:forEach items="${list}" var="vo">
-				<c:if test="${vo.seat_num}">
-					<div id="s1_${vo.seat_num}">
-						<button class="btn_seat" id="${vo.seat_num}" name="${vo.seat_num}" title="${vo.seat_reserve}">${vo.seat_name}</button>
-					</div>
-				</c:if>
+					<c:if test="${vo.locker_num /6 <= 1}">
+						<div >
+							<button class="btn_seat" id="${vo.locker_num}" name="${vo.locker_num}" title="${vo.locker_reserve}">${vo.locker_name}</button>
+						</div>
+					</c:if>
+					<c:if test="${vo.locker_num/6 > 1 && vo.locker_num /6 <= 2}">
+						<div>
+							<button class="btn_seat" id="${vo.locker_num}" name="${vo.locker_num}"  title="${vo.locker_reserve}">${vo.locker_name}</button>
+						</div>
+					</c:if>
+					<c:if test="${vo.locker_num/6 > 2 && vo.locker_num /6 <= 3}">
+						<div >
+							<button class="btn_seat" id="${vo.locker_num}" name="${vo.locker_num}"  title="${vo.locker_reserve}">${vo.locker_name}</button>
+						</div>
+					</c:if>
+					<c:if test="${vo.locker_num/6 > 3 && vo.locker_num /6 <= 4}">
+						<div >
+							<button class="btn_seat" id="${vo.locker_num}" name="${vo.locker_num}"  title="${vo.locker_reserve}">${vo.locker_name}</button>
+						</div>
+					</c:if>
+					<c:if test="${vo.locker_num/6 > 4 && vo.locker_num /6 <= 5}">
+						<div >
+							<button class="btn_seat" id="${vo.locker_num}" name="${vo.locker_num}"  title="${vo.locker_reserve}">${vo.locker_name}</button>
+						</div>
+					</c:if>
+					<c:if test="${vo.locker_num/6 > 5 && vo.locker_num /6 <= 6}">
+						<div>
+							<button class="btn_seat" id="${vo.locker_num}" name="${vo.locker_num}"  title="${vo.locker_reserve}">${vo.locker_name}</button>
+						</div>
+					</c:if>
+					<c:if test="${vo.locker_num/6 > 6 && vo.locker_num /6 <= 7}">
+						<div>
+							<button class="btn_seat" id="${vo.locker_num}" name="${vo.locker_num}"  title="${vo.locker_reserve}">${vo.locker_name}</button>
+						</div>
+					</c:if>
 			</c:forEach>
 		</div>
 	</div>
@@ -61,16 +91,17 @@
 </body>
 
 <script type="text/javascript">
-	var mem_seat = "${seat_num}";
-	var reserve_num = "${reserveVO.reserve_num}";
+	var mem_locker = "${locker_num}";
+	var reserve_num = "${lockerReserveVO.reserve_locker_num}";
 
-	
 	$(".btn_seat").each(function() {
 		var num = $(this).attr("title"); 
-		var seat_num = $(this).attr("id");
+		var locker_num = $(this).attr("id");
+
 		if(num==0){
-			if(mem_seat == seat_num){
+			if(mem_locker == locker_num){
 				$(this).addClass("myRes");
+				$(this).attr('disabled',"disabled");
 			}
 			else{
 				$(this).addClass("resImpossible");
@@ -80,33 +111,23 @@
 			$(this).removeClass("resImpossible");
 			$(this).addClass("resPossible");
 		}	
-	});
+	}); 
 	
 	$('.btn_seat').click(function(){
-		var seat_num = $(this).attr("id");
+		var locker_num = $(this).attr("id");
+		var locker_name = $(this).text();
 
 		if(${not empty member}){
-			if(reserve_num != ""){
-				if(mem_seat == seat_num){
-					location.href="../reserve/reserveModify?reserve_num="+reserve_num;
-				}else{
-					if(confirm("예약내역이 존재합니다. 기존 예약내역을 수정하시겠습니까?")==true){
-						location.href="../reserve/reserveModify?reserve_num="+reserve_num;
-					}
-					else{
-						return;
-					}
-				}
-			}
-			else{
-				if(confirm(seat_num+"번 자리 예약을 진행하시겠습니까?")==true){
-					location.href="../reserve/reserveForm?seat_num="+seat_num
+			if(reserve_num == ""){
+				if(confirm(locker_name+"번 사물함 예약을 진행하시겠습니까?")==true){
+					location.href="../locker/lockerReserveForm?locker_num="+locker_num
 				}
 				else{
 					return;
 				}
 			}
 		}
+		
 		else{
 			if(confirm("로그인이 필요한 서비스 입니다.") == true){
 				location.href="../member/memberLogin";

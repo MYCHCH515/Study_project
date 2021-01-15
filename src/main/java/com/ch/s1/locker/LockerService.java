@@ -15,11 +15,19 @@ public class LockerService {
 		return lockerMapper.getList();
 	}
 	
-	public int setSeatEnter(long locker_num) throws Exception{
+	public int setLockerEnter(long locker_num) throws Exception{
 		return lockerMapper.setLockerEnter(locker_num);
 	}
 	
-	public int setSeatExit(long locker_num) throws Exception{
+	public int setLockerExit(long locker_num) throws Exception{
 		return lockerMapper.setLockerExit(locker_num);
+	}
+	
+	public LockerReserveVO getMemberLocker(long mem_num) throws Exception{
+		return lockerMapper.getMemberLocker(mem_num);
+	}
+	
+	public int setInsert(LockerReserveVO lockerReserveVO) throws Exception{
+		return lockerMapper.setInsert(lockerReserveVO);
 	}
 }

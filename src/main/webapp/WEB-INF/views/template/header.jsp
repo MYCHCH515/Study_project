@@ -8,8 +8,7 @@
 	      
 	      <ul class="nav navbar-nav navbar-right">
 	        <li class="lnb_li"><a href="${pageContext.request.contextPath}/seat/seatList"><span>개인석</span></a></li>
-	        <li class="lnb_li"><a href="${pageContext.request.contextPath}"><span>스터디룸</span></a></li>
-	        <li class="lnb_li"><a href="${pageContext.request.contextPath}"><span>사물함</span></a></li>
+	        <li class="lnb_li"><a href="${pageContext.request.contextPath}/locker/lockerList"><span>사물함</span></a></li>
 	        <li class="lnb_li"><a href="${pageContext.request.contextPath}"><span>이용가이드</span></a></li>
 	        <li class="lnb_li"><a href="${pageContext.request.contextPath}/notice/noticeList"><span>뉴스&이벤트</span></a></li>
 	        

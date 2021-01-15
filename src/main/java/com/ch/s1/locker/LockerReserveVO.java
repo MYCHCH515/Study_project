@@ -15,4 +15,8 @@ public class LockerReserveVO {
 	private String reserve_end_tm;
 	private String payment_option;
 	private String check_flag;
+	private String locker_type;
+	private long locker_price;
+	
+	private LockerVO lockerVOs;
 }
