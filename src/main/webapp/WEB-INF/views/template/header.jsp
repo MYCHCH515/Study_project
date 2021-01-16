@@ -16,7 +16,7 @@
 	        	<c:when test="${not empty member}">	 
 	        		 <c:if test="${member.mem_type eq '1'}">
 	        		 	<li>
-	        				<a href="${pageContext.request.contextPath}/member/memberAdminPage" style="color:#00a5bd; font-weight: bold;">관리자</a>
+	        				<a href="${pageContext.request.contextPath}/admin/adminPage" style="color:#00a5bd; font-weight: bold;">관리자</a>
 	       			 	</li>
 	        		 </c:if>
 	        		 

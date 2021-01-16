@@ -2,6 +2,7 @@ package com.ch.s1.member;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +11,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+
+import com.ch.s1.util.Pager;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -43,13 +46,17 @@ public class MemberService {
 	public MemberVO getSearchId(MemberVO memberVO) throws Exception{
 		return memberMapper.getSearchId(memberVO);
 	}
-	
+
 	public MemberVO getMemberInfo(MemberVO memberVO) throws Exception{
 		return memberMapper.getMemberInfo(memberVO);
 	}
 	
 	public int setMemberSecession(MemberVO memberVO) throws Exception{
 		return memberMapper.setMemberSecession(memberVO);
+	}
+	
+	public int setMemberSelectSecession(Long mem_num) throws Exception{
+		return memberMapper.setMemberSelectSecession(mem_num);
 	}
 	
 	public int setModifyEmail(MemberVO memberVO) throws Exception{
@@ -59,6 +66,14 @@ public class MemberService {
 	public int setModifyPhone(MemberVO memberVO) throws Exception{
 		return memberMapper.setModifyPhone(memberVO);
 	}
+	
+	public List<MemberVO> getMemberList(Pager pager) throws Exception{
+		pager.makeRow();
+		long totalCount = memberMapper.getCount(pager);
+		pager.makePage(totalCount);
+		return memberMapper.getMemberList(pager);
+	}
+	
 	
 	//비밀번호 찾기 이메일발송
 	public void sendEmail(MemberVO memberVO, String div) throws Exception{

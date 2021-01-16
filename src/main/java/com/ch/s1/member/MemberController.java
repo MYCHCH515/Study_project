@@ -1,8 +1,10 @@
 package com.ch.s1.member;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -13,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -300,7 +303,18 @@ public class MemberController {
 			
 			if(reserveVO != null) {
 				long seat_num = reserveVO.getSeat_num();
+				reserveService.setCheckOut(reserveVO);
 				seatService.setSeatExit(seat_num);	
+			}
+			
+			LockerReserveVO lockerReserveVO = new LockerReserveVO();
+			lockerReserveVO.setMem_num(mem_num);
+			lockerReserveVO = lockerService.getMemberLocker(mem_num);
+			
+			if(lockerReserveVO != null) {
+				long locker_num = lockerReserveVO.getLocker_num();
+				lockerService.setLockerCheckOut(lockerReserveVO);
+				lockerService.setLockerExit(locker_num);
 			}
 			
 			memberService.setMemberSecession(memberVO);
@@ -317,6 +331,45 @@ public class MemberController {
 			mv.setViewName("common/result");
 		}
 		return mv;	
+	}
+	
+	@PostMapping("memberSelectSecession")
+	public ModelAndView setMemberSelectSecession(HttpSession session, 
+			@RequestParam(value ="chkBox[]") List<String> checkArr) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		int result = 0;
+		long mem_num = 0;
+		
+		for(String i : checkArr) {
+			mem_num = Integer.parseInt(i);
+			ReserveVO reserveVO = new ReserveVO();
+			reserveVO.setMem_num(mem_num);
+			reserveVO = reserveService.getLatestOne(reserveVO);
+			
+			if(reserveVO != null) {
+				long seat_num = reserveVO.getSeat_num();
+				reserveService.setCheckOut(reserveVO);
+				seatService.setSeatExit(seat_num);	
+			}
+			
+			LockerReserveVO lockerReserveVO = new LockerReserveVO();
+			lockerReserveVO.setMem_num(mem_num);
+			lockerReserveVO = lockerService.getMemberLocker(mem_num);
+			
+			if(lockerReserveVO != null) {
+				long locker_num = lockerReserveVO.getLocker_num();
+				lockerService.setLockerCheckOut(lockerReserveVO);
+				lockerService.setLockerExit(locker_num);
+			}
+	
+			result = memberService.setMemberSelectSecession(mem_num);
+		}
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+	
+		return mv;			
 	}
 	
 	@PostMapping("memberModifyEmail")
@@ -340,15 +393,5 @@ public class MemberController {
 	
 		return mv;	
 	}
-	
-	@GetMapping("memberAdminPage")
-	public ModelAndView getAdminPage() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		mv.setViewName("member/memberAdminPage");
-		return mv;
-	}
-	
-	
 	
 }

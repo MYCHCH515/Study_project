@@ -1,7 +1,11 @@
 package com.ch.s1.member;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.ch.s1.util.Pager;
 
 @Mapper
 public interface MemberMapper {
@@ -24,7 +28,13 @@ public interface MemberMapper {
 	
 	public int setMemberSecession(MemberVO memberVO) throws Exception;
 	
+	public int setMemberSelectSecession(long mem_num) throws Exception;
+	
 	public int setModifyEmail(MemberVO memberVO) throws Exception;
 	
 	public int setModifyPhone(MemberVO memberVO) throws Exception;
+	
+	public List<MemberVO> getMemberList(Pager pager) throws Exception;
+	
+	public long getCount(Pager pager) throws Exception;
 }

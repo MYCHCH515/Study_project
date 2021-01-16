@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ch.s1.reserve.ReserveVO;
+
 @Service
 public class LockerService {
 
@@ -29,5 +31,9 @@ public class LockerService {
 	
 	public int setInsert(LockerReserveVO lockerReserveVO) throws Exception{
 		return lockerMapper.setInsert(lockerReserveVO);
+	}
+	
+	public int setLockerCheckOut(LockerReserveVO lockerReserveVO) throws Exception{
+		return lockerMapper.setLockerCheckOut(lockerReserveVO);
 	}
 }

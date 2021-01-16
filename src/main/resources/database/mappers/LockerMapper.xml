@@ -22,6 +22,10 @@
     		values(#{mem_num},#{locker_num},sysdate(),#{reserve_strt_tm},#{reserve_end_tm},#{payment_option},'사용중',#{locker_type})
     	</insert>
     	
+    	<update id="setLockerCheckOut" parameterType="LockerReserveVO">
+    		update reserve_locker set check_flag ="사용종료" where reserve_locker_num=#{reserve_locker_num}
+    	</update>
+    	
     	<select id="getMemberLocker" parameterType="Long" resultMap="getMemberLockerResult">
     		select L.*, RL.* from reserve_locker RL 
 			left join locker L on L.locker_num = RL.locker_num

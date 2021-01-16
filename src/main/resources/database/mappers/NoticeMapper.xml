@@ -16,16 +16,16 @@
 	<sql id="getSearch">
 		<choose>
 			<when test="kind=='all'">
-				board_title or board_contents
+				board_title like concat('%',#{search},'%') and board_num >0 or 
+				board_contents like concat('%',#{search},'%') and board_num >0
 			</when>
 			<when test="kind=='title'">
-				board_title
+				board_title like concat('%',#{search},'%') and board_num >0
 			</when>
 			<otherwise>
-				board_contents
+				board_contents like concat('%',#{search},'%') and board_num >0
 			</otherwise>
 		</choose> 
-		like concat('%',#{search},'%') and board_num >0
 	</sql>
 	
 	<select id="getCount" resultType="Long" parameterType="Pager">

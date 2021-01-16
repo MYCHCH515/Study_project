@@ -41,6 +41,10 @@
 			delete from member where mem_num = #{mem_num}
 		</delete>
 		
+		<delete id="setMemberSelectSecession" parameterType="Long">
+			delete from member where mem_num = #{mem_num}
+		</delete>
+		
 		<update id="setModifyEmail">
 			update member set mem_email = #{mem_email} where mem_id=#{mem_id}
 		</update>
@@ -48,6 +52,35 @@
 		<update id="setModifyPhone">
 			update member set mem_phone = #{mem_phone} where mem_id=#{mem_id}
 		</update>
-   
+		
+		<sql id="getSearch">
+			<choose>
+				<when test="kind=='mem_id'">
+					mem_id
+				</when>
+				<when test="kind=='mem_name'">
+					mem_name
+				</when>
+				<otherwise>
+					mem_num 
+				</otherwise>
+			</choose> 
+			like concat('%',#{search},'%') and mem_num >0
+		</sql>
+		
+		<select id="getMemberList" resultType="MemberVO" parameterType="Pager">
+			select * from member where mem_type=0 and
+			<include refid="getSearch"></include>
+			order by mem_num desc 
+		    limit #{startRow}, #{perPage}	
+		</select>
+		
+		<select id="getCount" resultType="Long" parameterType="Pager">
+			select count(mem_num) from member where
+			<include refid="getSearch"></include>
+		</select>
+		
+	
+
     </mapper>
     
