@@ -39,6 +39,37 @@
 			where  reserve_num=#{reserve_num}
     	</update>
     	
+    	<update id="setSelectCheckOut" parameterType="Long">
+    		update reserve set check_flag ="퇴실" , check_out_tm = sysdate()
+			where reserve_num=#{reserve_num}
+    	</update>
+    	
+    	<sql id="getSearch">
+			<choose>
+				<when test="kind=='reserve_num'">
+					reserve_num
+				</when>
+				<when test="kind=='mem_num'">
+					mem_num
+				</when>
+				<otherwise>
+					seat_num
+				</otherwise>
+			</choose> 
+			like concat('%',#{search},'%') and seat_num >0
+		</sql>
+    	
+    	<select id="getReserveList" resultType="ReserveVO" parameterType="Pager">
+    		select * from reserve where check_flag ="입실" and 
+    		<include refid="getSearch"></include>
+    		order by seat_num desc limit #{startRow}, #{perPage}
+    	</select>
+    	
+		<select id="getAllReserveCount" resultType="Long" parameterType="Pager">
+			select count(seat_num) from reserve where check_flag="입실" and
+		    <include refid="getSearch"></include>
+		</select>
+    	
     	<select id="getMemberSeat" parameterType="Long" resultMap="getMemberSeatResult">
     		select R.*, S.* from reserve R
 			left join seat S on S.seat_num = R.seat_num

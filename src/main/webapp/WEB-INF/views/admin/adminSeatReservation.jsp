@@ -133,7 +133,7 @@
 	    </div>
 	
 	    <div class="col-sm-10 mypage_contents">
-	      <h3><strong>회원관리</strong></h3>
+	      <h3><strong>좌석관리</strong></h3>
 	      <hr>
 	   
 	      <c:choose>
@@ -143,42 +143,38 @@
 				<table class="table">
 					<tr class="list_tr">
 						<td ><input type="checkbox" id="allCheck" name="allCheck"></td>
-						<td class="col-sm-1">회원번호</td>
-						<td class="col-sm-2">회원명</td>
-						<td class="col-sm-2">회원ID</td>
-						<td class="col-sm-2">전화번호</td>
-						<td class="col-sm-2">이메일</td>
-						<td class="col-sm-2">가입날짜</td>
+						<td class="col-sm-2">예약번호</td>
+						<td class="col-sm-2">좌석명</td>
+						<td class="col-sm-2">회원번호</td>
+						<td class="col-sm-6">예약시간</td>
 					</tr>
 					
 					<c:forEach items="${list}" var="vo">
 				      <tr class="list_tr">
-				      		<td ><input type="checkbox" name="rowCheck" class="chkBox" value="${mem_num}" title="${vo.mem_num}"></td>
+				      		<td ><input type="checkbox" name="rowCheck" class="chkBox" value="${reserve_num}" title="${vo.reserve_num}"></td>
+					        <td>${vo.reserve_num}</td>
+					  		<td>${vo.seat_num}번좌석</td>
 					        <td>${vo.mem_num}</td>
-					  		<td>${vo.mem_name}</td>
-					        <td>${vo.mem_id}</td>
-					        <td>${vo.mem_phone}</td>
-					        <td>${vo.mem_email}</td>
-					        <td>${vo.mem_regDate}</td>
+					        <td>${vo.reserve_strt_tm} ~ ${vo.reserve_end_tm}</td>
 				      </tr>
 			    	</c:forEach>
 				</table>
 		  </div>
 		  
-		  <input type="button" value="선택회원삭제" id="selectDelete" class="btn btn-danger" style="float: right;">
+		  <input type="button" value="선택회원퇴실" id="selectDelete" class="btn btn-danger" style="float: right;">
 	      
 		  <div class="list_footer">	
 		   <!-- search -->
 		   <div class="col-sm-12">
-				  <form action="./adminPage" id="search_frm">
+				  <form action="./adminSeatReservation" id="search_frm">
 				    <input type="hidden" name="curPage" id="curPage" value="1">
 				    
 					    <div class="input-group search_wrap">
 						  	<div>
 							  <select class="form-control" id="kind" name="kind">
-							    <option value="mem_id" id="k_id">아이디</option>
-							    <option value="mem_name" id="k_name">회원명</option>
-							    <option value="mem_num" id="k_num">회원번호</option>
+							  	<option value="reserve_num" id="rn">예약번호</option>
+							    <option value="mem_num" id="mn">회원번호</option>
+							    <option value="seat_num" id="sn">좌석번호</option>
 							  </select>
 							</div>
 							
@@ -219,7 +215,7 @@
 			 	<div class="list_form">
 			 		<div class="list_none_wrap" style="text-align: center;">
 			 			<img alt="" src="../images/list_none.jpg">
-			 			<p class="list_none">일치하는 회원이 없습니다.</p>
+			 			<p class="list_none">예약내역이 없습니다.</p>
 			 		</div>
 			 		
 			 	</div>
@@ -240,7 +236,7 @@
 			$("#kind").val(kind);
 		} 
 		else{
-			$("#kind").val("mem_id");
+			$("#kind").val("reserve_num");
 		}
 
 	   var search_frm = $("#search_frm");
@@ -284,22 +280,22 @@
 			});
 			
 			if(checkArr.length==0){
-				alert("선택된 글이 없습니다.")
+				alert("선택된 예약내역이 없습니다.")
 			}
 			else{
-				var confirm_val = confirm("정말 삭제하시겠습니까?");
+				var confirm_val = confirm("퇴실처리 하시겠습니까?");
 
 				if(confirm_val){
 			
-					$.post("/member/memberSelectSecession",
+					$.post("/reserve/selectCheckOut",
 							{"chkBox":checkArr},
 						function(result){
 							if(result<1){
-								alert("회원삭제 실패했습니다.");
+								alert("퇴실처리 실패했습니다.");
 							}
 							else{
-								alert("회원삭제 성공했습니다.")
-								location.href="./adminPage";
+								alert("퇴실처리 되었습니다.")
+								location.href="./adminSeatReservation";
 							}
 						}
 					);

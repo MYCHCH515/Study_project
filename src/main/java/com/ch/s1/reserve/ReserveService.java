@@ -52,6 +52,10 @@ public class ReserveService {
 		return reserveMapper.setCheckOut(reserveVO);
 	}
 	
+	public int setSelectCheckOut(long reserve_num) throws Exception{
+		return reserveMapper.setSelectCheckOut(reserve_num);
+	}
+	
 	public ReserveVO getReserveInfo(ReserveVO reserveVO) throws Exception{
 		return reserveMapper.getReserveInfo(reserveVO);
 	}
@@ -62,6 +66,15 @@ public class ReserveService {
 	
 	public int setExtendTime(ReserveVO reserveVO) throws Exception{
 		return reserveMapper.setExtendTime(reserveVO);
+	}
+	
+	public List<ReserveVO> getReserveList(Pager pager) throws Exception{
+		
+		pager.makeRow();
+		long totalCount =  reserveMapper.getAllReserveCount(pager);
+		pager.makePage(totalCount);
+
+		return reserveMapper.getReserveList(pager);
 	}
 
 }

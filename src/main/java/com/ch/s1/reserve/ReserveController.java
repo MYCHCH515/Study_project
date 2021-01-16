@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ch.s1.locker.LockerReserveVO;
 import com.ch.s1.member.MemberVO;
 import com.ch.s1.product.ProductVO;
 import com.ch.s1.seat.SeatService;
@@ -190,6 +191,37 @@ public class ReserveController {
 		else {
 			System.out.println("퇴실실패");
 		} 
+		
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;	
+	}
+	
+	@PostMapping("selectCheckOut")
+	public ModelAndView setSelectCheckOut(HttpSession session, 
+			@RequestParam(value ="chkBox[]") List<String> checkArr) throws Exception {
+		ModelAndView mv = new ModelAndView();
+	
+		int result = 0;
+		long reserve_num = 0;
+		
+		for(String i : checkArr) {
+			reserve_num = Integer.parseInt(i);
+			ReserveVO reserveVO = new ReserveVO();
+			reserveVO.setReserve_num(reserve_num);
+			reserveVO = reserveService.getReserveInfo(reserveVO);
+			
+			System.out.println("-------"+reserveVO.getReserve_num());
+			
+			if(reserveVO != null) {
+				long seat_num = reserveVO.getSeat_num();
+				result = reserveService.setSelectCheckOut(reserve_num);
+				if(result==1) {
+					seatService.setSeatExit(seat_num);
+				}
+			}
+		}
 		
 		mv.addObject("msg", result);
 		mv.setViewName("common/ajaxResult");

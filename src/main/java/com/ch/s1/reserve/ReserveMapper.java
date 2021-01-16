@@ -25,9 +25,15 @@ public interface ReserveMapper {
 	
 	public int setCheckOut(ReserveVO reserveVO) throws Exception;
 	
+	public int setSelectCheckOut(long reserve_num) throws Exception;
+	
 	public ReserveVO getReserveInfo(ReserveVO reserveVO) throws Exception;
 
 	public int setChangeSeat(ReserveVO reserveVO) throws Exception;
 	
 	public int setExtendTime(ReserveVO reserveVO) throws Exception;
+	
+	public List<ReserveVO> getReserveList(Pager pager) throws Exception;
+	
+	public long getAllReserveCount(Pager pager) throws Exception;
 }

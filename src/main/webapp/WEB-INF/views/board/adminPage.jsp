@@ -143,23 +143,19 @@
 				<table class="table">
 					<tr class="list_tr">
 						<td ><input type="checkbox" id="allCheck" name="allCheck"></td>
-						<td class="col-sm-1">회원번호</td>
-						<td class="col-sm-2">회원명</td>
-						<td class="col-sm-2">회원ID</td>
-						<td class="col-sm-2">전화번호</td>
-						<td class="col-sm-2">이메일</td>
-						<td class="col-sm-2">가입날짜</td>
+						<td class="col-sm-2">예약번호</td>
+						<td class="col-sm-2">좌석명</td>
+						<td class="col-sm-2">회원번호</td>
+						<td class="col-sm-6">예약시간</td>
 					</tr>
 					
 					<c:forEach items="${list}" var="vo">
 				      <tr class="list_tr">
-				      		<td ><input type="checkbox" name="rowCheck" class="chkBox" value="${mem_num}" title="${vo.mem_num}"></td>
+				      		<td ><input type="checkbox" name="rowCheck" class="chkBox" value="${reserve_num}" title="${vo.reserve_num}"></td>
+					        <td>${vo.reserve_num}</td>
+					  		<td>${vo.seat_name}</td>
 					        <td>${vo.mem_num}</td>
-					  		<td>${vo.mem_name}</td>
-					        <td>${vo.mem_id}</td>
-					        <td>${vo.mem_phone}</td>
-					        <td>${vo.mem_email}</td>
-					        <td>${vo.mem_regDate}</td>
+					        <td>${vo.reserve_strt_tm} ~ ${vo.reserve_end_tm}</td>
 				      </tr>
 			    	</c:forEach>
 				</table>
@@ -176,7 +172,7 @@
 					    <div class="input-group search_wrap">
 						  	<div>
 							  <select class="form-control" id="kind" name="kind">
-							    <option value="mem_id" id="k_id">아이디</option>
+							  	<option value="mem_id" id="k_id">아이디</option>
 							    <option value="mem_name" id="k_name">회원명</option>
 							    <option value="mem_num" id="k_num">회원번호</option>
 							  </select>
@@ -219,7 +215,7 @@
 			 	<div class="list_form">
 			 		<div class="list_none_wrap" style="text-align: center;">
 			 			<img alt="" src="../images/list_none.jpg">
-			 			<p class="list_none">일치하는 회원이 없습니다.</p>
+			 			<p class="list_none">회원목록이 없습니다.</p>
 			 		</div>
 			 		
 			 	</div>
