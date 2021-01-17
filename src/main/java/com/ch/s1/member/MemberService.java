@@ -74,7 +74,14 @@ public class MemberService {
 		return memberMapper.getMemberList(pager);
 	}
 	
+	public MemberVO getMemberOriginPw(MemberVO memberVO) throws Exception{
+		return memberMapper.getMemberOriginPw(memberVO);
+	}
 	
+	public int setModifyPw(MemberVO memberVO) throws Exception{
+		return memberMapper.setModifyPw(memberVO);
+	}
+
 	//비밀번호 찾기 이메일발송
 	public void sendEmail(MemberVO memberVO, String div) throws Exception{
 		

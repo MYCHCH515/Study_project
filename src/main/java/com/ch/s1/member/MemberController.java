@@ -212,6 +212,31 @@ public class MemberController {
 		return mv;	
 	}
 	
+	@PostMapping("memberOriginPwCheck")
+	public ModelAndView getMemberOriginPw(MemberVO memberVO, @RequestParam String origin_pw) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println(origin_pw);
+		memberVO = memberService.getMemberOriginPw(memberVO);
+
+		int result = 0;
+		if(memberVO != null) {
+			String mem_db_pw = memberVO.getMem_pw();
+			System.out.println(mem_db_pw);
+			if(origin_pw.equals(mem_db_pw)) {
+				result = 1;
+				System.out.println("있ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+			}else {
+				result = 0;
+				System.out.println("없ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+			}
+		}
+		
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+	
+		return mv;		
+	}
+
 	@GetMapping("memberLogout")
 	public ModelAndView getMemberLogout(HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -387,6 +412,17 @@ public class MemberController {
 	public ModelAndView setMemberModifyPhone(MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = memberService.setModifyPhone(memberVO);
+
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+	
+		return mv;	
+	}
+	
+	@PostMapping("memberModifyPw")
+	public ModelAndView setMemberModifyPw(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = memberService.setModifyPw(memberVO);
 
 		mv.addObject("msg", result);
 		mv.setViewName("common/ajaxResult");

@@ -83,7 +83,7 @@
 	    <div class="col-sm-10 mypage_contents">
 	      <h3><strong>회원정보수정</strong></h3>
 	      <hr>
-	      <form action="./memberModify" method="post" id="mem_form">
+	      <form id="mem_form">
 	      <div class="list_form">
 			<table class="table">
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
@@ -117,15 +117,17 @@
 							
 								<tr class="list_tr" style="height: 60px;">
 									<td class="col-sm-3" style="font-size: 15px; padding: 20px 0; text-align: center">비밀번호 확인</td>
-				      			    <td class="col-sm-9"><input type="password" name="mem_pw" id="new_pw_chk" style="height: 35px; width: 250px;"></td>
+				      			    <td class="col-sm-9"><input type="password" name="mem_pw" id="mem_pw" style="height: 35px; width: 250px;"></td>
+				 
 								</tr>
 								
 								<tr class="list_tr" style="height: 60px;">
-									<td class="col-sm-3"></td>
-				      			    <td class="col-sm-9" style="text-align: right;">
-				      			    	<button type="button" style="border: 1px solid black; color:white; background-color: gray; padding: 5px;">비밀번호변경</button>
+									<td class="col-sm-3"><button type="button" id="change_pw_submit" style="border: 1px solid black; color:white; background-color: gray; padding: 5px;">비밀번호변경</button></span></td>
+				      			    <td class="col-sm-9">
+				      			    	<span class="pwResult"></span>
 				      			    </td>
 								</tr>
+
 	      			    	</table>
 	      			    </td>
 					</tr>	
@@ -230,6 +232,65 @@ $("#change_email_cancel").click(function(){
 		$("#change_email_submit").hide();
 	}
 });
+
+
+var regExpPw = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+var mem_num = ${vo.mem_num};
+$("#change_pw_submit").click(function(){
+	var pwCheck=false;
+	var origin_pw = $("#origin_pw").val();
+	
+	if(origin_pw !=''){
+		$.post("./memberOriginPwCheck",
+				{"mem_num":mem_num, "origin_pw":origin_pw},
+			function(result){
+				var str="";
+				if(result==1){
+					if(!regExpPw.test($("input[id='new_pw']").val())) {
+						str="형식에 맞지않는 비밀번호 입니다.";
+						$(".pwResult").removeClass("chkNotice2").addClass("chkNotice1");
+						pwCheck=false;
+					}
+					else{
+						pwCheck = false;
+						var new_pw = $("#new_pw").val();
+						var mem_pw = $("#mem_pw").val();
+						if(new_pw == mem_pw){
+						    $.post("./memberModifyPw",
+								    {"mem_pw":mem_pw, "mem_num":mem_num},
+								    function(result){
+								    	if(result < 1){
+											alert("비밀번호 수정에 실패했습니다.")	
+											return
+								    	}
+								    	else{
+								    		alert("수정되었습니다.");
+								    		$("#origin_pw").val("");
+								    		$("#new_pw").val("");
+								    		$("#mem_pw").val("");
+									    }
+							});
+						}
+						else{
+							str="비밀번호확인이 다릅니다.";
+							$(".pwResult").removeClass("chkNotice2").addClass("chkNotice1");
+						}
+					}	
+				}else{
+					str = "현재 비밀번호를 확인해주세요.";
+					$(".pwResult").removeClass("chkNotice2").addClass("chkNotice1");
+
+				}
+			$(".pwResult").html(str);
+		});
+	}
+
+	else{
+		$(".pwResult").html("필수 항목입니다.")
+		$(".pwResult").removeClass("chkNotice2").addClass("chkNotice1");
+	}
+});
+
 
 
 var regExpPhone = /^\d{3}\d{3,4}\d{4}$/;

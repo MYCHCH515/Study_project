@@ -295,10 +295,10 @@
 							{"chkBox":checkArr},
 						function(result){
 							if(result<1){
-								alert("시용종료 실패했습니다.");
+								alert("시용종료 처리실패했습니다.");
 							}
 							else{
-								alert("사용종료 되었습니다.")
+								alert("사용종료 처리되었습니다.")
 								location.href="./adminLockerReservation";
 							}
 						}

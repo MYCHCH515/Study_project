@@ -34,7 +34,11 @@ public interface MemberMapper {
 	
 	public int setModifyPhone(MemberVO memberVO) throws Exception;
 	
+	public int setModifyPw(MemberVO memberVO) throws Exception;
+	
 	public List<MemberVO> getMemberList(Pager pager) throws Exception;
 	
 	public long getCount(Pager pager) throws Exception;
+	
+	public MemberVO getMemberOriginPw(MemberVO memberVO) throws Exception;
 }

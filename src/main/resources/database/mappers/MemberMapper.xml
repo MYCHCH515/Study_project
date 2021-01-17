@@ -53,6 +53,10 @@
 			update member set mem_phone = #{mem_phone} where mem_id=#{mem_id}
 		</update>
 		
+		<update id="setModifyPw">
+			update member set mem_pw = #{mem_pw} where mem_num=#{mem_num}
+		</update>
+		
 		<sql id="getSearch">
 			<choose>
 				<when test="kind=='mem_id'">
@@ -80,7 +84,8 @@
 			<include refid="getSearch"></include>
 		</select>
 		
-	
-
+		<select id="getMemberOriginPw" resultType="MemberVO">
+			select mem_pw from member where mem_num=#{mem_num}
+		</select>
     </mapper>
     
