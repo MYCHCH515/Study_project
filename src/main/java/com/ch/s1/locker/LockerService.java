@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ch.s1.reserve.ReserveVO;
+import com.ch.s1.util.Pager;
 
 @Service
 public class LockerService {
@@ -35,5 +35,22 @@ public class LockerService {
 	
 	public int setLockerCheckOut(LockerReserveVO lockerReserveVO) throws Exception{
 		return lockerMapper.setLockerCheckOut(lockerReserveVO);
+	}
+	
+	public List<LockerReserveVO> getReserveLockerList(Pager pager) throws Exception{
+		
+		pager.makeRow();
+		long totalCount = lockerMapper.getAllReserveCount(pager);
+		pager.makePage(totalCount);
+		
+		return lockerMapper.getReserveLockerList(pager);
+	}
+	
+	public int setSelectCheckOut(long reserve_locker_num) throws Exception{
+		return lockerMapper.setSelectCheckOut(reserve_locker_num);
+	}
+	
+	public LockerReserveVO getReserveInfo(LockerReserveVO lockerReserveVO) throws Exception{
+		return lockerMapper.getReserveInfo(lockerReserveVO);
 	}
 }

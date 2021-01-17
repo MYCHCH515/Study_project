@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,37 +146,39 @@
 					<tr class="list_tr">
 						<td ><input type="checkbox" id="allCheck" name="allCheck"></td>
 						<td class="col-sm-2">예약번호</td>
-						<td class="col-sm-2">좌석명</td>
+						<td class="col-sm-2">사물함명</td>
 						<td class="col-sm-2">회원번호</td>
-						<td class="col-sm-6">예약시간</td>
+						<td class="col-sm-4">예약시간</td>
+						<td class="col-sm-2">이용권</td>
 					</tr>
 					
 					<c:forEach items="${list}" var="vo">
 				      <tr class="list_tr">
-				      		<td ><input type="checkbox" name="rowCheck" class="chkBox" value="${reserve_num}" title="${vo.reserve_num}"></td>
-					        <td>${vo.reserve_num}</td>
-					  		<td>${vo.seat_num}번좌석</td>
+				      		<td ><input type="checkbox" name="rowCheck" class="chkBox" value="${reserve_locker_num}" title="${vo.reserve_locker_num}"></td>
+					        <td>${vo.reserve_locker_num}</td>
+					  		<td>${vo.locker_num}번좌석</td>
 					        <td>${vo.mem_num}</td>
-					        <td>${vo.reserve_strt_tm} ~ ${vo.reserve_end_tm}</td>
+					        <td> ${vo.reserve_strt_tm}~${vo.reserve_end_tm}</td>
+					        <td>${vo.locker_type}</td>
 				      </tr>
 			    	</c:forEach>
 				</table>
 		  </div>
 		  
-		  <input type="button" value="선택회원퇴실" id="selectDelete" class="btn btn-danger" style="float: right;">
+		  <input type="button" value="선택종료" id="selectDelete" class="btn btn-danger" style="float: right;">
 	      
 		  <div class="list_footer">	
 		   <!-- search -->
 		   <div class="col-sm-12">
-				  <form action="./adminSeatReservation" id="search_frm">
+				  <form action="./adminLockerReservation" id="search_frm">
 				    <input type="hidden" name="curPage" id="curPage" value="1">
 				    
 					    <div class="input-group search_wrap">
 						  	<div>
 							  <select class="form-control" id="kind" name="kind">
-							  	<option value="reserve_num" id="rn">예약번호</option>
+							  	<option value="reserve_locker_num" id="rn">예약번호</option>
 							    <option value="mem_num" id="mn">회원번호</option>
-							    <option value="seat_num" id="sn">좌석번호</option>
+							    <option value="locker_num" id="ln">사물함명</option>
 							  </select>
 							</div>
 							
@@ -215,7 +219,7 @@
 			 	<div class="list_form">
 			 		<div class="list_none_wrap" style="text-align: center;">
 			 			<img alt="" src="../images/list_none.jpg">
-			 			<p class="list_none">좌석 예약내역이 없습니다.</p>
+			 			<p class="list_none">사물함 예약내역이 없습니다.</p>
 			 		</div>
 			 		
 			 	</div>
@@ -236,7 +240,7 @@
 			$("#kind").val(kind);
 		} 
 		else{
-			$("#kind").val("reserve_num");
+			$("#kind").val("reserve_locker_num");
 		}
 
 	   var search_frm = $("#search_frm");
@@ -283,19 +287,19 @@
 				alert("선택된 예약내역이 없습니다.")
 			}
 			else{
-				var confirm_val = confirm("퇴실처리 하시겠습니까?");
+				var confirm_val = confirm("사용종료 처리하시겠습니까?");
 
 				if(confirm_val){
 			
-					$.post("/reserve/selectCheckOut",
+					$.post("/locker/selectCheckOut",
 							{"chkBox":checkArr},
 						function(result){
 							if(result<1){
-								alert("퇴실처리 실패했습니다.");
+								alert("시용종료 실패했습니다.");
 							}
 							else{
-								alert("퇴실처리 되었습니다.")
-								location.href="./adminSeatReservation";
+								alert("사용종료 되었습니다.")
+								location.href="./adminLockerReservation";
 							}
 						}
 					);

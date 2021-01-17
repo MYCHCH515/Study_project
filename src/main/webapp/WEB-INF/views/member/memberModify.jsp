@@ -158,14 +158,14 @@
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
 						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center; vertical-align:middle;">사물함</td>
 						<td class="col-sm-9">
-							<input type="text" name="mem_regDate" id="regDate" value="${locker_name}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
+							<input type="text" id="locker" value="${locker_name}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
 						</td>
 					</tr>
 					
 					<tr class="list_tr" style="height: 60px; border: 1px solid #ddd;">
 						<td class="col-sm-3" style="background:#eef1f8; font-size: 17px; padding: 20px 0; text-align: center; vertical-align:middle;">가입일</td>
 						<td class="col-sm-9">
-							<input type="text" name="mem_regDate" id="regDate" value="${vo.mem_regDate}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
+							<input type="text" id="regDate" value="${vo.mem_regDate}" readonly="readonly" style="height: 50px; width: 250px; border: none;" >
 						</td>
 					</tr>
 			</table>

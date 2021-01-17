@@ -48,7 +48,39 @@
 				<result column="locker_reserve" property="locker_reserve"></result>
 			</association>
 		</resultMap>
+		
+		<sql id="getSearch">
+			<choose>
+				<when test="kind=='reserve_locker_num'">
+					reserve_locker_num
+				</when>
+				<when test="kind=='mem_num'">
+					mem_num
+				</when>
+				<otherwise>
+					locker_num
+				</otherwise>
+			</choose> 
+			like concat('%',#{search},'%') and locker_num >0
+		</sql>
     	
+    	<select id="getReserveLockerList" resultType="LockerReserveVO" parameterType="Pager">
+    		select * from reserve_locker where check_flag ="사용중" and 
+    		<include refid="getSearch"></include>
+    		order by locker_num desc limit #{startRow}, #{perPage}
+    	</select>
     	
+		<select id="getAllReserveCount" resultType="Long" parameterType="Pager">
+			select count(locker_num) from reserve_locker where check_flag="사용중" 
+			and <include refid="getSearch"></include>
+		</select>
+		
+    	<select id="getReserveInfo" parameterType="LockerReserveVO" resultType="LockerReserveVO">
+    		select * from reserve_locker where reserve_locker_num = #{reserve_locker_num}
+    	</select>
+    	
+    	<update id="setSelectCheckOut" parameterType="Long">
+    		update reserve_locker set check_flag ="사용종료" where reserve_locker_num=#{reserve_locker_num}
+    	</update>
     </mapper>
     

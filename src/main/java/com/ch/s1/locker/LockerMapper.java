@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.ch.s1.reserve.ReserveVO;
+import com.ch.s1.util.Pager;
 
 @Mapper
 public interface LockerMapper {
@@ -20,4 +20,12 @@ public interface LockerMapper {
 	public int setInsert(LockerReserveVO lockerReserveVO) throws Exception;
 
 	public int setLockerCheckOut(LockerReserveVO lockerReserveVO) throws Exception;
+	
+	public List<LockerReserveVO> getReserveLockerList(Pager pager) throws Exception;
+
+	public long getAllReserveCount(Pager pager) throws Exception;
+	
+	public int setSelectCheckOut(long reserve_locker_num) throws Exception;
+	
+	public LockerReserveVO getReserveInfo(LockerReserveVO lockerReserveVO) throws Exception;
 }

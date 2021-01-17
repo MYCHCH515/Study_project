@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ch.s1.locker.LockerReserveVO;
+import com.ch.s1.locker.LockerService;
 import com.ch.s1.member.MemberService;
 import com.ch.s1.member.MemberVO;
 import com.ch.s1.reserve.ReserveService;
@@ -23,6 +25,9 @@ public class AdminController {
 	
 	@Autowired
 	private ReserveService reserveService;
+	
+	@Autowired
+	private LockerService lockerService;
 	
 	@GetMapping("adminPage")
 	public ModelAndView getMemberList(Pager pager)throws Exception{
@@ -43,6 +48,17 @@ public class AdminController {
 		mv.addObject("list", ar);
 		mv.addObject("pager", pager);
 		mv.setViewName("admin/adminSeatReservation");
+		return mv;
+	}
+	
+	@GetMapping("adminLockerReservation")
+	public ModelAndView getReserveLocekrList(Pager pager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<LockerReserveVO> ar = lockerService.getReserveLockerList(pager);
+		
+		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
+		mv.setViewName("admin/adminLockerReservation");
 		return mv;
 	}
 }

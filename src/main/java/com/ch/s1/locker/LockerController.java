@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ch.s1.member.MemberVO;
+import com.ch.s1.reserve.ReserveVO;
 
 @Controller
 @RequestMapping(value="/locker/**")
@@ -99,6 +100,39 @@ public class LockerController {
 		mv.setViewName("common/ajaxResult");
 		
 		return mv;
+	}
+	
+	@PostMapping("selectCheckOut")
+	public ModelAndView setSelectCheckOut(HttpSession session, 
+			@RequestParam(value ="chkBox[]") List<String> checkArr) throws Exception {
+		ModelAndView mv = new ModelAndView();
+	
+		int result = 0;
+		long reserve_locker_num = 0;
+		
+		for(String i : checkArr) {
+			reserve_locker_num = Integer.parseInt(i);
+			LockerReserveVO lockerReserveVO = new LockerReserveVO();
+			lockerReserveVO.setReserve_locker_num(reserve_locker_num);
+			
+			lockerReserveVO= lockerService.getReserveInfo(lockerReserveVO);
+
+			System.out.println("-------"+lockerReserveVO.getReserve_locker_num());
+			
+			if(lockerReserveVO != null) {
+				long locker_num = lockerReserveVO.getLocker_num();
+				result = lockerService.setLockerCheckOut(lockerReserveVO);
+			
+				if(result==1) {
+					lockerService.setLockerExit(locker_num);
+				}
+			}
+		}
+		
+		mv.addObject("msg", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;	
 	}
 
 }
