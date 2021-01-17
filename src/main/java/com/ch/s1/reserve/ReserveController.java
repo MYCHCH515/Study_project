@@ -31,9 +31,10 @@ public class ReserveController {
 	@Autowired
 	private SeatService seatService;
 
-	@GetMapping("reserveForm")
-	public ModelAndView setInsert() throws Exception {
+	@PostMapping("reserveFormView")
+	public ModelAndView setInsert(@RequestParam("seat_num") long seat_num) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		System.out.println("---------"+seat_num);
 		List<ProductVO> ar = reserveService.getProductList();
 		mv.addObject("list", ar);
 		mv.setViewName("reserve/reserveForm");
@@ -95,16 +96,16 @@ public class ReserveController {
 		return mv;
 	}
 	
-	@GetMapping("reserveModify")
-	public ModelAndView getReserveModify(@RequestParam long reserve_num) throws Exception{
+	@PostMapping("reserveModify")
+	public ModelAndView getReserveModify(@RequestParam("reserve_num") long reserve_num) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
+		System.out.println("------*****"+reserve_num);
 		mv.addObject("reserve_num", reserve_num);
 		mv.setViewName("reserve/reserveModify");
 		return mv;
 	}
 	
-	@GetMapping("extendTime")
+	@PostMapping("extendTimeView")
 	public ModelAndView getExtendTime(ReserveVO reserveVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		reserveVO = reserveService.getReserveInfo(reserveVO);
@@ -136,7 +137,7 @@ public class ReserveController {
 		return mv;
 	}
 	
-	@GetMapping("changeSeat")
+	@PostMapping("changeSeatView")
 	public ModelAndView getChangeSeat(ReserveVO reserveVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		List<SeatVO> ar = seatService.getList();

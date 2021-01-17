@@ -150,13 +150,6 @@
 		</div>
 	</div>
 	</div>
-	<form id="reserveModifyFrm" action="/reserve/reserveModify" method="post">
-		<input type="hidden" id="reserve_num_post" name="reserve_num">
-	</form>
-	
-	<form id="reserveFrm" action="/reserve/reserveFormView" method="post">
-		<input type="hidden" id="seat_num_post" name="seat_num">
-	</form>
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
 
@@ -188,12 +181,10 @@
 		if(${not empty member}){
 			if(reserve_num != ""){
 				if(mem_seat == seat_num){
-					$("#reserve_num_post").val(reserve_num);
-					$("#reserveModifyFrm").submit();
+					location.href="../reserve/reserveModify?reserve_num="+reserve_num;
 				}else{
 					if(confirm("예약내역이 존재합니다. 기존 예약내역을 수정하시겠습니까?")==true){
-						$("#reserve_num_post").val(reserve_num);
-						$("#reserveModifyFrm").submit();
+						location.href="../reserve/reserveModify?reserve_num="+reserve_num;
 					}
 					else{
 						return;
@@ -202,8 +193,7 @@
 			}
 			else{
 				if(confirm(seat_num+"번 자리 예약을 진행하시겠습니까?")==true){
-					$("#seat_num_post").val(seat_num);
-					$("#reserveFrm").submit();
+					location.href="../reserve/reserveForm?seat_num="+seat_num
 				}
 				else{
 					return;

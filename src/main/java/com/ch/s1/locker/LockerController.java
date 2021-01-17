@@ -50,10 +50,10 @@ public class LockerController {
 		return mv;
 	}
 	
-	@GetMapping("lockerReserveForm")
-	public ModelAndView setInsert() throws Exception{
+	@PostMapping("lockerReserveFormView")
+	public ModelAndView setInsert(@RequestParam("locker_num") long locker_num) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
+		System.out.println("^^^^^^^^^^^^^^^");
 		mv.setViewName("locker/lockerReserveForm");
 		return mv;
 	}

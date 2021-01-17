@@ -46,17 +46,17 @@
   	   <div class="modify_link_wrap">
   			
   			<div class="modify_link">
-  				<a href="./extendTime?reserve_num=${reserve_num}"><img alt="" src="../images/m2.png"></a>
+  				<img alt="" src="../images/m2.png" id="m1">
   				<p>시간연장</p>
   			</div>
   			
   			<div class="modify_link">
-  				<a href="./changeSeat?reserve_num=${reserve_num}"><img alt="" src="../images/m3.png"></a>
+  				<img alt="" src="../images/m3.png" id="m2">
   				<p>자리이동</p>
   			</div>
   			
   			<div class="modify_link">
-  				<img alt="" src="../images/m1.png" id="m1">
+  				<img alt="" src="../images/m1.png" id="m3">
   				<p>퇴실</p>
   			</div>
   			
@@ -67,6 +67,14 @@
 	   </div> 
 	   
 	</div>
+	
+	<form id="reserveExtend" action="/reserve/extendTimeView" method="post">
+		<input type="hidden" id="reserve_num_extend_post" name="reserve_num">
+	</form>
+	
+	<form id="reserveChangeSeat" action="/reserve/changeSeatView" method="post">
+		<input type="hidden" id="reserve_num_change_post" name="reserve_num">
+	</form>
 
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
@@ -77,8 +85,22 @@
 	});
 
 	var reserve_num = "${reserve_num}";
-	
+
 	$("#m1").click(function(){
+		if(reserve_num != ""){
+			$("#reserve_num_extend_post").val(reserve_num);
+			$("#reserveExtend").submit();	
+		}
+	});
+
+	$("#m2").click(function(){
+		if(reserve_num != ""){
+			$("#reserve_num_change_post").val(reserve_num);
+			$("#reserveChangeSeat").submit();	
+		}
+	});
+	
+	$("#m3").click(function(){
 		if(reserve_num != ""){
 			if(confirm("퇴실 하시겠습니까?")==true){
 				

@@ -87,6 +87,9 @@
 		</div>
 	</div>
 	</div>
+	<form id="reserveFrm" action="/locker/lockerReserveFormView" method="post">
+		<input type="hidden" id="reserve_num_post" name="locker_num">
+	</form>
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
 
@@ -120,7 +123,8 @@
 		if(${not empty member}){
 			if(reserve_num == ""){
 				if(confirm(locker_name+"번 사물함 예약을 진행하시겠습니까?")==true){
-					location.href="../locker/lockerReserveForm?locker_num="+locker_num
+					$("#reserve_num_post").val(locker_num);
+					$("#reserveFrm").submit();
 				}
 				else{
 					return;
