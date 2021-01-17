@@ -48,11 +48,6 @@
 				  </div>
 				  <hr>
 			</form>
-			
-			<div>
-				<a href="#">카카오</a>
-				<a href="#">네이버</a>
-			</div>
 		</div>
   	</div>
   </div>
