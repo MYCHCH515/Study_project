@@ -44,6 +44,13 @@
 			where reserve_num=#{reserve_num}
     	</update>
     	
+    	
+    	<select id="getCheckEndTime" resultMap="getMemberSeatResult">
+    		select R.*, S.* from reserve R
+			left join seat S on S.seat_num = R.seat_num
+			where R.check_flag = '입실' and S.seat_reserve = 0
+    	</select>   
+    	
     	<sql id="getSearch">
 			<choose>
 				<when test="kind=='reserve_num'">

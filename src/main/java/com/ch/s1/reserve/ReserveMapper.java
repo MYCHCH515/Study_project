@@ -36,4 +36,6 @@ public interface ReserveMapper {
 	public List<ReserveVO> getReserveList(Pager pager) throws Exception;
 	
 	public long getAllReserveCount(Pager pager) throws Exception;
+	
+	public List<ReserveVO> getCheckEndTime() throws Exception;
 }

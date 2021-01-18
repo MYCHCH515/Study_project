@@ -76,5 +76,9 @@ public class ReserveService {
 
 		return reserveMapper.getReserveList(pager);
 	}
+	
+	public List<ReserveVO> getCheckEndTime() throws Exception{
+		return reserveMapper.getCheckEndTime();
+	}
 
 }
