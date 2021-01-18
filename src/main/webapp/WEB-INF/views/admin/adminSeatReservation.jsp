@@ -128,7 +128,7 @@
 	        <li><a href="/admin/adminPage">회원관리</a></li>
 	        <li><a href="/admin/adminSeatReservation">좌석관리</a></li>
 	        <li><a href="/admin/adminLockerReservation">사물함관리</a></li>
-	        <li><a href="/admin/adminInquiry">문의내역관리</a></li>
+	        <li><a href="/notice/noticeWrite">게시글작성</a></li>
 	      </ul><br>
 	    </div>
 	

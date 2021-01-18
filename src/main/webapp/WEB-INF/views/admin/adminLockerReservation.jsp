@@ -130,12 +130,12 @@
 	        <li><a href="/admin/adminPage">회원관리</a></li>
 	        <li><a href="/admin/adminSeatReservation">좌석관리</a></li>
 	        <li><a href="/admin/adminLockerReservation">사물함관리</a></li>
-	        <li><a href="/admin/adminInquiry">문의내역관리</a></li>
+	        <li><a href="/notice/noticeWrite">게시글작성</a></li>
 	      </ul><br>
 	    </div>
 	
 	    <div class="col-sm-10 mypage_contents">
-	      <h3><strong>좌석관리</strong></h3>
+	      <h3><strong>사물함관리</strong></h3>
 	      <hr>
 	   
 	      <c:choose>
@@ -156,7 +156,7 @@
 				      <tr class="list_tr">
 				      		<td ><input type="checkbox" name="rowCheck" class="chkBox" value="${reserve_locker_num}" title="${vo.reserve_locker_num}"></td>
 					        <td>${vo.reserve_locker_num}</td>
-					  		<td>${vo.locker_num}번좌석</td>
+					  		<td>${vo.locker_num}번</td>
 					        <td>${vo.mem_num}</td>
 					        <td> ${vo.reserve_strt_tm}~${vo.reserve_end_tm}</td>
 					        <td>${vo.locker_type}</td>

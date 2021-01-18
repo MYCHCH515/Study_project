@@ -88,11 +88,11 @@ public class MemberService {
 		//Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.gmail.com";		//SMTP 서버명
-		String hostSMTPid = "";
-		String hostSMTPpwd = "";
+		String hostSMTPid = "nam173838@gmail.com";
+		String hostSMTPpwd = "ip01022901836IP!";
 		
 		//보내는 사람
-		String fromEmail = "";
+		String fromEmail = "nam173838@gmail.com";
 		String fromName = "거북이의기적";
 		
 		String subject = ""; 	//메일 제목
@@ -100,7 +100,7 @@ public class MemberService {
 		
 		if(div.equals("findpw")) {
 			subject = "거북이의기적 임시 비밀번호 입니다.";
-			msg += "<div align='center' style='width:300px; height: 500px; border:2px solid #00a5bd; font-family:verdana'>";
+			msg += "<div align='center' style='width:400px; height: 200px; border:2px solid #00a5bd; font-family:verdana'>";
 			msg += "<h3 style='color: blue;'>";
 			msg += memberVO.getMem_id() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
 			msg += "<p>임시 비밀번호 : ";
@@ -208,14 +208,14 @@ public class MemberService {
 	
 	public void certifiedPhoneNumber(String phoneNumber, String cerNum) {
 
-        String api_key = "";
-        String api_secret = "";
+		String api_key = "NCSX2T40ET1VYUA5";
+		String api_secret = "AUT0THQGC7Y3RI3HWEYQEUTBBC9C2EF5";
         Message coolsms = new Message(api_key, api_secret);
 
         // 4 params(to, from, type, text) are mandatory. must be filled
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("to", phoneNumber);    // 수신전화번호
-        params.put("from", "");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+        params.put("from", "01041171836");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
         params.put("type", "SMS");
         params.put("text", "거북이의기적 휴대폰인증 테스트 메시지 : 인증번호는" + "["+cerNum+"]" + "입니다.");
         params.put("app_version", "test app 1.2"); // application name and version

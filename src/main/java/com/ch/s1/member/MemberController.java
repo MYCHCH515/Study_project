@@ -169,6 +169,8 @@ public class MemberController {
 		int result=1;
 		if(memberVO == null) {
 			result=0;
+		}else {
+			result=1;
 		}
 		
 		mv.addObject("msg", result);

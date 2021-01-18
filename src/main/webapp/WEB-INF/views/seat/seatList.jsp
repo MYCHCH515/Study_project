@@ -38,9 +38,7 @@
 	
 	<div class="container">
 	<h3 class="table_list_title">개인석</h3>
-	<div class="leave_list" >
-		<button>퇴실 예정석</button>
-	</div>
+
 	<ul class="color_wrap">
 		<li><div class="color_type ct1"></div>이용불가</li>
 		<li><div class="color_type ct2"></div>이용가능</li>

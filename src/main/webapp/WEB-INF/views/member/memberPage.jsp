@@ -64,7 +64,6 @@
 	      <ul class="nav nav-pills nav-stacked mypage_li">
 	        <li><a href="/member/memberPage">나의정보</a></li>
 	        <li><a href="/reserve/memberReservation">예약내역</a></li>
-	        <li><a href="/member/memberInquiry">문의내역</a></li>
 	      </ul><br>
 	    </div>
 	

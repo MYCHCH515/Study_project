@@ -27,7 +27,7 @@ public class NoticeAdminInterceptor implements HandlerInterceptor {
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 	 	
 		String path = request.getRequestURI();
-	 	String kind = path.substring(path.lastIndexOf("notice")).replace("notice", "");
+	 	String kind = path.substring(path.lastIndexOf("notice")).replace("notice","");
 		
 	 	String message = "관리자 권한이 필요한 서비스입니다.";
 		
@@ -36,10 +36,9 @@ public class NoticeAdminInterceptor implements HandlerInterceptor {
 	 		long mem_type = memberVO.getMem_type();
 	 		
  			if(mem_type==1) {	
- 				if(kind.equals("Write")) {
- 					result = true;
- 				}
- 				else {
+ 				result = true;
+ 				
+ 				if(kind.equals("Update") || kind.equals("Delete")) {
  					int board_num = Integer.parseInt(request.getParameter("board_num"));
  					BoardVO boardVO = new BoardVO();
  					boardVO.setBoard_num(board_num);
@@ -53,6 +52,9 @@ public class NoticeAdminInterceptor implements HandlerInterceptor {
  						message="작성자만 접근이 가능합니다";
  					}
  				}
+ 			}
+ 			else {
+ 				result = false;
  			}
 	 	}
 	 	

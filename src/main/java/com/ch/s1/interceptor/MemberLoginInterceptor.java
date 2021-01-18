@@ -29,6 +29,7 @@ public class MemberLoginInterceptor implements HandlerInterceptor {
 	 	String message = "로그인이 필요한 서비스입니다.";
 		
 	 	boolean result = false;
+	
 	 	if(memberVO != null) {
 	 		result = true;
 	 	}

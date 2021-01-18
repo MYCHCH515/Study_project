@@ -73,7 +73,8 @@
 					mem_email : mem_email
 				},
 				success : function(result) {
-					alert(result);
+					alert(result)
+					location.reload();
 				},
 			})
 		}

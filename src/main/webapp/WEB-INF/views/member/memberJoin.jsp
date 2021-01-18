@@ -109,11 +109,10 @@
 		idCheck=false;
 		var id = $(this).val();
 		if(id !=''){
-			$.get("./memberIdCheck?mem_id="+id,function(data){
-				data=data.trim();
-				var str = "이미 사용중인 ID입니다."
+			$.get("./memberIdCheck?mem_id="+id,function(result){
+				var str = "";
 				$(".idResult").removeClass("chkNotice2").addClass("chkNotice1");
-				if(data==0){
+				if(result==0){
 					if(!regExpId.test($("input[id='id']").val())) {
 						idCheck=false;
 						str="5~20자의 영 대 소문자, 숫자만 사용 가능합니다."				
@@ -123,6 +122,8 @@
 						str="사용가능한 ID입니다.";
 						$(".idResult").removeClass("chkNotice1").addClass("chkNotice2");
 					}	
+				}else{
+					str = "이미 사용중인 ID입니다.";
 				}
 				$(".idResult").html(str);
 			});
@@ -265,7 +266,7 @@
 		if(email !=''){
 			$.get("./memberEmailCheck?mem_email="+email,function(data){
 				data=data.trim();
-				var str = "이미 사용중인 이메일 입니다."
+				var str = "";
 				$(".emailResult").removeClass("chkNotice2").addClass("chkNotice1");
 				if(data==0){
 					if(!regExpEmail.test($("input[id='email']").val())) {
@@ -278,6 +279,8 @@
 						str="사용가능한 이메일입니다.";
 						$(".emailResult").removeClass("chkNotice1").addClass("chkNotice2");
 					}
+				}else{
+					str = "이미 사용중인 이메일 입니다.";
 				}
 				$(".emailResult").html(str);
 			});

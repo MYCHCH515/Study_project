@@ -35,12 +35,10 @@ public class InterceptorConfig implements WebMvcConfigurer{
 		registry.addInterceptor(memberLoginInterceptor)
 		.addPathPatterns("/locker/lockerReserveForm")
 		.addPathPatterns("/reserve/**")
-		.addPathPatterns("/member/**")
-		.excludePathPatterns("/member/memberAgree")
-		.excludePathPatterns("/member/memberJoin")
-		.excludePathPatterns("/member/memberLogin")
-		.excludePathPatterns("/member/memberSearchId")
-		.excludePathPatterns("/member/memberSearchPw");
+		.addPathPatterns("/member/memberPage")
+		.addPathPatterns("/member/memberInquiry")
+		.addPathPatterns("/member/memberReservation");
+
 		WebMvcConfigurer.super.addInterceptors(registry);
 	}
 }
