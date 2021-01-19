@@ -27,7 +27,7 @@ public class ReserveService {
 	public List<ProductVO> getProductList() throws Exception {
 		return productMapper.getList();
 	}
-
+	
 	public int setInsert(ReserveVO reserveVO) throws Exception {
 		return reserveMapper.setInsert(reserveVO);
 	}
