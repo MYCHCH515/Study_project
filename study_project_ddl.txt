@@ -1,0 +1,243 @@
+CREATE TABLE `locker` (
+  `locker_num` int NOT NULL,
+  `locker_name` varchar(45) DEFAULT NULL,
+  `locker_reserve` int DEFAULT NULL,
+  PRIMARY KEY (`locker_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `seat` (
+  `seat_num` int NOT NULL,
+  `seat_name` varchar(255) DEFAULT NULL,
+  `seat_reserve` int DEFAULT NULL,
+  PRIMARY KEY (`seat_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `member` (
+  `mem_num` int NOT NULL AUTO_INCREMENT,
+  `mem_id` varchar(255) NOT NULL,
+  `mem_pw` varchar(255) NOT NULL,
+  `mem_name` varchar(255) NOT NULL,
+  `mem_phone` varchar(255) NOT NULL,
+  `mem_email` varchar(255) NOT NULL,
+  `mem_type` int NOT NULL,
+  `mem_regDate` date DEFAULT NULL,
+  PRIMARY KEY (`mem_num`),
+  UNIQUE KEY `mem_id_UNIQUE` (`mem_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `notice` (
+  `board_num` int NOT NULL AUTO_INCREMENT,
+  `board_contents` varchar(255) DEFAULT NULL,
+  `board_writer` varchar(255) DEFAULT NULL,
+  `board_title` varchar(255) DEFAULT NULL,
+  `regDate` date DEFAULT NULL,
+  `hit` int DEFAULT NULL,
+  PRIMARY KEY (`board_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `noticeFiles` (
+  `fileNum` int NOT NULL AUTO_INCREMENT,
+  `fileName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `oriName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `board_num` int DEFAULT NULL,
+  PRIMARY KEY (`fileNum`),
+  KEY `NF_NUM_FK_idx` (`board_num`),
+  CONSTRAINT `NF_NUM_FK` FOREIGN KEY (`board_num`) REFERENCES `notice` (`board_num`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `product` (
+  `product_num` int NOT NULL AUTO_INCREMENT,
+  `product_price` int DEFAULT NULL,
+  `product_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `product_type` int DEFAULT NULL,
+  PRIMARY KEY (`product_num`),
+  KEY `pd_pd_type_FK_idx` (`product_type`),
+  CONSTRAINT `pd_pd_type_FK` FOREIGN KEY (`product_type`) REFERENCES `product_type` (`product_type`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `product_type` (
+  `product_type` int NOT NULL,
+  `product_type_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`product_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `reserve` (
+  `reserve_num` int NOT NULL AUTO_INCREMENT,
+  `mem_num` int DEFAULT NULL,
+  `seat_num` int DEFAULT NULL,
+  `product_num` int DEFAULT NULL,
+  `reserve_regDate` date DEFAULT NULL,
+  `reserve_strt_tm` datetime DEFAULT NULL,
+  `reserve_end_tm` datetime DEFAULT NULL,
+  `payment_option` varchar(255) DEFAULT NULL,
+  `check_flag` varchar(45) DEFAULT NULL,
+  `check_out_tm` datetime DEFAULT NULL,
+  PRIMARY KEY (`reserve_num`),
+  KEY `reserve_mem_num_FK_idx` (`mem_num`),
+  KEY `reserve_seat_num_FK_idx` (`seat_num`),
+  KEY `reserve_product_num_FK_idx` (`product_num`),
+  CONSTRAINT `reserve_mem_num_FK` FOREIGN KEY (`mem_num`) REFERENCES `member` (`mem_num`) ON DELETE CASCADE,
+  CONSTRAINT `reserve_product_num_FK` FOREIGN KEY (`product_num`) REFERENCES `product` (`product_num`) ON DELETE CASCADE,
+  CONSTRAINT `reserve_seat_num_FK` FOREIGN KEY (`seat_num`) REFERENCES `seat` (`seat_num`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `reserve_locker` (
+  `reserve_locker_num` int NOT NULL AUTO_INCREMENT,
+  `mem_num` int DEFAULT NULL,
+  `locker_num` int DEFAULT NULL,
+  `reserve_regDate` date DEFAULT NULL,
+  `reserve_strt_tm` datetime DEFAULT NULL,
+  `reserve_end_tm` date DEFAULT NULL,
+  `payment_option` varchar(45) DEFAULT NULL,
+  `check_flag` varchar(45) DEFAULT NULL,
+  `locker_type` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`reserve_locker_num`),
+  KEY `rl_lns_tm_idx` (`locker_num`),
+  KEY `rl_mns_tm_idx` (`mem_num`),
+  CONSTRAINT `rl_lns_tm` FOREIGN KEY (`locker_num`) REFERENCES `locker` (`locker_num`) ON DELETE CASCADE,
+  CONSTRAINT `rl_mns_tm` FOREIGN KEY (`mem_num`) REFERENCES `member` (`mem_num`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+
+insert into locker(locker_num, locker_name, locker_reserve) values (1, "A1", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (2, "A2", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (3, "A3", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (4, "A4", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (5, "A5", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (6, "A6", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (7, "A7", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (8, "A8", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (9, "A9", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (10, "A10", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (11, "A11", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (12, "A12", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (13, "A13", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (14, "A14", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (15, "A15", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (16, "A16", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (17, "A17", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (18, "A18", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (19, "A19", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (20, "A20", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (21, "B21", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (22, "B22", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (23, "B23", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (24, "B24", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (25, "B25", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (26, "B26", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (27, "B27", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (28, "B28", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (29, "B29", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (30, "B30", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (31, "B31", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (32, "B32", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (33, "B33", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (34, "B34", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (35, "B35", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (36, "B36", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (37, "B37", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (38, "B38", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (39, "B39", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (40, "B40", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (41, "B41", 1);
+insert into locker(locker_num, locker_name, locker_reserve) values (42, "B42", 1);
+
+
+
+insert into seat values(1,"1번",1);
+insert into seat values(2,"2번",1);
+insert into seat values(3,"3번",1);
+insert into seat values(4,"4번",1);
+insert into seat values(5,"5번",1);
+insert into seat values(6,"6번",1);
+insert into seat values(7,"7번",1);
+insert into seat values(8,"8번",1);
+insert into seat values(9,"9번",1);
+insert into seat values(10,"10번",1);
+insert into seat values(11,"11번",1);
+insert into seat values(12,"12번",1);
+insert into seat values(13,"13번",1);
+insert into seat values(14,"14번",1);
+insert into seat values(15,"15번",1);
+insert into seat values(16,"16번",1);
+insert into seat values(17,"17번",1);
+insert into seat values(18,"18번",1);
+insert into seat values(19,"19번",1);
+insert into seat values(20,"20번",1);
+insert into seat values(21,"21번",1);
+insert into seat values(22,"22번",1);
+insert into seat values(23,"23번",1);
+insert into seat values(24,"24번",1);
+insert into seat values(25,"25번",1);
+insert into seat values(26,"26번",1);
+insert into seat values(27,"27번",1);
+insert into seat values(28,"28번",1);
+insert into seat values(29,"29번",1);
+insert into seat values(30,"30번",1);
+insert into seat values(31,"31번",1);
+insert into seat values(32,"32번",1);
+insert into seat values(33,"33번",1);
+insert into seat values(34,"34번",1);
+insert into seat values(35,"35번",1);
+insert into seat values(36,"36번",1);
+insert into seat values(37,"37번",1);
+insert into seat values(38,"38번",1);
+insert into seat values(39,"39번",1);
+insert into seat values(40,"40번",1);
+insert into seat values(41,"41번",1);
+insert into seat values(42,"42번",1);
+
+
+
+insert into member (mem_id,mem_pw,mem_name,mem_phone,mem_email,mem_type,mem_regDate)
+values('admin1','admin1','admin1','01011111111','admin1@email.com',1, sysdate());
+
+insert into member (mem_id,mem_pw,mem_name,mem_phone,mem_email,mem_type,mem_regDate)
+values('admin2','admin2','admin2','01022222222','admin2@email.com',1, sysdate());
+
+insert into member (mem_id,mem_pw,mem_name,mem_phone,mem_email,mem_type,mem_regDate)
+values('admin3','admin3','admin3','01033333333','admin3@email.com',1, sysdate());
+
+insert into member (mem_id,mem_pw,mem_name,mem_phone,mem_email,mem_type, mem_regDate)
+values('user1','user1','user1','01012341234','user1@email.com',0, sysdate());
+
+insert into member (mem_id,mem_pw,mem_name,mem_phone,mem_email,mem_type, mem_regDate)
+values('user2','user2','user2','01045674567','user2@email.com',0, sysdate());
+
+insert into member (mem_id,mem_pw,mem_name,mem_phone,mem_email,mem_type, mem_regDate)
+values('user3','user3','user3','01088889999','user3@email.com',0, sysdate());
+
+
+insert into notice(board_contents,board_writer,board_title,regDate,hit)
+values('contents1','admin1','title1',sysdate(),0);
+
+insert into notice(board_contents,board_writer,board_title,regDate,hit)
+values('contents2','admin2','title2',sysdate(),0);
+
+insert into notice(board_contents,board_writer,board_title,regDate,hit)
+values('contents3','writer3','title3',sysdate(),0);
+
+
+insert into product_type(product_type,product_type_name) values(1,"일회 시간권");
+insert into product_type(product_type,product_type_name) values(2,"시간 충전권");
+insert into product_type(product_type,product_type_name) values(3,"기간 이용권");
+
+
+insert into product(product_num,product_price,product_time,product_type)
+values(1,1000,"1",1);
+insert into product(product_num,product_price,product_time,product_type)
+values(2,2000,"2",1);
+insert into product(product_num,product_price,product_time,product_type)
+values(3,3000,"3",1);
+insert into product(product_num,product_price,product_time,product_type)
+values(4,4000,"4",1);
+insert into product(product_num,product_price,product_time,product_type)
+values(5,4500,"5",1);
+insert into product(product_num,product_price,product_time,product_type)
+values(6,5400,"6",1);
+insert into product(product_num,product_price,product_time,product_type)
+values(7,6300,"7",1);
+insert into product(product_num,product_price,product_time,product_type)
+values(8,7200,"8",1);
+insert into product(product_num,product_price,product_time,product_type)
+values(9,10000,"12",1);
