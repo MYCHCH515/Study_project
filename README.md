@@ -1,11 +1,9 @@
-# Study_project
 ![logo](https://user-images.githubusercontent.com/54904892/138931439-5bb153cf-3ea6-4da2-b3b5-88a38b458ba4.png)
 <br>
 
 ## 1. 서비스 소개
 + 스터디 카페 예약 프로젝트
-
-[최종프로젝트ppt.pdf](https://github.com/MYCHCH515/mychch515/files/7420630/ppt.pdf)
+### 🏠[Github](https://github.com/MYCHCH515/Study_project) 🎤[Presentation](https://github.com/MYCHCH515/mychch515/files/7420630/ppt.pdf)
 
 ## 2. 개요
 + 명칭 : 스터디 카페 예약 프로젝트
